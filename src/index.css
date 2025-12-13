@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #faf7f2;
+  --color-ink: #0b0b0c;
+  --color-sand: #e8e1d6;
+  --color-stone: #b8b1a6;
+  --color-brand: #9a6b3b;
+  --color-brand-dark: #6f4b27;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
