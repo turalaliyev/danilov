@@ -18,11 +18,8 @@ export default function Hero() {
         <div className="absolute inset-0 flex items-center justify-center flex-col text-center">
           <div className="text-white/90 relative z-10">
             <h1 className="text-4xl sm:text-3xl tracking-[2px] mb-2.5 uppercase font-bold drop-shadow-lg">
-              The Art of Chilling
+              One step higher
             </h1>
-            <p className="text-base mb-6 drop-shadow-md">
-              Discover Holiday's newest arrivals
-            </p>
             <a
               href="#collections"
               className="inline-block px-8 py-3 border-2 border-black/90 uppercase text-sm hover:bg-black hover:text-white transition font-medium"

@@ -19,12 +19,12 @@ export default function CollectionSection({ title, description, products, image,
 
   return (
     <section
-      className={`grid grid-cols-1 md:grid-cols-2 min-h-screen overflow-hidden ${reverse ? "bg-paper/50" : ""}`}
+      className={`grid grid-cols-1 md:grid-cols-2 min-h-screen max-h-[120vh] ${reverse ? "bg-paper/50" : ""}`}
     >
       {/* Big picture */}
       <div className={`collection-image h-full w-full ${reverse ? "md:order-2" : ""}`}>
         <img
-          src={image || "https://placeholder.pics/svg/600x900"}
+          src={image || "https://placeholder.pics/svg/600x900/DBDBDB-DBDBDB/DBDBDB-DBDBDB"}
           alt={`${title} collection`}
           className="w-full h-full object-cover"
         />
@@ -32,7 +32,7 @@ export default function CollectionSection({ title, description, products, image,
 
       {/* Other part - Flex Column Layout */}
       <div
-        className={`collection-details flex flex-col h-full bg-[#f4f0eb] py-12 md:py-16 ${
+        className={`collection-details flex flex-col max-h-[120vh] bg-[#f4f0eb] py-12 md:py-16 ${
           reverse ? "md:order-1" : ""
         }`}
       >
@@ -65,7 +65,7 @@ export default function CollectionSection({ title, description, products, image,
         </div>
         
         {/* 3. Navigation Arrows (Bottom) */}
-        <div className="flex-none flex justify-center gap-4 mt-8">
+        <div className="flex-none flex justify-center gap-8 mt-10">
           <button 
             onClick={() => scrollSlider('prev')} 
             className="p-1 text-black/40 hover:text-black/80 transition-colors"
