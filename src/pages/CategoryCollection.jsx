@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import { urlFor } from "../sanity/image";
 
 import manCategory from "../assets/man_category.webp";
 import womanCategory from "../assets/woman_category.jpg";
+import { client } from "../sanity/clients";
 
 const MAN_TABS = [
   { label: "View All", slug: "man-shoes" },
@@ -74,57 +74,30 @@ export default function CategoryCollection() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
 
-  const projectId = import.meta.env.VITE_SANITY_PROJECT_ID;
-  const dataset = import.meta.env.VITE_SANITY_DATASET;
-  const apiVersion = "2024-01-01";
-
   useEffect(() => {
-    const controller = new AbortController();
-
-    const fetchProducts = async () => {
+    const getData = async () => {
       setLoading(true);
-      setErr("");
-
-      const query = `
-        *[
-          _type == "product" &&
-          defined(slug.current) &&
-          (
-            category == $cat ||
-            category->slug.current == $cat ||
-            $cat in categories[]->slug.current
-          )
-        ] | order(_createdAt desc) {
-          _id,
-          title,
-          price,
-          "slug": slug.current,
-          "image": coalesce(mainImage, images[0], image)
-        }
-      `;
-
-      const url = `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}`;
-
       try {
-        const res = await axios.get(url, {
-          params: { query, $cat: category },
-          signal: controller.signal,
-        });
+        const SHOES_QUERY = `*[_type == "shoes"]{
+            _id,
+            title_en, title_az, title_ru,
+            description_en, description_az, description_ru,
+            price,
+            "slug": slug.current,
+            mainImage,
+            additionalImage,
+            categories
+            } | order(_createdAt desc)`;
 
-        setItems(Array.isArray(res?.data?.result) ? res.data.result : []);
-      } catch (e) {
-        if (axios.isCancel?.(e) || e?.name === "CanceledError") return;
-        setItems([]);
-        setErr("Failed to load products. Please try again.");
-      } finally {
-        setLoading(false);
+        const shoes = await client.fetch(SHOES_QUERY);
+        setItems(shoes);
+      } catch (error) {
+        setErr(error);
       }
+      setLoading(false);
     };
-
-    if (projectId && dataset && category) fetchProducts();
-
-    return () => controller.abort();
-  }, [category, projectId, dataset]);
+    getData();
+  }, [category]);
 
   const onTabClick = (slug) => {
     navigate(`/category/${slug}`);
@@ -201,8 +174,8 @@ export default function CategoryCollection() {
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-16">
                 {items.map((p) => {
-                  const img = p.image
-                    ? urlFor(p.image).width(900).height(700).url()
+                  const img = p.mainImage
+                    ? urlFor(p.mainImage).width(900).height(700).url()
                     : null;
 
                   return (
