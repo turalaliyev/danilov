@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import CollectionCard from "./CollectionCard";
 
 export default function CollectionSection({ title, description, products, image, reverse = false }) {
   const sliderRef = useRef(null);
@@ -59,20 +60,7 @@ export default function CollectionSection({ title, description, products, image,
           }}
         >
           {products.map((product, index) => (
-            <div
-              key={index}
-              className="product-card shrink-0 h-[500px] min-w-[350px] max-w-[350px] bg-white border border-black/10 p-5 text-center shadow-sm flex flex-col font-light"
-            >
-              <img
-                src={product.image || "https://placeholder.pics/svg/300x400"}
-                alt={product.name}
-                className="w-full flex-1 object-cover mb-4"
-              />
-              <div className="flex-none">
-                <h4 className="text-sm mb-1.5 text-black/80">{product.name}</h4>
-                <span className="text-black/60 text-xs uppercase tracking-wide">{product.price}</span>
-              </div>
-            </div>
+            <CollectionCard key={index} product={product} />
           ))}
         </div>
         
