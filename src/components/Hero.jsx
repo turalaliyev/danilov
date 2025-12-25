@@ -6,7 +6,7 @@ export default function Hero() {
       <div className="relative overflow-hidden">
         {/* background image */}
         <div
-          className="h-[70vh] min-h-130 bg-cover bg-center"
+          className="h-[85vh] min-h-130 bg-cover bg-center"
           style={{
             backgroundImage: `url(${HeroImage})`,
           }}
@@ -29,14 +29,6 @@ export default function Hero() {
             >
               Discover More
             </a>
-          </div>
-          
-          {/* scroll indicator */}
-          <div className="absolute bottom-5 right-8 text-xs flex items-center text-black/70 drop-shadow-sm">
-            <span>Scroll</span>
-            <div className="w-4 h-[26px] border border-black/70 rounded-[10px] ml-2 relative">
-              <div className="absolute left-1/2 top-1.5 -translate-x-1/2 w-0.5 h-1.5 bg-black/70 rounded-sm animate-scroll-indicator" />
-            </div>
           </div>
         </div>
 

@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 export default function CollectionSection({ title, description, products, image, reverse = false }) {
   const sliderRef = useRef(null);
@@ -16,55 +17,84 @@ export default function CollectionSection({ title, description, products, image,
   };
 
   return (
-    <section className={`grid grid-cols-1 md:grid-cols-2 gap-10 py-16 px-8 ${reverse ? "bg-paper/50" : ""}`}>
-      <div className={`collection-image ${reverse ? "md:order-2" : ""}`}>
+    <section
+      className={`grid grid-cols-1 md:grid-cols-2 min-h-screen overflow-hidden ${reverse ? "bg-paper/50" : ""}`}
+    >
+      {/* Big picture */}
+      <div className={`collection-image h-full w-full ${reverse ? "md:order-2" : ""}`}>
         <img
-          src={image || "https://placeholder.pics/svg/600x500"}
+          src={image || "https://placeholder.pics/svg/600x900"}
           alt={`${title} collection`}
-          className="w-full h-full object-cover min-h-[400px]"
+          className="w-full h-full object-cover"
         />
       </div>
-      <div className={`collection-details flex flex-col justify-center ${reverse ? "md:order-1" : ""}`}>
-        <h2 className="text-2xl md:text-3xl uppercase mb-4 tracking-wide">{title}</h2>
-        <p className="text-sm text-black/60 max-w-[550px] mb-8 leading-relaxed">{description}</p>
-        
-        <div className="relative mt-8">
-          <button
-            className="absolute left-[-16px] top-1/2 -translate-y-1/2 w-8 h-8 border-none bg-black/40 text-white flex items-center justify-center cursor-pointer text-lg z-10 hover:bg-black/60 transition"
-            onClick={() => scrollSlider("prev")}
-            aria-label="Previous"
-          >
-            ❮
-          </button>
-          
-          <div
-            ref={sliderRef}
-            className="product-slider flex gap-5 overflow-x-auto scroll-smooth scrollbar-hide"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {products.map((product, index) => (
-              <div key={index} className="product-card flex-shrink-0 min-w-[220px] bg-white border border-black/10 p-4 text-center">
-                <img
-                  src={product.image || "https://placeholder.pics/svg/300x200"}
-                  alt={product.name}
-                  className="w-full h-auto mb-2.5"
-                />
-                <h4 className="text-sm mb-1">{product.name}</h4>
-                <span className="text-black/60 text-xs">{product.price}</span>
-              </div>
-            ))}
+
+      {/* Other part - Flex Column Layout */}
+      <div
+        className={`collection-details flex flex-col h-full bg-[#f4f0eb] py-12 md:py-16 ${
+          reverse ? "md:order-1" : ""
+        }`}
+      >
+
+        {/* 1. Header (Title & Description) */}
+        <div className="flex-none flex justify-center items-center mb-10">
+          <div className="w-full">
+            <h2 className="text-2xl font-bold md:text-3xl uppercase mb-5 tracking-[0.08em] text-center max-w-[400px] mx-auto">
+              {title}
+            </h2>
+            <p className="text-sm font-light text-black/70 leading-relaxed w-[90%] md:max-w-[60%] mx-auto text-center">
+              {description}
+            </p>
           </div>
-          
-          <button
-            className="absolute right-[-16px] top-1/2 -translate-y-1/2 w-8 h-8 border-none bg-black/40 text-white flex items-center justify-center cursor-pointer text-lg z-10 hover:bg-black/60 transition"
-            onClick={() => scrollSlider("next")}
-            aria-label="Next"
+        </div>
+
+        {/* 2. Slider (Takes available space) */}
+        <div
+          ref={sliderRef}
+          className="product-slider flex-1 flex overflow-x-auto scroll-smooth scrollbar-hide items-center"
+          style={{ 
+            scrollbarWidth: "none", 
+            msOverflowStyle: "none",
+            paddingLeft: "calc(50% - 175px)" // 350px / 2 = 175px
+          }}
+        >
+          {products.map((product, index) => (
+            <div
+              key={index}
+              className="product-card shrink-0 h-[500px] min-w-[350px] max-w-[350px] bg-white border border-black/10 p-5 text-center shadow-sm flex flex-col font-light"
+            >
+              <img
+                src={product.image || "https://placeholder.pics/svg/300x400"}
+                alt={product.name}
+                className="w-full flex-1 object-cover mb-4"
+              />
+              <div className="flex-none">
+                <h4 className="text-sm mb-1.5 text-black/80">{product.name}</h4>
+                <span className="text-black/60 text-xs uppercase tracking-wide">{product.price}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* 3. Navigation Arrows (Bottom) */}
+        <div className="flex-none flex justify-center gap-4 mt-8">
+          <button 
+            onClick={() => scrollSlider('prev')} 
+            className="p-1 text-black/40 hover:text-black/80 transition-colors"
+            aria-label="Previous products"
           >
-            ❯
+            <MdChevronLeft size={24} />
+          </button>
+          <button 
+            onClick={() => scrollSlider('next')} 
+            className="p-1 text-black/40 hover:text-black/80 transition-colors"
+            aria-label="Next products"
+          >
+            <MdChevronRight size={24} />
           </button>
         </div>
+
       </div>
     </section>
   );
 }
-

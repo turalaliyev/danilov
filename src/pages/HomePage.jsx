@@ -10,32 +10,32 @@ export default function HomePage() {
     {
       name: "Men's blue suede hiking boot",
       price: "US$ 1.250",
-      image: "https://placeholder.pics/svg/300x200",
+      image: "https://placeholder.pics/svg/400x495",
     },
     {
       name: "Blue cashmere beanie",
       price: "US$ 490",
-      image: "https://placeholder.pics/svg/300x200",
+      image: "https://placeholder.pics/svg/400x495",
     },
     {
       name: "Men's black leather boot with fur",
       price: "US$ 1.300",
-      image: "https://placeholder.pics/svg/300x200",
+      image: "https://placeholder.pics/svg/400x495",
     },
     {
       name: "Blue tumbled leather bag",
       price: "US$ 3.680",
-      image: "https://placeholder.pics/svg/300x200",
+      image: "https://placeholder.pics/svg/400x495",
     },
     {
       name: "Men's grey suede desert boot",
       price: "US$ 1.060",
-      image: "https://placeholder.pics/svg/300x200",
+      image: "https://placeholder.pics/svg/400x495",
     },
     {
       name: "Brown suede adjustable belt",
       price: "US$ 460",
-      image: "https://placeholder.pics/svg/300x200",
+      image: "https://placeholder.pics/svg/400x495",
     },
   ];
 
@@ -43,32 +43,32 @@ export default function HomePage() {
     {
       name: "Women's brown leather lace‑up with fur",
       price: "US$ 1.060",
-      image: "https://placeholder.pics/svg/300x200",
+      image: "https://placeholder.pics/svg/400x495",
     },
     {
       name: "Beige fur bucket hat",
       price: "US$ 1.240",
-      image: "https://placeholder.pics/svg/300x200",
+      image: "https://placeholder.pics/svg/400x495",
     },
     {
       name: "Women's beige suede ankle boot",
       price: "US$ 1.100",
-      image: "https://placeholder.pics/svg/300x200",
+      image: "https://placeholder.pics/svg/400x495",
     },
     {
       name: "Black leather gloves",
       price: "US$ 660",
-      image: "https://placeholder.pics/svg/300x200",
+      image: "https://placeholder.pics/svg/400x495",
     },
     {
       name: "Women's black suede desert boot",
       price: "US$ 1.040",
-      image: "https://placeholder.pics/svg/300x200",
+      image: "https://placeholder.pics/svg/400x495",
     },
     {
       name: "Black tumbled leather shoulder bag",
       price: "US$ 3.020",
-      image: "https://placeholder.pics/svg/300x200",
+      image: "https://placeholder.pics/svg/400x495",
     },
   ];
 
