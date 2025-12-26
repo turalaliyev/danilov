@@ -90,7 +90,6 @@ export default function HomePage() {
         image="https://placeholder.pics/svg/500x800/DBDBDB-DBDBDB/DBDBDB-DBDBDB"
         reverse={true}
       />
-
       <PromoGrid />
 
       <AboutSection />

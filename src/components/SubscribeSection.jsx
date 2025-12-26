@@ -1,114 +1,99 @@
 import { useState } from "react";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function SubscribeSection() {
-  const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
-  const [consent1, setConsent1] = useState(false);
-  const [consent2, setConsent2] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log({ email, gender, consent1, consent2 });
+    
+    // Формируем сообщение для WhatsApp
+    const text = `Hello! I am interested in: ${gender || "General inquiry"}`;
+    const encodedText = encodeURIComponent(text);
+    
+    // Ваш номер телефона (замените на нужный)
+    const phoneNumber = "YOUR_PHONE_NUMBER"; 
+    
+    // Ссылка для WhatsApp
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedText}`;
+    
+    // Переход в WhatsApp
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
     <section
-      className="subscribe-section relative py-20 px-8 bg-cover bg-center"
-      style={{
-        backgroundImage: "url(https://placeholder.pics/svg/1200x600)",
-      }}
+      className="subscribe-section relative py-20 px-4 md:px-8 flex items-center justify-center min-h-[500px] bg-[#d3d3d3]"
     >
-      <div className="subscribe-card max-w-[500px] mx-auto bg-white/90 p-10">
-        <h2 className="text-2xl uppercase mb-5 tracking-wide">Subscribe and Get 10% Off</h2>
-        <p className="text-sm text-black/60 mb-5 leading-relaxed">
-          Get to know our world and be the first to shop new collections or online exclusives and enjoy 10% off your first order.
+      <div className="subscribe-card w-full max-w-[800px] bg-white p-12 md:p-16 shadow-2xl">
+        <h2 className="text-2xl uppercase mb-6 tracking-widest text-center font-medium">
+          Contact us on WhatsApp
+        </h2>
+        <p className="text-sm text-black/60 mb-10 leading-relaxed text-center max-w-lg mx-auto">
+          Get in touch with us directly for exclusive offers, new collection updates, and personalized service.
         </p>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="email" className="block text-sm mt-2.5">
-            * Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Your email address"
-            required
-            className="w-full p-2.5 my-2.5 border border-black/20"
-          />
+        
+        <form onSubmit={handleSubmit} className="flex flex-col gap-8 max-w-lg mx-auto">
           
-          <div className="gender my-2.5">
-            <label className="inline-block mr-5 text-sm">
-              <input
-                type="radio"
-                name="gender"
-                value="man"
-                checked={gender === "man"}
-                onChange={(e) => setGender(e.target.value)}
-                className="mr-1.5"
-              />
-              Man
-            </label>
-            <label className="inline-block mr-5 text-sm">
-              <input
-                type="radio"
-                name="gender"
-                value="woman"
-                checked={gender === "woman"}
-                onChange={(e) => setGender(e.target.value)}
-                className="mr-1.5"
-              />
-              Woman
-            </label>
-            <label className="inline-block text-sm">
-              <input
-                type="radio"
-                name="gender"
-                value="na"
-                checked={gender === "na"}
-                onChange={(e) => setGender(e.target.value)}
-                className="mr-1.5"
-              />
-              Prefer not to say
-            </label>
+          {/* Gender / Interest Selection */}
+          <div className="gender-selection mt-2">
+             <span className="block text-sm mb-4 font-normal text-black/80 text-center">I am interested in:</span>
+             <div className="flex flex-col gap-3 items-center">
+                <label className="flex items-center gap-3 cursor-pointer text-sm font-light hover:opacity-70 transition-opacity">
+                  <div className="relative flex items-center">
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="Men's Collection"
+                      checked={gender === "Men's Collection"}
+                      onChange={(e) => setGender(e.target.value)}
+                      className="peer appearance-none w-4 h-4 border border-black rounded-full checked:bg-black checked:border-black transition-all"
+                    />
+                  </div>
+                  Men's Collection
+                </label>
+                <label className="flex items-center gap-3 cursor-pointer text-sm font-light hover:opacity-70 transition-opacity">
+                  <div className="relative flex items-center">
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="Women's Collection"
+                      checked={gender === "Women's Collection"}
+                      onChange={(e) => setGender(e.target.value)}
+                      className="peer appearance-none w-4 h-4 border border-black rounded-full checked:bg-black checked:border-black transition-all"
+                    />
+                  </div>
+                  Women's Collection
+                </label>
+                <label className="flex items-center gap-3 cursor-pointer text-sm font-light hover:opacity-70 transition-opacity">
+                  <div className="relative flex items-center">
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="Other Inquiry"
+                      checked={gender === "Other Inquiry"}
+                      onChange={(e) => setGender(e.target.value)}
+                      className="peer appearance-none w-4 h-4 border border-black rounded-full checked:bg-black checked:border-black transition-all"
+                    />
+                  </div>
+                  Other Inquiry
+                </label>
+             </div>
           </div>
           
-          <div className="consent flex items-start my-2.5 text-xs text-black/60">
-            <input
-              type="checkbox"
-              id="policy1"
-              checked={consent1}
-              onChange={(e) => setConsent1(e.target.checked)}
-              className="mr-1.5 mt-0.5"
-            />
-            <label htmlFor="policy1">
-              I have read and understood the privacy policy and I give my consent for the processing of my personal data for marketing purposes.
-            </label>
+          {/* Submit Button */}
+          <div className="flex justify-center mt-6">
+            <button
+              type="submit"
+              className="px-10 py-3 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-black/80 transition-all flex items-center gap-3"
+            >
+              <FaWhatsapp size={16} />
+              Chat on WhatsApp
+            </button>
           </div>
           
-          <div className="consent flex items-start my-2.5 text-xs text-black/60">
-            <input
-              type="checkbox"
-              id="policy2"
-              checked={consent2}
-              onChange={(e) => setConsent2(e.target.checked)}
-              className="mr-1.5 mt-0.5"
-            />
-            <label htmlFor="policy2">
-              I have read and understood the privacy policy and I give my consent for the processing of my personal data to receive personalized offers and services based on my preferences and habits.
-            </label>
-          </div>
-          
-          <button
-            type="submit"
-            className="mt-5 px-8 py-3 text-sm bg-black text-white border-none uppercase cursor-pointer hover:bg-black/90 transition"
-          >
-            Sign Up
-          </button>
         </form>
       </div>
     </section>
   );
 }
-

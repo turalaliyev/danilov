@@ -19,10 +19,10 @@ export default function CollectionSection({ title, description, products, image,
 
   return (
     <section
-      className={`grid grid-cols-1 md:grid-cols-2 min-h-screen max-h-[120vh] ${reverse ? "bg-paper/50" : ""}`}
+      className={`grid grid-cols-1 md:grid-cols-2 md:min-h-[120vh] md:max-h-[120vh] overflow-hidden ${reverse ? "bg-paper/50" : ""}`}
     >
       {/* Big picture */}
-      <div className={`collection-image h-full w-full ${reverse ? "md:order-2" : ""}`}>
+      <div className={`collection-image w-full h-[50vh] md:h-full md:max-h-[120vh] ${reverse ? "md:order-2" : ""}`}>
         <img
           src={image || "https://placeholder.pics/svg/600x900/DBDBDB-DBDBDB/DBDBDB-DBDBDB"}
           alt={`${title} collection`}
@@ -32,7 +32,7 @@ export default function CollectionSection({ title, description, products, image,
 
       {/* Other part - Flex Column Layout */}
       <div
-        className={`collection-details flex flex-col max-h-[120vh] bg-[#f4f0eb] py-12 md:py-16 ${
+        className={`collection-details flex flex-col w-full h-auto md:h-full md:max-h-[120vh] bg-[#f4f0eb] py-12 md:py-16 ${
           reverse ? "md:order-1" : ""
         }`}
       >
@@ -40,7 +40,7 @@ export default function CollectionSection({ title, description, products, image,
         {/* 1. Header (Title & Description) */}
         <div className="flex-none flex justify-center items-center mb-10">
           <div className="w-full">
-            <h2 className="text-2xl font-bold md:text-3xl uppercase mb-5 tracking-[0.08em] text-center max-w-[400px] mx-auto">
+            <h2 className="text-2xl font-extrabold md:text-3xl uppercase mb-5 tracking-[0.08em] text-center max-w-[400px] mx-auto">
               {title}
             </h2>
             <p className="text-sm font-light text-black/70 leading-relaxed w-[90%] md:max-w-[60%] mx-auto text-center">
@@ -52,7 +52,7 @@ export default function CollectionSection({ title, description, products, image,
         {/* 2. Slider (Takes available space) */}
         <div
           ref={sliderRef}
-          className="product-slider flex-1 flex overflow-x-auto scroll-smooth scrollbar-hide items-center"
+          className="product-slider flex-1 flex overflow-x-auto scroll-smooth scrollbar-hide items-center min-h-[450px] md:min-h-0"
           style={{ 
             scrollbarWidth: "none", 
             msOverflowStyle: "none",
@@ -60,7 +60,9 @@ export default function CollectionSection({ title, description, products, image,
           }}
         >
           {products.map((product, index) => (
-            <CollectionCard key={index} product={product} />
+            <div key={index} className="flex-none">
+              <CollectionCard product={product} />
+            </div>
           ))}
         </div>
         
