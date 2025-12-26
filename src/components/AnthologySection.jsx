@@ -1,15 +1,27 @@
 import { useRef } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import videoSrc from "../assets/v.mp4";
 
 export default function AnthologySection() {
   const sliderRef = useRef(null);
 
+  // Use local test images (no external placeholders) so AnthologySection always renders.
+  const testImages = Object.values(
+    import.meta.glob("../assets/test_images/*.jpg", { eager: true, import: "default" })
+  );
+
+  const pick = (seed) => {
+    if (!testImages.length) return undefined;
+    const idx = Math.floor(Math.random() * 1_000_000 + seed) % testImages.length;
+    return testImages[idx];
+  };
+
   const items = [
-    { title: "Santoni Easy", image: "https://placeholder.pics/svg/300x400/DBDBDB-DBDBDB/DBDBDB-DBDBDB" },
-    { title: "Eclipse", image: "https://placeholder.pics/svg/300x400/DBDBDB-DBDBDB/DBDBDB-DBDBDB" },
-    { title: "Back to Business", image: "https://placeholder.pics/svg/300x400/DBDBDB-DBDBDB/DBDBDB-DBDBDB" },
-    { title: "Double Buckle Sneaker", image: "https://placeholder.pics/svg/300x400/DBDBDB-DBDBDB/DBDBDB-DBDBDB" },
-    { title: "Limited Edition", image: "https://placeholder.pics/svg/300x400/DBDBDB-DBDBDB/DBDBDB-DBDBDB" },
+    { title: "Danilov Classic", video: videoSrc },
+    { title: "Eclipse", image: pick(11) },
+    { title: "Back to Business", image: pick(12) },
+    { title: "Double Buckle Sneaker", image: pick(13) },
+    { title: "Limited Edition", image: pick(14) },
   ];
 
   const scrollSlider = (direction) => {
@@ -39,26 +51,53 @@ export default function AnthologySection() {
       <div className="flex flex-col bg-white overflow-hidden py-12 md:py-16">
         <div
           ref={sliderRef}
-          className="flex-1 flex overflow-x-auto scroll-smooth scrollbar-hide gap-5 items-center w-full mb-6"
+          className="flex-1 flex overflow-x-auto scroll-smooth scrollbar-hide gap-2 items-center w-full mb-6"
           style={{ 
             scrollbarWidth: "none", 
             msOverflowStyle: "none",
-            paddingLeft: "calc(50% - 150px)" // Центрирование: 300px / 2 = 150px
+            paddingLeft: "calc(50% - 200px)" // Центрирование: 300px / 2 = 150px
           }}
         >
           {items.map((item, index) => (
-            <div key={index} className="flex-none w-[300px] h-[400px] bg-gray-100 relative group cursor-pointer">
-              <img 
-                src={item.image}
-                alt={item.title}
-                className="w-full h-full object-cover"
-              />
+            <div key={index} className="flex-none w-[300px] h-[400px] bg-gray-100 relative group cursor-pointer overflow-hidden">
+              {item.video ? (
+                <video 
+                  src={item.video}
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+              ) : item.image ? (
+                <img 
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              ) : (
+                <div className="w-full h-full bg-black/10" />
+              )}
+              {/* Overlay with title - centered */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <h3 className="text-white uppercase font-semibold text-lg md:text-lg tracking-wide text-center underline underline-offset-12">
+                  {item.title}
+                </h3>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Кнопки навигации под карточками (по центру) */}
-        <div className="flex justify-center gap-8">
+        {/* Кнопки навигации под карточками (строго по центру под первой карточкой) */}
+        <div 
+          className="flex justify-center gap-8 relative"
+          style={{ 
+            width: "300px",
+            left: "50%",
+            transform: "translateX(calc(-150px - 50px))"
+          }}
+        >
           <button 
             onClick={() => scrollSlider('prev')} 
             className="p-1 text-black/40 hover:text-black/80 transition-colors"
