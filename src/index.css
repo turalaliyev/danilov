@@ -1,26 +1,233 @@
 @import "tailwindcss";
 
-@theme {
+:root {
+  /* light palette */
   --color-paper: #faf7f2;
+  --color-paper-80: rgba(250, 247, 242, 0.8);
   --color-ink: #0b0b0c;
+  --color-ink-90: rgba(11, 11, 12, 0.9);
+  --color-ink-80: rgba(11, 11, 12, 0.8);
+  --color-ink-70: rgba(11, 11, 12, 0.7);
+  --color-ink-60: rgba(11, 11, 12, 0.6);
+  --color-ink-50: rgba(11, 11, 12, 0.5);
+  --color-ink-45: rgba(11, 11, 12, 0.45);
+  --color-ink-40: rgba(11, 11, 12, 0.4);
+  --color-ink-30: rgba(11, 11, 12, 0.3);
+  --color-ink-20: rgba(11, 11, 12, 0.2);
+  --color-ink-15: rgba(11, 11, 12, 0.15);
+  --color-ink-10: rgba(11, 11, 12, 0.1);
+  --color-ink-05: rgba(11, 11, 12, 0.05);
   --color-sand: #e8e1d6;
   --color-stone: #b8b1a6;
   --color-brand: #9a6b3b;
   --color-brand-dark: #6f4b27;
+  --color-ink-bg: #0b0b0c;
+
+  --color-page: #faf7f2;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f4f0eb;
+  --color-surface-glass: rgba(250, 247, 242, 0.85);
+  --color-surface-muted-soft: rgba(250, 247, 242, 0.5);
+  --color-overlay-weak: rgba(0, 0, 0, 0.08);
+  --color-overlay: rgba(0, 0, 0, 0.2);
+  --color-overlay-strong: rgba(0, 0, 0, 0.35);
+  --color-hero-scrim: rgba(0, 0, 0, 0.2);
+  --color-border-soft: rgba(0, 0, 0, 0.1);
+  --color-border-weak: rgba(0, 0, 0, 0.05);
+  --color-border-mid: rgba(0, 0, 0, 0.15);
+  --color-contact-bg: #d3d3d3;
 }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 6rem;
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* dark palette aligned to reference visual */
+    --color-paper: #f3ede4;
+    --color-paper-80: rgba(243, 237, 228, 0.8);
+    --color-ink: #f3ede4;
+    --color-ink-90: rgba(243, 237, 228, 0.9);
+    --color-ink-80: rgba(243, 237, 228, 0.8);
+    --color-ink-70: rgba(243, 237, 228, 0.7);
+    --color-ink-60: rgba(243, 237, 228, 0.6);
+    --color-ink-50: rgba(243, 237, 228, 0.5);
+    --color-ink-45: rgba(243, 237, 228, 0.45);
+    --color-ink-40: rgba(243, 237, 228, 0.4);
+    --color-ink-30: rgba(243, 237, 228, 0.3);
+    --color-ink-20: rgba(243, 237, 228, 0.2);
+    --color-ink-15: rgba(243, 237, 228, 0.15);
+    --color-ink-10: rgba(243, 237, 228, 0.12);
+    --color-ink-05: rgba(243, 237, 228, 0.08);
+
+    --color-sand: #c3b8a6;
+    --color-stone: #968b7c;
+    --color-brand: #c48b4b;
+    --color-brand-dark: #9a6b3b;
+    --color-ink-bg: #9a6b3b;
+
+    --color-page: rgb(53, 40, 31); /* charcoal background like reference */
+    --color-surface: #15181b; /* darker card surface (matches reference) */
+    --color-surface-muted: rgb(53, 40, 31); /* rich brown sections (header/footer) */
+    --color-surface-glass: rgb(53, 40, 31); /* header uses bg-paper/85 */
+    --color-surface-muted-soft: rgba(53, 40, 31, 0.7);
+    --color-overlay-weak: rgba(0, 0, 0, 0.16);
+    --color-overlay: rgba(0, 0, 0, 0.32);
+    --color-overlay-strong: rgba(0, 0, 0, 0.55);
+    --color-hero-scrim: rgba(0, 0, 0, 0.58);
+    --color-border-soft: rgba(243, 237, 228, 0.16);
+    --color-border-weak: rgba(243, 237, 228, 0.09);
+    --color-border-mid: rgba(243, 237, 228, 0.22);
+    --color-contact-bg: #282c30;
+  }
 }
 
-body {
-  background: var(--color-paper);
+@media (prefers-color-scheme: dark) {
+  /* точечные правки под референс (не влияют на светлую тему) */
+  .product-card {
+    border-color: transparent; /* (2) без обводки вокруг маленьких карточек */
+  }
+
+  .bg-gray-100 {
+    background-color: var(--color-surface); /* (4) Anthology cards bg */
+  }
+
+  footer {
+    background-color: var(--color-surface-muted); /* (6) footer коричневый */
+    border-color: var(--color-border-mid);
+  }
+
+  footer .border-black\/10 {
+    border-color: var(--color-border-mid);
+  }
+}
+
+@layer base {
+  body {
+    color-scheme: light dark;
+    background-color: var(--color-page);
+    color: var(--color-ink);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  header {
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 300;
+  }
+
+  /* inputs keep theme accent */
+  input[type="radio"],
+  input[type="checkbox"] {
+    accent-color: var(--color-ink);
+  }
+}
+
+/* override key utility colors to follow theme tokens */
+.text-black {
   color: var(--color-ink);
-  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
-
-header {
-  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
-  font-weight: 300;
+.text-black\/90 {
+  color: var(--color-ink-90);
+}
+.text-black\/80 {
+  color: var(--color-ink-80);
+}
+.text-black\/70 {
+  color: var(--color-ink-70);
+}
+.text-black\/60 {
+  color: var(--color-ink-60);
+}
+.text-black\/50 {
+  color: var(--color-ink-50);
+}
+.text-black\/45 {
+  color: var(--color-ink-45);
+}
+.text-black\/40 {
+  color: var(--color-ink-40);
+}
+.text-black\/30 {
+  color: var(--color-ink-30);
+}
+.text-black\/20 {
+  color: var(--color-ink-20);
+}
+.hover\:text-black:hover {
+  color: var(--color-ink);
+}
+.hover\:text-black\/80:hover {
+  color: var(--color-ink-80);
+}
+.border-black {
+  border-color: var(--color-ink);
+}
+.border-black\/10 {
+  border-color: var(--color-border-soft);
+}
+.border-black\/5 {
+  border-color: var(--color-border-weak);
+}
+.border-black\/15 {
+  border-color: var(--color-border-mid);
+}
+.bg-paper {
+  background-color: var(--color-page);
+}
+.bg-paper\/50 {
+  background-color: var(--color-surface-muted-soft);
+}
+.bg-paper\/85 {
+  background-color: var(--color-surface-glass);
+}
+.bg-\[\#f4f0eb\] {
+  background-color: var(--color-surface-muted);
+}
+.bg-\[\#d3d3d3\] {
+  background-color: var(--color-contact-bg);
+}
+.bg-white {
+  background-color: var(--color-surface);
+}
+.bg-white\/60 {
+  background-color: var(--color-surface);
+  background-color: color-mix(in srgb, var(--color-surface) 60%, transparent);
+}
+.hover\:bg-white:hover {
+  background-color: var(--color-surface);
+}
+.bg-sand\/40 {
+  background-color: var(--color-sand);
+  background-color: color-mix(in srgb, var(--color-sand) 40%, transparent);
+}
+.bg-black\/5 {
+  background-color: var(--color-ink-05);
+}
+.bg-black\/10 {
+  background-color: var(--color-ink-10);
+}
+.bg-black\/20 {
+  background-color: var(--color-hero-scrim);
+}
+.bg-black\/30 {
+  background-color: var(--color-overlay-strong);
+}
+.bg-black\/50 {
+  background-color: var(--color-overlay);
+}
+.bg-black {
+  background-color: var(--color-ink);
+}
+.hover\:bg-black\/5:hover {
+  background-color: var(--color-ink-05);
+}
+.text-paper {
+  color: var(--color-paper);
+}
+.text-paper\/80 {
+  color: var(--color-paper-80);
+}
+.bg-ink {
+  background-color: var(--color-ink-bg);
 }

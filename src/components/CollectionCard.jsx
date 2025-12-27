@@ -3,7 +3,7 @@ import React from 'react';
 export default function CollectionCard({ product }) {
   return (
     <div
-      className="product-card shrink-0 h-[55vh] w-[40vh] bg-white border border-black/10 p-4 text-center shadow-sm flex flex-col font-light"
+      className="product-card shrink-0 h-[55vh] w-[40vh] bg-white p-4 text-center shadow-sm flex flex-col font-light"
     >
       <img
         src={product.image || "https://placeholder.pics/svg/300x400/DBDBDB-DBDBDB/DBDBDB-DBDBDB"}
