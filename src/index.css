@@ -64,7 +64,7 @@
     --color-ink-bg: #9a6b3b;
 
     --color-page: rgb(53, 40, 31); /* charcoal background like reference */
-    --color-surface: #15181ba8; /* darker card surface (matches reference) */
+    --color-surface: rgba(22, 27, 31, 0.98); /* darker card surface (matches reference) */
     --color-surface-muted: rgb(53, 40, 31); /* rich brown sections (header/footer) */
     --color-surface-glass: rgb(53, 40, 31); /* header uses bg-paper/85 */
     --color-surface-muted-soft: rgba(57, 46, 38, 0.7);
