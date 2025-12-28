@@ -9,6 +9,7 @@ import cultureCategory from "../assets/culture_category.jpg";
 import careCategory from "../assets/care_category.avif";
 import { HiOutlineMagnifyingGlass, HiBars2 } from "react-icons/hi2";
 import LogoBlack from "../assets/logo-black.png";
+import LogoWhite from "../assets/logo-white.png";
 
 const NAV = [
   { label: "Gifts", key: "gifts" },
@@ -117,6 +118,19 @@ export default function Header() {
   const [mView, setMView] = useState("nav");
   const [mNavKey, setMNavKey] = useState(null);
   const [mCategoryKey, setMCategoryKey] = useState(null);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const checkDarkMode = () => {
+      setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    };
+
+    checkDarkMode();
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQuery.addEventListener("change", checkDarkMode);
+
+    return () => mediaQuery.removeEventListener("change", checkDarkMode);
+  }, []);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -313,7 +327,7 @@ export default function Header() {
     <header
       ref={headerRef}
       style={{ transform: `translateY(-${offset}px)` }}
-      className="sticky top-0 z-50 bg-paper/85 backdrop-blur border-b border-black/10 will-change-transform" // Сдвигаем header вверх пропорционально скроллу
+      className="sticky top-0 z-50 bg-paper/85 backdrop-blur will-change-transform" // Сдвигаем header вверх пропорционально скроллу
     >
       <div className="pr-4">
         <div className="h-16 flex items-center justify-between">
@@ -327,7 +341,7 @@ export default function Header() {
               className="select-none cursor-pointer"
               aria-label="Go to home"
             >
-              <img src={LogoBlack} alt="Danilov" className="h-18" />
+              <img src={isDarkMode ? LogoWhite : LogoBlack} alt="Danilov" className="h-18" />
             </button>
 
             <div className="hidden md:flex items-center gap-6 text-sm">

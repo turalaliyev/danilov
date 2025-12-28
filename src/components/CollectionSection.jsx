@@ -22,7 +22,7 @@ export default function CollectionSection({ title, description, products, image,
       className={`grid grid-cols-1 md:grid-cols-2 md:min-h-[120vh] md:max-h-[120vh] overflow-hidden ${reverse ? "bg-paper/50" : ""}`}
     >
       {/* Big picture */}
-      <div className={`collection-image w-full h-[50vh] md:h-full md:max-h-[120vh] ${reverse ? "md:order-2" : ""}`}>
+      <div className={`collection-image w-full h-[70vh] md:h-full md:max-h-[120vh] ${reverse ? "md:order-2" : ""}`}>
         <img
           src={image || "https://placeholder.pics/svg/600x900/DBDBDB-DBDBDB/DBDBDB-DBDBDB"}
           alt={`${title} collection`}
@@ -52,7 +52,7 @@ export default function CollectionSection({ title, description, products, image,
         {/* 2. Slider (Takes available space) */}
         <div
           ref={sliderRef}
-          className="product-slider flex-1 flex overflow-x-auto scroll-smooth scrollbar-hide items-center min-h-[450px] md:min-h-0"
+          className="product-slider flex-1 flex overflow-x-auto scroll-smooth gap-1 scrollbar-hide items-center min-h-[450px] md:min-h-0"
           style={{ 
             scrollbarWidth: "none", 
             msOverflowStyle: "none",

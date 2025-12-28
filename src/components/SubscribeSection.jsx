@@ -85,7 +85,7 @@ export default function SubscribeSection() {
           <div className="flex justify-center mt-6">
             <button
               type="submit"
-              className="px-10 py-3 bg-black text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-black/80 transition-all flex items-center gap-3"
+              className="px-10 py-3 bg-green-600 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-green-700 transition-all flex items-center gap-3"
             >
               <FaWhatsapp size={16} />
               Chat on WhatsApp
