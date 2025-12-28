@@ -161,7 +161,7 @@ export default function CategoryCollection() {
               <div className="grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-16">
                 {Array.from({ length: 6 }).map((_, idx) => (
                   <div key={idx} className="animate-pulse">
-                    <div className="aspect-4/3 bg-black/5" />
+                    <div className="aspect-4/3 bg-black /5" />
                     <div className="h-4 bg-black/5 mt-6 w-3/4" />
                     <div className="h-4 bg-black/5 mt-3 w-1/3" />
                   </div>
@@ -182,7 +182,6 @@ export default function CategoryCollection() {
                     <button
                       key={p._id}
                       type="button"
-                      onClick={() => navigate(`/product/${p.slug}`)}
                       className="text-left group"
                     >
                       <div className="aspect-4/3 bg-black/5 overflow-hidden">
@@ -196,15 +195,14 @@ export default function CategoryCollection() {
                         ) : null}
                       </div>
 
-                      <div className="mt-6 text-[14px] text-black/90">
-                        {p.title}
+                      <div className="mt-2 text-[14px] text-black/90 flex justify-between">
+                        <div>{p.title_en}</div>
+                        {p.price != null && (
+                          <div className=" text-[14px] text-black/80">
+                            {Number(p.price).toLocaleString()} AZN
+                          </div>
+                        )}
                       </div>
-
-                      {p.price != null && (
-                        <div className="mt-3 text-[14px] text-black/80">
-                          US$ {Number(p.price).toLocaleString()}
-                        </div>
-                      )}
                     </button>
                   );
                 })}

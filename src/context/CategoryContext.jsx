@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { client } from "../sanity/client"; // ✅ Import your Sanity client
+import { client } from "../sanity/clients";
 
 const CategoryContext = createContext();
 
@@ -11,7 +11,7 @@ export const CategoryProvider = ({ children }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const CATEGORY_QUERY = `*[_type == "category"]{ _id, title_en, title_az }`;
+        const CATEGORY_QUERY = `*[_type == "category"]{ _id, title_en, title_az, title_ru }`;
         const data = await client.fetch(CATEGORY_QUERY);
         setCategories(data);
       } catch (error) {
