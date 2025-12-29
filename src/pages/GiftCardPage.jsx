@@ -30,7 +30,7 @@ export default function GiftCardPage() {
             onClick={() => navigate("/gifts/him")}
             className="group text-left border border-black/10 hover:border-black/25 transition overflow-hidden"
           >
-            <div className="h-[54vh] min-h-90 bg-black/5 overflow-hidden">
+            <div className=" bg-black/5 overflow-hidden">
               <img
                 src="https://i.etsystatic.com/10158652/r/il/e9267d/1320400492/il_794xN.1320400492_d0mh.jpg"
                 alt="Gift cards for him"
@@ -47,8 +47,7 @@ export default function GiftCardPage() {
                 Gift Cards for Him
               </div>
               <div className="mt-2 text-sm text-black/60 leading-relaxed max-w-md">
-                Choose a gift card tailored for him — timeless shoes and leather
-                essentials.
+                Choose a gift card tailored for him — timeless shoes.
               </div>
 
               <div className="mt-5 inline-flex items-center text-xs tracking-[0.28em] uppercase text-black/70 group-hover:text-black transition">
@@ -65,7 +64,7 @@ export default function GiftCardPage() {
             onClick={() => navigate("/gifts/her")}
             className="group text-left border border-black/10 hover:border-black/25 transition overflow-hidden"
           >
-            <div className="h-[54vh] min-h-90 bg-black/5 overflow-hidden">
+            <div className="bg-black/5 overflow-hidden">
               <img
                 src="https://i.etsystatic.com/10158652/r/il/e9267d/1320400492/il_794xN.1320400492_d0mh.jpg"
                 alt="Gift cards for her"

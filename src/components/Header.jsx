@@ -10,6 +10,7 @@ import careCategory from "../assets/care_category.avif";
 import { HiOutlineMagnifyingGlass, HiBars2 } from "react-icons/hi2";
 import LogoBlack from "../assets/logo-black.png";
 import LogoWhite from "../assets/logo-white.png";
+import LanguageSelect from "./LanguageSelect";
 
 const NAV = [
   { label: "Gifts", key: "gifts" },
@@ -341,7 +342,11 @@ export default function Header() {
               className="select-none cursor-pointer"
               aria-label="Go to home"
             >
-              <img src={isDarkMode ? LogoWhite : LogoBlack} alt="Danilov" className="h-18" />
+              <img
+                src={isDarkMode ? LogoWhite : LogoBlack}
+                alt="Danilov"
+                className="h-18"
+              />
             </button>
 
             <div className="hidden md:flex items-center gap-6 text-sm">
@@ -368,6 +373,9 @@ export default function Header() {
           </div>
 
           <div className="flex items-center gap-2 md:gap-4">
+            <div className="hidden md:block">
+              <LanguageSelect />
+            </div>
             <div className="sm:hidden h-10 w-10 grid place-items-center">
               <HiOutlineMagnifyingGlass
                 className="size-6 text-black/60"
@@ -392,6 +400,10 @@ export default function Header() {
             >
               <HiBars2 className="size-7 text-black/60" aria-hidden="true" />
             </button>
+
+            <div className="md:hidden">
+              <LanguageSelect />
+            </div>
 
             <div className="hidden sm:grid h-10 w-10 place-items-center">
               <HiOutlineMagnifyingGlass

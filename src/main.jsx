@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { CategoryProvider } from "./context/CategoryContext.jsx";
+import { LanguageProvider } from "./context/LanguageContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <CategoryProvider>
-        <App />
+        <LanguageProvider>
+          <App />
+        </LanguageProvider>
       </CategoryProvider>
     </BrowserRouter>
   </StrictMode>

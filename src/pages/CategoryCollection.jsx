@@ -1,10 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { urlFor } from "../sanity/image";
 
 import manCategory from "../assets/man_category.webp";
 import womanCategory from "../assets/woman_category.jpg";
 import { client } from "../sanity/clients";
+import LanguageContext from "../context/LanguageContext";
+import CategoryContext from "../context/CategoryContext";
 
 const MAN_TABS = [
   { label: "View All", slug: "man-shoes" },
@@ -51,6 +53,10 @@ function titleFromSlug(slug) {
 export default function CategoryCollection() {
   const { category } = useParams();
   const navigate = useNavigate();
+  const { language } = useContext(LanguageContext);
+  const { categories } = useContext(CategoryContext);
+
+  console.log(language);
 
   const group = useMemo(() => {
     if (category?.startsWith("man-")) return "man";
@@ -70,6 +76,35 @@ export default function CategoryCollection() {
     return manCategory;
   }, [group]);
 
+  const MAN_SHOE_SLUGS = useMemo(
+    () => MAN_TABS.filter((t) => t.slug !== "man-shoes").map((t) => t.slug),
+    []
+  );
+
+  const WOMAN_SHOE_SLUGS = useMemo(
+    () => WOMAN_TABS.filter((t) => t.slug !== "woman-shoes").map((t) => t.slug),
+    []
+  );
+
+  const categoryIdsForQuery = useMemo(() => {
+    if (!categories?.length || !category) return [];
+
+    if (category === "man-shoes") {
+      return categories
+        .filter((c) => MAN_SHOE_SLUGS.includes(c.slug?.current))
+        .map((c) => c._id);
+    }
+
+    if (category === "woman-shoes") {
+      return categories
+        .filter((c) => WOMAN_SHOE_SLUGS.includes(c.slug?.current))
+        .map((c) => c._id);
+    }
+
+    const one = categories.find((c) => c.slug?.current === category);
+    return one ? [one._id] : [];
+  }, [categories, category, MAN_SHOE_SLUGS, WOMAN_SHOE_SLUGS]);
+
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
@@ -78,7 +113,20 @@ export default function CategoryCollection() {
     const getData = async () => {
       setLoading(true);
       try {
-        const SHOES_QUERY = `*[_type == "shoes"]{
+        if (!category) {
+          setItems([]);
+          setLoading(false);
+          return;
+        }
+
+        const isViewAll =
+          category === "man-shoes" || category === "woman-shoes";
+        if (!isViewAll && categoryIdsForQuery.length === 0) {
+          setItems([]);
+          return;
+        }
+
+        const SHOES_QUERY = `*[_type == "shoes" && references($catIds)]{
             _id,
             title_en, title_az, title_ru,
             description_en, description_az, description_ru,
@@ -89,7 +137,9 @@ export default function CategoryCollection() {
             categories
             } | order(_createdAt desc)`;
 
-        const shoes = await client.fetch(SHOES_QUERY);
+        const shoes = await client.fetch(SHOES_QUERY, {
+          catIds: categoryIdsForQuery,
+        });
         setItems(shoes);
       } catch (error) {
         setErr(error);
@@ -97,7 +147,7 @@ export default function CategoryCollection() {
       setLoading(false);
     };
     getData();
-  }, [category]);
+  }, [category, categoryIdsForQuery]);
 
   const onTabClick = (slug) => {
     navigate(`/category/${slug}`);
@@ -113,8 +163,8 @@ export default function CategoryCollection() {
           </h1>
 
           {tabs.length > 0 && (
-            <div className="max-w-[60%] overflow-x-auto">
-              <div className="flex items-center gap-6 text-sm whitespace-nowrap justify-end pb-2">
+            <div className="hidden md:block max-w-[75%] overflow-x-auto">
+              <div className="flex items-center gap-6 text-xs whitespace-nowrap justify-end pb-2 pr-2">
                 {tabs.map((t) => {
                   const active = t.slug === category;
                   return (
@@ -141,15 +191,6 @@ export default function CategoryCollection() {
         <div className="mt-6 flex items-center justify-between">
           <div className="text-sm text-black/70">
             {loading ? "Loading..." : `${items.length} Products`}
-          </div>
-
-          <div className="flex items-center gap-8 text-sm text-black/80">
-            <button type="button" className="hover:text-black transition">
-              Sort By
-            </button>
-            <button type="button" className="hover:text-black transition">
-              FILTERS
-            </button>
           </div>
         </div>
 

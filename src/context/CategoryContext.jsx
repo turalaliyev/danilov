@@ -11,7 +11,7 @@ export const CategoryProvider = ({ children }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const CATEGORY_QUERY = `*[_type == "category"]{ _id, title_en, title_az, title_ru }`;
+        const CATEGORY_QUERY = `*[_type == "category"]{ _id, slug, title_en, title_az, title_ru }`;
         const data = await client.fetch(CATEGORY_QUERY);
         setCategories(data);
       } catch (error) {
