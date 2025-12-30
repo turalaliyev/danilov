@@ -4,7 +4,7 @@ import CollectionSection from "../components/CollectionSection.jsx";
 import PromoGrid from "../components/PromoGrid.jsx";
 import AboutSection from "../components/AboutSection.jsx";
 import AnthologySection from "../components/AnthologySection.jsx";
-import SubscribeSection from "../components/SubscribeSection.jsx";
+import ContactSection from "../components/ContactSection.jsx";
 
 import Img1 from "../assets/test_images/IMG-20221227-WA0004.jpg";
 import Img2 from "../assets/test_images/IMG-20230917-WA0003.jpg";
@@ -160,7 +160,7 @@ export default function HomePage() {
 
       <AnthologySection />
 
-      <SubscribeSection />
+      <ContactSection />
     </main>
   );
 }
