@@ -28,7 +28,7 @@ export default function Footer() {
               <img
                 src={isDarkMode ? LogoWhite : LogoBlack}
                 alt="Danilov"
-                className="h-16 -ml-3"
+                className="h-16 -ml-1"
               />
             </Link>
             <p className="mt-1 text-sm text-black/80 leading-relaxed">
