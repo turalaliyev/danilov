@@ -174,10 +174,54 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
+    // Track velocity to detect bounce-back
+    let lastTime = performance.now();
+    let velocity = 0;
+
     const onScroll = () => {
-      const currentY = window.scrollY;
-      const delta = currentY - lastScrollY.current;
+      const rawY = window.scrollY || document.documentElement.scrollTop || 0;
+      const currentY = Math.max(rawY, 0);
+      const prevY = Math.max(lastScrollY.current, 0);
+      
+      const now = performance.now();
+      const dt = now - lastTime;
+      lastTime = now;
+      
+      const delta = currentY - prevY;
+      
+      // Calculate velocity (px per ms)
+      if (dt > 0) {
+        velocity = delta / dt;
+      }
+      
       lastScrollY.current = currentY;
+
+      // Top zone where header is always visible - catches bounce-back
+      const TOP_ZONE = 50;
+
+      // At top: always show header
+      if (currentY <= TOP_ZONE) {
+        if (offsetRef.current !== 0) {
+          offsetRef.current = 0;
+          setOffset(0);
+        }
+        ticking.current = false;
+        return;
+      }
+
+      // Ignore very small movements (bounce noise)
+      if (Math.abs(delta) < 2) {
+        ticking.current = false;
+        return;
+      }
+
+      // Detect bounce-back: if we were near top and now getting pushed down with high velocity
+      // This happens when trackpad/touch overscroll releases
+      if (prevY < TOP_ZONE * 2 && delta > 0 && velocity > 0.5) {
+        // This is likely bounce-back, ignore hiding
+        ticking.current = false;
+        return;
+      }
 
       if (ticking.current) return;
       ticking.current = true;
