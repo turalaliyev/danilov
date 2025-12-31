@@ -389,7 +389,7 @@ export default function Header() {
               <img
                 src={isDarkMode ? LogoWhite : LogoBlack}
                 alt="Danilov"
-                className="h-18"
+                className="h-19 mr-2"
               />
             </button>
 
@@ -402,7 +402,7 @@ export default function Header() {
                     type="button"
                     onClick={() => toggleDesktopDropdown(i.key)}
                     className={[
-                      "tracking-wide cursor-pointer transition inline-flex items-center gap-2",
+                      "tracking-wide cursor-pointer transition inline-flex items-center gap-2 uppercase",
                       "hover:opacity-70",
                       isActive ? "opacity-90" : "",
                     ].join(" ")}
@@ -654,7 +654,7 @@ export default function Header() {
                           if (!expandable) return openMobileNav(i.key);
                           openMobileNav(i.key);
                         }}
-                        className="py-3 text-left text-sm tracking-wide border-b border-black/10 last:border-b-0 flex items-center justify-between"
+                        className="py-3 text-left text-sm tracking-wide border-b border-black/10 last:border-b-0 flex items-center justify-between uppercase"
                       >
                         <span>{i.label}</span>
                         {expandable ? (
@@ -683,7 +683,7 @@ export default function Header() {
                           setMView("subcategories");
                         }
                       }}
-                      className="py-3 text-left text-sm tracking-wide border-b border-black/10 last:border-b-0 text-black/70 hover:text-black transition flex items-center justify-between"
+                      className="py-3 text-left text-sm tracking-wide border-b border-black/10 last:border-b-0 text-black/70 hover:text-black transition flex items-center justify-between uppercase"
                     >
                       <span>{c.label}</span>
                       {c.hasSub ? (
@@ -705,7 +705,7 @@ export default function Header() {
                       key={s.slug}
                       type="button"
                       onClick={() => go(`/category/${s.slug}`)}
-                      className="py-3 text-left text-sm tracking-wide border-b border-black/10 last:border-b-0 text-black/60 hover:text-black transition"
+                      className="py-3 text-left text-sm tracking-wide border-b border-black/10 last:border-b-0 text-black/60 hover:text-black transition uppercase"
                     >
                       {s.label}
                     </button>

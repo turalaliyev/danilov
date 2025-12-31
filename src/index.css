@@ -116,6 +116,11 @@
     font-weight: 300;
   }
 
+  footer {
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+  }
+
   /* inputs keep theme accent */
   input[type="radio"],
   input[type="checkbox"] {

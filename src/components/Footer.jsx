@@ -28,10 +28,10 @@ export default function Footer() {
               <img
                 src={isDarkMode ? LogoWhite : LogoBlack}
                 alt="Danilov"
-                className="h-16 -ml-1"
+                className="h-16 -ml-3"
               />
             </Link>
-            <p className="mt-1 text-sm text-black/60 leading-relaxed">
+            <p className="mt-1 text-sm text-black/80 leading-relaxed">
               A modern shoe house inspired by timeless craftsmanship and clean
               design. Built for daily wear — finished like a statement piece.
             </p>
