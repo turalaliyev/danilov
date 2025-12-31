@@ -42,7 +42,7 @@ export default function AnthologySection() {
             Danilov anthology
           </h2>
           <p className="font-light text-sm text-black/70 mb-8 leading-relaxed">
-            Discover the world of Santoni through creative vision, artisanal savoir-faire, and contemporary style.
+            Discover the world of Danilov through creative vision, artisanal savoir-faire, and contemporary style.
           </p>
         </div>
       </div>
