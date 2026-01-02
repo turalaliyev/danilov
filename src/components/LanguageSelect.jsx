@@ -10,38 +10,63 @@ const LANGS = [
 export default function LanguageSelect() {
   const { language, setLanguage } = useContext(LanguageContext);
   const [open, setOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const wrapRef = useRef(null);
+  const ignoreNextClick = useRef(false);
 
   useEffect(() => {
-    const onDown = (e) => {
+    const checkDarkMode = () => {
+      setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    };
+
+    checkDarkMode();
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQuery.addEventListener("change", checkDarkMode);
+
+    return () => mediaQuery.removeEventListener("change", checkDarkMode);
+  }, []);
+
+  useEffect(() => {
+    const onClickOutside = (e) => {
+      // Skip if we just handled a button click
+      if (ignoreNextClick.current) {
+        ignoreNextClick.current = false;
+        return;
+      }
       if (!wrapRef.current) return;
       if (!wrapRef.current.contains(e.target)) setOpen(false);
     };
     const onKey = (e) => {
       if (e.key === "Escape") setOpen(false);
     };
-    document.addEventListener("mousedown", onDown);
+    document.addEventListener("pointerdown", onClickOutside);
     window.addEventListener("keydown", onKey);
     return () => {
-      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("pointerdown", onClickOutside);
       window.removeEventListener("keydown", onKey);
     };
   }, []);
 
   const current = LANGS.find((l) => l.value === language)?.label || "EN";
 
+  const handleToggle = () => {
+    ignoreNextClick.current = true;
+    setOpen((v) => !v);
+  };
+
   return (
     <div ref={wrapRef} className="relative">
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onPointerDown={handleToggle}
         className={[
           "inline-flex items-center gap-1.5",
           "text-xs tracking-[0.24em] uppercase",
-          "text-white/80 hover:text-white transition",
           "px-2 py-1 rounded-sm",
-          "border border-white/10 hover:border-white/20",
-          "bg-transparent",
+          "bg-transparent transition",
+          isDarkMode
+            ? "text-white/80 hover:text-white border border-white/10 hover:border-white/20"
+            : "text-ink/70 hover:text-ink border border-ink/10 hover:border-ink/20",
         ].join(" ")}
         aria-haspopup="menu"
         aria-expanded={open}
@@ -78,7 +103,7 @@ export default function LanguageSelect() {
             <button
               key={l.value}
               type="button"
-              onClick={() => {
+              onPointerDown={() => {
                 setLanguage(l.value);
                 setOpen(false);
               }}
