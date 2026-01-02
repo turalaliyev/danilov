@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import CategoryCollection from "./pages/CategoryCollection.jsx";
 import GiftCardPage from "./pages/GiftCardPage.jsx";
+import Contacts from "./pages/Contacts.jsx";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/category/:category" element={<CategoryCollection />} />
         <Route path="/gift-card" element={<GiftCardPage />} />
+        <Route path="/contacts" element={<Contacts />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
