@@ -1,10 +1,12 @@
-import { useMemo } from "react";
+import { useMemo, useContext } from "react";
 import Hero from "../components/Hero.jsx";
 import CollectionSection from "../components/CollectionSection.jsx";
 import PromoGrid from "../components/PromoGrid.jsx";
 import AboutSection from "../components/AboutSection.jsx";
 import AnthologySection from "../components/AnthologySection.jsx";
 import ContactSection from "../components/ContactSection.jsx";
+import LanguageContext from "../context/LanguageContext";
+import { translations } from "../translations";
 
 import Img1 from "../assets/test_images/IMG-20221227-WA0004.jpg";
 import Img2 from "../assets/test_images/IMG-20230917-WA0003.jpg";
@@ -33,6 +35,9 @@ import Img24 from "../assets/test_images/Screenshot_20220922-005904_Instagram.jp
 import Img25 from "../assets/test_images/Screenshot_20220922-005907_Instagram.jpg";
 
 export default function HomePage() {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language] || translations.en;
+  
   const testImages = useMemo(
     () => [
       Img1,
@@ -141,15 +146,15 @@ export default function HomePage() {
       <Hero />
       
       <CollectionSection
-        title="Shop the Men's Collection"
-        description="Ruggedly refined hiking‑inspired boots crafted in handsome leathers and soft shearling along with masterful leather weekend bags balance modernity and artisanal depth."
+        title={t.collections.mensCollection}
+        description={t.collections.mensDescription}
         products={mensProducts}
         image={pick(1)}
       />
 
       <CollectionSection
-        title="Shop the Women's Collection"
-        description="Stacked heel shearling knee‑high boots and polished lace‑up trekking styles deliver sporty sophistication. Accessories convey warmth and beauty."
+        title={t.collections.womensCollection}
+        description={t.collections.womensDescription}
         products={womensProducts}
         image={pick(2)}
         reverse={true}

@@ -1,8 +1,13 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import videoSrc from "../assets/v.mp4";
+import LanguageContext from "../context/LanguageContext";
+import { translations } from "../translations";
 
 export default function AnthologySection() {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language] || translations.en;
+  const tEn = translations.en; // Always use English for card titles
   const sliderRef = useRef(null);
 
   // Use local test images (no external placeholders) so AnthologySection always renders.
@@ -17,11 +22,11 @@ export default function AnthologySection() {
   };
 
   const items = [
-    { title: "Danilov Classic", video: videoSrc },
-    { title: "Eclipse", image: pick(11) },
-    { title: "Back to Business", image: pick(12) },
-    { title: "Double Buckle Sneaker", image: pick(13) },
-    { title: "Limited Edition", image: pick(14) },
+    { title: tEn.anthology.classic, video: videoSrc },
+    { title: tEn.anthology.eclipse, image: pick(11) },
+    { title: tEn.anthology.backToBusiness, image: pick(12) },
+    { title: tEn.anthology.doubleBuckleSneaker, image: pick(13) },
+    { title: tEn.anthology.limitedEdition, image: pick(14) },
   ];
 
   const scrollSlider = (direction) => {
@@ -39,10 +44,10 @@ export default function AnthologySection() {
       <div className="flex flex-col justify-center px-10 md:px-16 py-12 bg-[#f4f0eb]">
         <div className="max-w-md mx-auto md:mx-0 w-full">
           <h2 className="uppercase font-bold text-2xl leading-relaxed mb-4">
-            Danilov anthology
+            {t.anthology.title}
           </h2>
           <p className="font-light text-sm text-black/70 mb-8 leading-relaxed">
-            Discover the world of Danilov through creative vision, artisanal savoir-faire, and contemporary style.
+            {t.anthology.description}
           </p>
         </div>
       </div>

@@ -1,4 +1,11 @@
+import { useContext } from "react";
+import LanguageContext from "../context/LanguageContext";
+import { translations } from "../translations";
+
 export default function PromoGrid() {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language] || translations.en;
+
   // Use local test images (no external placeholders) so PromoGrid always renders.
   const testImages = Object.values(
     import.meta.glob("../assets/test_images/*.jpg", { eager: true, import: "default" })
@@ -11,10 +18,10 @@ export default function PromoGrid() {
   };
 
   const promos = [
-    { title: "Boots For Him", link: "/category/man-boots", image: pick(1) },
-    { title: "Boots For Her", link: "/category/woman-boots", image: pick(2) },
-    { title: "Men's Outwear", link: "/category/man-clothes", image: pick(3) },
-    { title: "Men's Accessories", link: "/category/man-accessories", image: pick(4), linkText: "View All" },
+    { title: t.promoGrid.bootsForHim, link: "/category/man-boots", image: pick(1) },
+    { title: t.promoGrid.bootsForHer, link: "/category/woman-boots", image: pick(2) },
+    { title: t.promoGrid.mensOutwear, link: "/category/man-clothes", image: pick(3) },
+    { title: t.promoGrid.mensAccessories, link: "/category/man-accessories", image: pick(4), linkText: t.promoGrid.viewAll },
   ];
 
   return (
@@ -37,7 +44,7 @@ export default function PromoGrid() {
           <div className="promo-overlay absolute inset-0 flex flex-col items-center justify-center text-white uppercase text-center bg-black/30">
             <h3 className="text-2xl mb-2.5">{promo.title}</h3>
             <a href={promo.link} className="border-b border-white text-sm pb-1 hover:opacity-80 transition">
-              {promo.linkText || "Shop Now"}
+              {promo.linkText || t.promoGrid.shopNow}
             </a>
           </div>
         </div>

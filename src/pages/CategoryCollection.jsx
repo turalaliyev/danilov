@@ -7,47 +7,48 @@ import womanCategory from "../assets/woman_category.jpg";
 import { client } from "../sanity/clients";
 import LanguageContext from "../context/LanguageContext";
 import CategoryContext from "../context/CategoryContext";
-
-const MAN_TABS = [
-  { label: "View All", slug: "man-shoes" },
-  { label: "Classic", slug: "man-classic" },
-  { label: "Derby", slug: "man-derby" },
-  { label: "Oxford", slug: "man-oxford" },
-  { label: "Monk", slug: "man-monk" },
-  { label: "Loafers", slug: "man-loafers" },
-  { label: "Boots", slug: "man-boots" },
-  { label: "Moccasins", slug: "man-moccasins" },
-  { label: "Sports", slug: "man-sports" },
-  { label: "Sandals", slug: "man-sandals" },
-  { label: "Slippers (Mules)", slug: "man-mules" },
-];
-
-const WOMAN_TABS = [
-  { label: "View All", slug: "woman-shoes" },
-  { label: "Boots", slug: "woman-boots" },
-  { label: "High heels", slug: "woman-high-heels" },
-  { label: "Moccasins", slug: "woman-moccasins" },
-  { label: "Sports", slug: "woman-sports" },
-  { label: "Flat shoes", slug: "woman-flat" },
-  { label: "Pumps", slug: "woman-pumps" },
-  { label: "Sandals", slug: "woman-sandals" },
-  { label: "Slippers (Mules)", slug: "woman-mules" },
-];
+import { translations } from "../translations";
 
 const underlineClass =
   "relative inline-block text-black after:content-[''] after:absolute after:left-0 after:bottom-[-6px] after:h-[1px] after:w-full after:bg-black";
 
-function titleFromSlug(slug) {
+function titleFromSlug(slug, t) {
   if (!slug) return "";
-  const clean = slug
-    .replace(/^man-/, "")
-    .replace(/^woman-/, "")
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (m) => m.toUpperCase());
+  
+  if (slug === "man-shoes") return `${t.categoryCollection.mens} ${t.categoryCollection.viewAll.toUpperCase()}`;
+  if (slug === "woman-shoes") return `${t.categoryCollection.womens} ${t.categoryCollection.viewAll.toUpperCase()}`;
+  
+  const slugToKey = {
+    "man-classic": "classic",
+    "man-derby": "derby",
+    "man-oxford": "oxford",
+    "man-monk": "monk",
+    "man-loafers": "loafers",
+    "man-boots": "boots",
+    "man-moccasins": "moccasins",
+    "man-sports": "sports",
+    "man-sandals": "sandals",
+    "man-mules": "slippers",
+    "woman-boots": "boots",
+    "woman-high-heels": "highHeels",
+    "woman-moccasins": "moccasins",
+    "woman-sports": "sports",
+    "woman-flat": "flatShoes",
+    "woman-pumps": "pumps",
+    "woman-sandals": "sandals",
+    "woman-mules": "slippers",
+  };
 
-  if (slug.startsWith("man-")) return `MEN'S ${clean.toUpperCase()}`;
-  if (slug.startsWith("woman-")) return `WOMEN'S ${clean.toUpperCase()}`;
-  return clean.toUpperCase();
+  const key = slugToKey[slug];
+  let label = key ? t.categoryCollection[key] : slug.replace(/^(man-|woman-)/, "").replace(/-/g, " ");
+
+  if (slug.startsWith("man-")) {
+    return `${t.categoryCollection.mens} ${label.toUpperCase()}`;
+  }
+  if (slug.startsWith("woman-")) {
+    return `${t.categoryCollection.womens} ${label.toUpperCase()}`;
+  }
+  return label.toUpperCase();
 }
 
 export default function CategoryCollection() {
@@ -55,8 +56,7 @@ export default function CategoryCollection() {
   const navigate = useNavigate();
   const { language } = useContext(LanguageContext);
   const { categories } = useContext(CategoryContext);
-
-  console.log(language);
+  const t = translations[language] || translations.en;
 
   const group = useMemo(() => {
     if (category?.startsWith("man-")) return "man";
@@ -64,11 +64,43 @@ export default function CategoryCollection() {
     return "other";
   }, [category]);
 
+  const MAN_TABS = useMemo(
+    () => [
+      { label: t.categoryCollection.viewAll, slug: "man-shoes" },
+      { label: t.categoryCollection.classic, slug: "man-classic" },
+      { label: t.categoryCollection.derby, slug: "man-derby" },
+      { label: t.categoryCollection.oxford, slug: "man-oxford" },
+      { label: t.categoryCollection.monk, slug: "man-monk" },
+      { label: t.categoryCollection.loafers, slug: "man-loafers" },
+      { label: t.categoryCollection.boots, slug: "man-boots" },
+      { label: t.categoryCollection.moccasins, slug: "man-moccasins" },
+      { label: t.categoryCollection.sports, slug: "man-sports" },
+      { label: t.categoryCollection.sandals, slug: "man-sandals" },
+      { label: t.categoryCollection.slippers, slug: "man-mules" },
+    ],
+    [t]
+  );
+
+  const WOMAN_TABS = useMemo(
+    () => [
+      { label: t.categoryCollection.viewAll, slug: "woman-shoes" },
+      { label: t.categoryCollection.boots, slug: "woman-boots" },
+      { label: t.categoryCollection.highHeels, slug: "woman-high-heels" },
+      { label: t.categoryCollection.moccasins, slug: "woman-moccasins" },
+      { label: t.categoryCollection.sports, slug: "woman-sports" },
+      { label: t.categoryCollection.flatShoes, slug: "woman-flat" },
+      { label: t.categoryCollection.pumps, slug: "woman-pumps" },
+      { label: t.categoryCollection.sandals, slug: "woman-sandals" },
+      { label: t.categoryCollection.slippers, slug: "woman-mules" },
+    ],
+    [t]
+  );
+
   const tabs = useMemo(() => {
     if (group === "man") return MAN_TABS;
     if (group === "woman") return WOMAN_TABS;
     return [];
-  }, [group]);
+  }, [group, MAN_TABS, WOMAN_TABS]);
 
   const heroImage = useMemo(() => {
     if (group === "man") return manCategory;
@@ -159,7 +191,7 @@ export default function CategoryCollection() {
       <div className="max-w-350 mx-auto px-6 lg:px-10 pt-8">
         <div className="flex items-start justify-between gap-6">
           <h1 className="text-[28px] leading-none tracking-wide font-semibold">
-            {titleFromSlug(category)}
+            {titleFromSlug(category, t)}
           </h1>
 
           {tabs.length > 0 && (
@@ -190,7 +222,7 @@ export default function CategoryCollection() {
 
         <div className="mt-6 flex items-center justify-between">
           <div className="text-sm text-black/70">
-            {loading ? "Loading..." : `${items.length} Products`}
+            {loading ? t.categoryCollection.loading : `${items.length} ${t.categoryCollection.products}`}
           </div>
         </div>
 
@@ -210,7 +242,7 @@ export default function CategoryCollection() {
               </div>
             ) : items.length === 0 ? (
               <div className="text-sm text-black/60">
-                No products found for this category.
+                {t.categoryCollection.noProducts}
               </div>
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-16">

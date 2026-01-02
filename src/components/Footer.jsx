@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { FaInstagram, FaTiktok } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import LogoBlack from "../assets/logo-black.png";
 import LogoWhite from "../assets/logo-white.png";
+import LanguageContext from "../context/LanguageContext";
+import { translations } from "../translations";
 
 export default function Footer() {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language] || translations.en;
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
@@ -32,35 +36,34 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-1 text-sm text-black/80 leading-relaxed">
-              A modern shoe house inspired by timeless craftsmanship and clean
-              design. Built for daily wear — finished like a statement piece.
+              {t.footer.description}
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-20 lg:gap-32 xl:gap-48 2xl:gap-64">
             <div>
               <div className="text-xs tracking-[0.4em] uppercase text-black/60">
-                Customer care
+                {t.footer.customerCare}
               </div>
               <ul className="mt-4 space-y-2 text-sm">
                 <li>
                   <Link className="hover:opacity-70" to="/category/personal">
-                    Personalization
+                    {t.footer.personalization}
                   </Link>
                 </li>
                 <li>
                   <Link className="hover:opacity-70" to="/category/findus">
-                    Find us
+                    {t.footer.findUs}
                   </Link>
                 </li>
                 <li>
                   <Link className="hover:opacity-70" to="/category/care">
-                    Service
+                    {t.footer.service}
                   </Link>
                 </li>
                 <li>
                   <Link className="hover:opacity-70" to="/category/contact">
-                    Contact
+                    {t.footer.contact}
                   </Link>
                 </li>
               </ul>
@@ -68,7 +71,7 @@ export default function Footer() {
 
             <div>
               <div className="text-xs tracking-[0.4em] uppercase text-black/60">
-                Follow
+                {t.footer.follow}
               </div>
               <div className="mt-4 flex gap-4">
                 <a
