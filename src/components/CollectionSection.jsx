@@ -1,8 +1,12 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import CollectionCard from "./CollectionCard";
+import LanguageContext from "../context/LanguageContext";
+import { translations } from "../translations";
 
 export default function CollectionSection({ title, description, products, image, reverse = false }) {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language] || translations.en;
   const sliderRef = useRef(null);
 
   const scrollSlider = (direction) => {
@@ -71,14 +75,14 @@ export default function CollectionSection({ title, description, products, image,
           <button 
             onClick={() => scrollSlider('prev')} 
             className="p-1 text-black/40 hover:text-black/80 transition-colors"
-            aria-label="Previous products"
+            aria-label={t.collections.previousProducts || "Previous products"}
           >
             <MdChevronLeft size={24} />
           </button>
           <button 
             onClick={() => scrollSlider('next')} 
             className="p-1 text-black/40 hover:text-black/80 transition-colors"
-            aria-label="Next products"
+            aria-label={t.collections.nextProducts || "Next products"}
           >
             <MdChevronRight size={24} />
           </button>

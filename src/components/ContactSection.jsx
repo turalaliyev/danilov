@@ -1,35 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FaWhatsapp } from "react-icons/fa";
-import { useLanguage } from "../hooks/useLanguage";
-
-const translations = {
-  en: {
-    greeting: "Hello! I am interested in:",
-    generalInquiry: "General inquiry",
-    mensCollection: "Men's Collection",
-    womensCollection: "Women's Collection",
-    otherInquiry: "Other Inquiry",
-  },
-  ru: {
-    greeting: "Здравствуйте! Меня интересует:",
-    generalInquiry: "Общий запрос",
-    mensCollection: "Мужская коллекция",
-    womensCollection: "Женская коллекция",
-    otherInquiry: "Другой запрос",
-  },
-  az: {
-    greeting: "Salam! Məni maraqlandırır:",
-    generalInquiry: "Ümumi sorğu",
-    mensCollection: "Kişi kolleksiyası",
-    womensCollection: "Qadın kolleksiyası",
-    otherInquiry: "Digər sorğu",
-  },
-};
+import LanguageContext from "../context/LanguageContext";
+import { translations } from "../translations";
 
 export default function ContactSection() {
-  const { language } = useLanguage();
-  const [gender, setGender] = useState("");
+  const { language } = useContext(LanguageContext);
   const t = translations[language] || translations.en;
+  const [gender, setGender] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,17 +14,17 @@ export default function ContactSection() {
     // Получаем перевод выбранной опции
     let selectedOption = "";
     if (gender === "Men's Collection") {
-      selectedOption = t.mensCollection;
+      selectedOption = t.contact.mensCollection;
     } else if (gender === "Women's Collection") {
-      selectedOption = t.womensCollection;
+      selectedOption = t.contact.womensCollection;
     } else if (gender === "Other Inquiry") {
-      selectedOption = t.otherInquiry;
+      selectedOption = t.contact.otherInquiry;
     } else {
-      selectedOption = t.generalInquiry;
+      selectedOption = t.contact.generalInquiry;
     }
     
     // Формируем сообщение для WhatsApp на выбранном языке
-    const text = `${t.greeting} ${selectedOption}`;
+    const text = `${t.contact.interestedIn} ${selectedOption}`;
     const encodedText = encodeURIComponent(text);
     
     // Номер телефона 
@@ -66,17 +43,17 @@ export default function ContactSection() {
     >
       <div className="contact-card w-full max-w-[800px] bg-white p-12 md:p-16 shadow-2xl">
         <h2 className="text-2xl uppercase mb-6 tracking-widest text-center font-medium">
-          Contact us on WhatsApp
+          {t.contact.title}
         </h2>
         <p className="text-sm text-black/60 mb-10 leading-relaxed max-w-lg mx-auto">
-          Get in touch with us directly for exclusive offers, new collection updates, and personalized service.
+          {t.contact.description}
         </p>
         
         <form onSubmit={handleSubmit} className="flex flex-col gap-8 max-w-lg mx-auto">
                     {/* Gender / Interest Selection */}
                     <div className="gender-selection mt-2">
              <div className="flex flex-row items-center gap-4 flex-wrap">
-               <span className="text-sm font-normal text-black/80 whitespace-nowrap">I am interested in:</span>
+               <span className="text-sm font-normal text-black/80 whitespace-nowrap">{t.contact.interestedIn}</span>
                <div className="flex flex-row gap-6 items-center">
                 <label className="flex items-center gap-3 cursor-pointer text-sm font-light hover:opacity-70 transition-opacity">
                   <div className="relative flex items-center">
@@ -89,7 +66,7 @@ export default function ContactSection() {
                       className="peer appearance-none w-4 h-4 border border-black rounded-full checked:bg-green-600 checked:border-green-600 transition-all"
                     />
                   </div>
-                  {t.mensCollection}
+                  {t.contact.mensCollection}
                 </label>
                 <label className="flex items-center gap-3 cursor-pointer text-sm font-light hover:opacity-70 transition-opacity">
                   <div className="relative flex items-center">
@@ -102,7 +79,7 @@ export default function ContactSection() {
                       className="peer appearance-none w-4 h-4 border border-black rounded-full checked:bg-green-600 checked:border-green-600 transition-all"
                     />
                   </div>
-                  {t.womensCollection}
+                  {t.contact.womensCollection}
                 </label>
                 <label className="flex items-center gap-3 cursor-pointer text-sm font-light hover:opacity-70 transition-opacity">
                   <div className="relative flex items-center">
@@ -115,7 +92,7 @@ export default function ContactSection() {
                       className="peer appearance-none w-4 h-4 border border-black rounded-full checked:bg-green-600 checked:border-green-600 transition-all"
                     />
                   </div>
-                  {t.otherInquiry}
+                  {t.contact.otherInquiry}
                 </label>
                </div>
              </div>
@@ -129,7 +106,7 @@ export default function ContactSection() {
               className="px-10 py-3 bg-green-600 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-green-700 transition-all flex items-center gap-3"
             >
               <FaWhatsapp size={16} />
-              Chat on WhatsApp
+              {t.contact.chatOnWhatsApp}
             </button>
           </div>
           

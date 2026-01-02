@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import manCategory from "../assets/man_category.webp";
@@ -11,46 +11,13 @@ import { HiOutlineMagnifyingGlass, HiBars2 } from "react-icons/hi2";
 import LogoBlack from "../assets/logo-black.png";
 import LogoWhite from "../assets/logo-white.png";
 import LanguageSelect from "./LanguageSelect";
-
-const NAV = [
-  { label: "Gifts", key: "gifts" },
-  { label: "Man", key: "man" },
-  { label: "Woman", key: "woman" },
-  { label: "Service", key: "care" },
-  { label: "Personalization", key: "personal" },
-  { label: "Danilov's Culture", key: "culture" },
-  { label: "Accessories", key: "accessories" },
-  { label: "Find Us", key: "findus" },
-];
-
-const MAN_SHOES = [
-  { label: "Classic", slug: "man-classic" },
-  { label: "Derby", slug: "man-derby" },
-  { label: "Oxford", slug: "man-oxford" },
-  { label: "Monk", slug: "man-monk" },
-  { label: "Loafers", slug: "man-loafers" },
-  { label: "Boots", slug: "man-boots" },
-  { label: "Moccasins", slug: "man-moccasins" },
-  { label: "Sports", slug: "man-sports" },
-  { label: "Sandals", slug: "man-sandals" },
-  { label: "Slippers (Mules)", slug: "man-mules" },
-  { label: "All shoes", slug: "man-shoes" },
-];
-
-const WOMAN_SHOES = [
-  { label: "Boots", slug: "woman-boots" },
-  { label: "High heels", slug: "woman-high-heels" },
-  { label: "Moccasins", slug: "woman-moccasins" },
-  { label: "Sports", slug: "woman-sports" },
-  { label: "Flat shoes", slug: "woman-flat" },
-  { label: "Pumps", slug: "woman-pumps" },
-  { label: "Sandals", slug: "woman-sandals" },
-  { label: "Slippers (Mules)", slug: "woman-mules" },
-  { label: "All shoes", slug: "woman-shoes" },
-];
+import LanguageContext from "../context/LanguageContext";
+import { translations } from "../translations";
 
 export default function Header() {
   const navigate = useNavigate();
+  const { language } = useContext(LanguageContext);
+  const t = translations[language] || translations.en;
 
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(null);
@@ -68,50 +35,96 @@ export default function Header() {
   const headerHeightRef = useRef(0);
   const ticking = useRef(false);
 
+  const NAV = useMemo(
+    () => [
+      { label: t.nav.gifts, key: "gifts" },
+      { label: t.nav.man, key: "man" },
+      { label: t.nav.woman, key: "woman" },
+      { label: t.nav.service, key: "care" },
+      { label: t.nav.personalization, key: "personal" },
+      { label: t.nav.culture, key: "culture" },
+      { label: t.nav.accessories, key: "accessories" },
+      { label: t.nav.findUs, key: "findus" },
+    ],
+    [t]
+  );
+
+  const MAN_SHOES = useMemo(
+    () => [
+      { label: t.header.classic, slug: "man-classic" },
+      { label: t.header.derby, slug: "man-derby" },
+      { label: t.header.oxford, slug: "man-oxford" },
+      { label: t.header.monk, slug: "man-monk" },
+      { label: t.header.loafers, slug: "man-loafers" },
+      { label: t.header.boots, slug: "man-boots" },
+      { label: t.header.moccasins, slug: "man-moccasins" },
+      { label: t.header.sports, slug: "man-sports" },
+      { label: t.header.sandals, slug: "man-sandals" },
+      { label: t.header.slippers, slug: "man-mules" },
+      { label: t.header.allShoes, slug: "man-shoes" },
+    ],
+    [t]
+  );
+
+  const WOMAN_SHOES = useMemo(
+    () => [
+      { label: t.header.boots, slug: "woman-boots" },
+      { label: t.header.highHeels, slug: "woman-high-heels" },
+      { label: t.header.moccasins, slug: "woman-moccasins" },
+      { label: t.header.sports, slug: "woman-sports" },
+      { label: t.header.flatShoes, slug: "woman-flat" },
+      { label: t.header.pumps, slug: "woman-pumps" },
+      { label: t.header.sandals, slug: "woman-sandals" },
+      { label: t.header.slippers, slug: "woman-mules" },
+      { label: t.header.allShoes, slug: "woman-shoes" },
+    ],
+    [t]
+  );
+
   const dropdownData = useMemo(
     () => ({
-      man: { title: "Man", image: manCategory },
-      woman: { title: "Woman", image: womanCategory },
+      man: { title: t.nav.man, image: manCategory },
+      woman: { title: t.nav.woman, image: womanCategory },
       care: {
-        title: "Service",
+        title: t.nav.service,
         image: careCategory,
         links: [
-          { label: "Care kits", href: "/shoe-care/kits" },
-          { label: "Creams & polishes", href: "/shoe-care/creams" },
-          { label: "Brushes", href: "/shoe-care/brushes" },
-          { label: "Laces & accessories", href: "/shoe-care/accessories" },
+          { label: t.service.careKits, href: "/shoe-care/kits" },
+          { label: t.service.creamsPolishes, href: "/shoe-care/creams" },
+          { label: t.service.brushes, href: "/shoe-care/brushes" },
+          { label: t.service.lacesAccessories, href: "/shoe-care/accessories" },
         ],
       },
       personal: {
-        title: "Personalization",
+        title: t.nav.personalization,
         image: personalizationCategory,
         links: [
-          { label: "Monogram", href: "/personalization/monogram" },
-          { label: "Made to order", href: "/personalization/made-to-order" },
-          { label: "Materials", href: "/personalization/materials" },
+          { label: t.personalization.monogram, href: "/personalization/monogram" },
+          { label: t.personalization.madeToOrder, href: "/personalization/made-to-order" },
+          { label: t.personalization.materials, href: "/personalization/materials" },
           {
-            label: "Book an appointment",
+            label: t.personalization.bookAppointment,
             href: "/personalization/appointment",
           },
         ],
       },
       culture: {
-        title: "Danilov's Culture",
+        title: t.nav.culture,
         image: cultureCategory,
         links: [
-          { label: "The story", href: "/culture/story" },
-          { label: "Craftsmanship", href: "/culture/craftsmanship" },
-          { label: "Journal", href: "/culture/journal" },
-          { label: "Stores", href: "/stores" },
+          { label: t.culture.theStory, href: "/culture/story" },
+          { label: t.culture.craftsmanship, href: "/culture/craftsmanship" },
+          { label: t.culture.journal, href: "/culture/journal" },
+          { label: t.culture.stores, href: "/stores" },
         ],
       },
       findus: {
-        title: "Find Us",
+        title: t.nav.findUs,
         image: findusCategory,
-        links: [{ label: "Find Us", href: "/contacts" }],
+        links: [{ label: t.nav.findUs, href: "/contacts" }],
       },
     }),
-    []
+    [t]
   );
 
   const activeItem = active ? dropdownData[active] : null;
@@ -336,15 +349,15 @@ export default function Header() {
   const mobileCategoriesForNav = () => {
     if (mNavKey === "man") {
       return [
-        { label: "Shoes", key: "shoes", hasSub: true },
+        { label: t.header.shoes, key: "shoes", hasSub: true },
         {
-          label: "Accessories",
+          label: t.header.accessories,
           key: "accessories",
           hasSub: false,
           href: "/man-accessories",
         },
         {
-          label: "Clothes",
+          label: t.header.clothes,
           key: "clothes",
           hasSub: false,
           href: "/man-clothes",
@@ -352,7 +365,7 @@ export default function Header() {
       ];
     }
     if (mNavKey === "woman") {
-      return [{ label: "Shoes", key: "shoes", hasSub: true }];
+      return [{ label: t.header.shoes, key: "shoes", hasSub: true }];
     }
     return (dropdownData[mNavKey]?.links || []).map((l) => ({
       label: l.label,
@@ -500,25 +513,25 @@ export default function Header() {
           <div className="h-full w-full flex">
             <div className="w-[30%] max-w-130 h-full px-12 py-10 overflow-auto">
               <div className="text-xs tracking-[0.35em] uppercase text-black/60">
-                {activeItem?.title || "Menu"}
+                {activeItem?.title || t.header.menu}
               </div>
 
               {active === "man" && (
                 <div className="mt-10 space-y-6">
                   {[
-                    { label: "Shoes", key: "shoes" },
-                    { label: "Accessories", key: "accessories" },
-                    { label: "Clothes", key: "clothes" },
-                  ].map((t) => {
-                    const isOn = manCategoryTab === t.key;
+                    { label: t.header.shoes, key: "shoes" },
+                    { label: t.header.accessories, key: "accessories" },
+                    { label: t.header.clothes, key: "clothes" },
+                  ].map((tab) => {
+                    const isOn = manCategoryTab === tab.key;
                     const shouldUnderline =
-                      isOn && t.key === "shoes" && showManSubcats;
+                      isOn && tab.key === "shoes" && showManSubcats;
 
                     return (
                       <button
-                        key={t.key}
+                        key={tab.key}
                         type="button"
-                        onClick={() => onManCategoryClick(t.key)}
+                        onClick={() => onManCategoryClick(tab.key)}
                         className={[
                           "block w-full text-left text-xs tracking-[0.28em] uppercase transition cursor-pointer",
                           "text-black/60 hover:text-black hover:opacity-100",
@@ -529,7 +542,7 @@ export default function Header() {
                             shouldUnderline ? underlineActiveTabClass : ""
                           }
                         >
-                          {t.label}
+                          {tab.label}
                         </span>
                       </button>
                     );
@@ -547,7 +560,7 @@ export default function Header() {
                       "text-black opacity-100",
                     ].join(" ")}
                   >
-                    <span className={underlineActiveTabClass}>Shoes</span>
+                    <span className={underlineActiveTabClass}>{t.header.shoes}</span>
                   </button>
                 </div>
               )}
@@ -632,7 +645,7 @@ export default function Header() {
                   onClick={mGoBack}
                   className="relative text-xs tracking-[0.24em] uppercase text-black/60 hover:text-black transition"
                 >
-                  Back
+                  {t.header.back}
                 </button>
               </div>
             )}

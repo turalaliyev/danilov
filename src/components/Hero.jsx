@@ -1,9 +1,13 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import { BsPlay, BsPause } from "react-icons/bs";
 import { CgMouse } from "react-icons/cg";
 import videoBg from "../assets/video_2025-12-24_12-27-14.mp4";
+import LanguageContext from "../context/LanguageContext";
+import { translations } from "../translations";
 
 export default function Hero() {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language] || translations.en;
   const [isPlaying, setIsPlaying] = useState(true);
   const videoRef = useRef(null);
 
@@ -47,7 +51,7 @@ export default function Hero() {
               href="#collections"
               className="relative inline-block text-sm uppercase tracking-[0.15em] pb-1 border-b border-white hover:text-gray-200 hover:border-gray-200 transition-colors"
             >
-              Discover More
+              {t.hero.discoverMore}
             </a>
           </div>
         </div>
@@ -69,7 +73,7 @@ export default function Hero() {
 
           {/* Scroll Indicator (Right) */}
           <div className="flex flex-col items-center gap-2 animate-bounce-slow">
-             <span className="text-[10px] uppercase tracking-widest font-medium">Scroll</span>
+             <span className="text-[10px] uppercase tracking-widest font-medium">{t.hero.scroll}</span>
              <div className="w-[1px] h-8 bg-white/50 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1/2 bg-white animate-scroll-down"></div>
              </div>
