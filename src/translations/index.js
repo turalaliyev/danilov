@@ -121,6 +121,11 @@ export const translations = {
       brushes: "Brushes",
       lacesAccessories: "Laces & accessories",
     },
+    // Service Page
+    servicePage: {
+      title: "Danilov - Service",
+      description: "At Danilov Service, we believe that exceptional footwear deserves exceptional care. Our expert craftsmen offer professional shoe restoration, leather conditioning, and bespoke repair services to extend the life of your beloved pairs. From deep cleaning and polishing to sole replacement and stitching repairs, we treat every shoe with the same attention to detail that goes into crafting them. Trust us to keep your Danilov shoes — and any fine footwear — looking impeccable for years to come.",
+    },
     // Personalization dropdown
     personalization: {
       monogram: "Monogram",
@@ -258,6 +263,11 @@ export const translations = {
       brushes: "Щетки",
       lacesAccessories: "Шнурки и аксессуары",
     },
+    // Service Page
+    servicePage: {
+      title: "Danilov - Сервис",
+      description: "В Danilov Service мы верим, что исключительная обувь заслуживает исключительного ухода. Наши опытные мастера предлагают профессиональную реставрацию обуви, кондиционирование кожи и индивидуальные ремонтные услуги, чтобы продлить жизнь вашим любимым парам. От глубокой чистки и полировки до замены подошвы и ремонта швов — мы относимся к каждой паре обуви с тем же вниманием к деталям, что и при её создании. Доверьте нам уход за вашей обувью Danilov — и любой качественной обувью — чтобы она выглядела безупречно долгие годы.",
+    },
     // Personalization dropdown
     personalization: {
       monogram: "Монограмма",
@@ -394,6 +404,11 @@ export const translations = {
       creamsPolishes: "Kremlər və cilalar",
       brushes: "Fırçalar",
       lacesAccessories: "Bağcıqlar və aksesuarlar",
+    },
+    // Service Page
+    servicePage: {
+      title: "Danilov - Servis",
+      description: "Danilov Service-də biz inanırıq ki, əla ayaqqabı əla qulluğa layiqdir. Təcrübəli ustalarımız sevimli cütlərinizin ömrünü uzatmaq üçün peşəkar ayaqqabı bərpası, dəri kondisionerləmə və fərdi təmir xidmətləri təklif edir. Dərin təmizləmə və cilalamadan taban dəyişdirilməsinə və tikiş təmirinə qədər — hər ayaqqabıya onun hazırlanmasına sərf edilən eyni diqqətlə yanaşırıq. Danilov ayaqqabılarınızın — və hər hansı keyfiyyətli ayaqqabının — illər boyu qüsursuz görünməsi üçün bizə etibar edin.",
     },
     // Personalization dropdown
     personalization: {
