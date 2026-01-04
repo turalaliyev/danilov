@@ -1,10 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { urlFor } from "../sanity/image";
 
 import { client } from "../sanity/clients";
+import LanguageContext from "../context/LanguageContext";
+import { translations } from "../translations";
 
 export default function Contacts() {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language] || translations.en;
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -53,9 +57,9 @@ export default function Contacts() {
             <div className="h-6 w-16 bg-black/5 animate-pulse" />
           </div>
 
-          <div className="mt-10 grid lg:grid-cols-[1fr_520px] gap-10">
-            <div className="bg-black/5 aspect-16/11 animate-pulse" />
-            <div className="bg-black/5 aspect-16/11 animate-pulse" />
+          <div className="mt-10 grid lg:grid-cols-2 gap-10">
+            <div className="bg-black/5 aspect-[4/3] animate-pulse" />
+            <div className="bg-black/5 aspect-[4/3] animate-pulse" />
           </div>
 
           <div className="h-16" />
@@ -69,7 +73,7 @@ export default function Contacts() {
       <div className="max-w-350 mx-auto px-6 lg:px-10 pt-8">
         <div className="flex items-start justify-between gap-6">
           <h1 className="text-[28px] leading-none tracking-wide font-semibold">
-            Find Us
+            {t.footer.findUs}
           </h1>
 
           <div className="flex items-center gap-6 text-sm whitespace-nowrap">
@@ -78,15 +82,15 @@ export default function Contacts() {
               onClick={() => navigate(-1)}
               className="text-black/70 hover:text-black transition"
             >
-              Back
+              {t.header.back}
             </button>
           </div>
         </div>
 
-        <div className="mt-10 grid lg:grid-cols-[1fr_520px] gap-10">
-          <div>
+        <div className="mt-10 grid lg:grid-cols-2 gap-10">
+          <div className="order-1">
             <div className="bg-black/5 overflow-hidden">
-              <div className="aspect-16/11">
+              <div className="aspect-[4/3]">
                 {data?.locationImage ? (
                   <img
                     src={urlFor(data.locationImage).url()}
@@ -97,22 +101,11 @@ export default function Contacts() {
                 ) : null}
               </div>
             </div>
-
-            <div className="mt-6 flex flex-wrap items-center gap-4">
-              <a
-                href={waLink}
-                target="_blank"
-                rel="noreferrer"
-                className="px-10 py-3 bg-green-600 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-green-700 transition-all flex items-center gap-3"
-              >
-                Chat on WhatsApp
-              </a>
-            </div>
           </div>
 
-          <div className="lg:sticky lg:top-28">
+          <div className="lg:sticky lg:top-28 order-2">
             <div className="bg-black/5 overflow-hidden">
-              <div className="aspect-16/11">
+              <div className="aspect-[4/3]">
                 <iframe
                   title="Map"
                   src={mapSrc}
@@ -130,6 +123,18 @@ export default function Contacts() {
               <div className="mt-2 text-black/60">Baku, Azerbaijan</div>
             </div>
           </div>
+        </div>
+
+        {/* WhatsApp Button - centered on desktop, below map on mobile */}
+        <div className="mt-10 flex justify-center">
+          <a
+            href={waLink}
+            target="_blank"
+            rel="noreferrer"
+            className="px-10 py-3 bg-green-600 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-green-700 transition-all flex items-center gap-3"
+          >
+            {t.contact.chatOnWhatsApp}
+          </a>
         </div>
 
         <div className="h-16" />
