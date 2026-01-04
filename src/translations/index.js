@@ -279,7 +279,7 @@ export const translations = {
       gifts: "Hədiyyələr",
       man: "Kişi",
       woman: "Qadın",
-      service: "Xidmət",
+      service: "Servis",
       personalization: "Fərdiləşdirmə",
       culture: "Danilov Mədəniyyəti",
       accessories: "Aksesuarlar",
@@ -354,7 +354,7 @@ export const translations = {
       mensCollection: "Kişi kolleksiyası",
       womensCollection: "Qadın kolleksiyası",
       otherInquiry: "Digər sorğu",
-      chatOnWhatsApp: "WhatsApp-də söhbət",
+      chatOnWhatsApp: "WhatsApp-da əlaqə",
     },
     // Footer
     footer: {
@@ -362,7 +362,7 @@ export const translations = {
       customerCare: "Müştəri xidməti",
       personalization: "Fərdiləşdirmə",
       findUs: "Bizi tapın",
-      service: "Xidmət",
+      service: "Servis",
       contact: "Əlaqə",
       follow: "İzləyin",
     },
