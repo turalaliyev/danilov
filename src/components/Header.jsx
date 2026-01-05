@@ -4,15 +4,14 @@ import { useNavigate } from "react-router-dom";
 import manCategory from "../assets/man_category.webp";
 import womanCategory from "../assets/woman_category.jpg";
 import personalizationCategory from "../assets/personalization_category.webp";
-import findusCategory from "../assets/findus_category.webp";
 import cultureCategory from "../assets/culture_category.jpg";
-import careCategory from "../assets/care_category.avif";
 import { HiOutlineMagnifyingGlass, HiBars2 } from "react-icons/hi2";
 import LogoBlack from "../assets/logo-black.png";
 import LogoWhite from "../assets/logo-white.png";
 import LanguageSelect from "./LanguageSelect";
 import LanguageContext from "../context/LanguageContext";
 import { translations } from "../translations";
+import SearchOverlay from "./SearchOverlay";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -29,6 +28,8 @@ export default function Header() {
   const [manShoeTab, setManShoeTab] = useState("man-classic");
   const [womanShoeTab, setWomanShoeTab] = useState("woman-boots");
 
+  const [searchOpen, setSearchOpen] = useState(false);
+
   const headerRef = useRef(null);
   const lastScrollY = useRef(0);
   const offsetRef = useRef(0);
@@ -40,7 +41,7 @@ export default function Header() {
       { label: t.nav.gifts, key: "gifts" },
       { label: t.nav.man, key: "man" },
       { label: t.nav.woman, key: "woman" },
-      { label: t.nav.service, key: "care" },
+      { label: t.nav.service, key: "service" },
       { label: t.nav.personalization, key: "personal" },
       { label: t.nav.culture, key: "culture" },
       { label: t.nav.accessories, key: "accessories" },
@@ -85,23 +86,22 @@ export default function Header() {
     () => ({
       man: { title: t.nav.man, image: manCategory },
       woman: { title: t.nav.woman, image: womanCategory },
-      care: {
-        title: t.nav.service,
-        image: careCategory,
-        links: [
-          { label: t.service.careKits, href: "/shoe-care/kits" },
-          { label: t.service.creamsPolishes, href: "/shoe-care/creams" },
-          { label: t.service.brushes, href: "/shoe-care/brushes" },
-          { label: t.service.lacesAccessories, href: "/shoe-care/accessories" },
-        ],
-      },
       personal: {
         title: t.nav.personalization,
         image: personalizationCategory,
         links: [
-          { label: t.personalization.monogram, href: "/personalization/monogram" },
-          { label: t.personalization.madeToOrder, href: "/personalization/made-to-order" },
-          { label: t.personalization.materials, href: "/personalization/materials" },
+          {
+            label: t.personalization.monogram,
+            href: "/personalization/monogram",
+          },
+          {
+            label: t.personalization.madeToOrder,
+            href: "/personalization/made-to-order",
+          },
+          {
+            label: t.personalization.materials,
+            href: "/personalization/materials",
+          },
           {
             label: t.personalization.bookAppointment,
             href: "/personalization/appointment",
@@ -117,11 +117,6 @@ export default function Header() {
           { label: t.culture.journal, href: "/culture/journal" },
           { label: t.culture.stores, href: "/stores" },
         ],
-      },
-      findus: {
-        title: t.nav.findUs,
-        image: findusCategory,
-        links: [{ label: t.nav.findUs, href: "/contacts" }],
       },
     }),
     [t]
@@ -195,18 +190,18 @@ export default function Header() {
       const rawY = window.scrollY || document.documentElement.scrollTop || 0;
       const currentY = Math.max(rawY, 0);
       const prevY = Math.max(lastScrollY.current, 0);
-      
+
       const now = performance.now();
       const dt = now - lastTime;
       lastTime = now;
-      
+
       const delta = currentY - prevY;
-      
+
       // Calculate velocity (px per ms)
       if (dt > 0) {
         velocity = delta / dt;
       }
-      
+
       lastScrollY.current = currentY;
 
       // Top zone where header is always visible - catches bounce-back
@@ -276,6 +271,8 @@ export default function Header() {
   const toggleDesktopDropdown = (key) => {
     if (key === "gifts") return go("/gift-card");
     if (key === "accessories") return go("/category/man-accessories");
+    if (key === "findus") return go("/contacts");
+    if (key === "service") return go("/service");
 
     setActive((prev) => {
       const next = prev === key ? null : key;
@@ -335,11 +332,24 @@ export default function Header() {
     setOpen(false);
   };
 
-  const mobileNavHasCategories = (key) => key === "man" || key === "woman";
+  // ✅ show arrow for items that open a sub menu on mobile
+  const mobileNavHasCategories = (key) => {
+    return ["man", "woman", "personal", "culture"].includes(key);
+  };
+
+  // ✅ Only these hrefs should be prefixed with "/category"
+  const isProductCategoryHref = (href) => {
+    return (
+      typeof href === "string" &&
+      (href.startsWith("/man-") || href.startsWith("/woman-"))
+    );
+  };
 
   const openMobileNav = (key) => {
     if (key === "gifts") return go("/gift-card");
     if (key === "accessories") return go("/category/man-accessories");
+    if (key === "findus") return go("/contacts");
+    if (key === "service") return go("/service");
 
     setMNavKey(key);
     setMCategoryKey(null);
@@ -367,6 +377,8 @@ export default function Header() {
     if (mNavKey === "woman") {
       return [{ label: t.header.shoes, key: "shoes", hasSub: true }];
     }
+
+    // personal/culture use dropdownData links
     return (dropdownData[mNavKey]?.links || []).map((l) => ({
       label: l.label,
       key: l.href,
@@ -385,7 +397,7 @@ export default function Header() {
     <header
       ref={headerRef}
       style={{ transform: `translateY(-${offset}px)` }}
-      className="sticky top-0 z-50 bg-paper/85 backdrop-blur will-change-transform" // Сдвигаем header вверх пропорционально скроллу
+      className="sticky top-0 z-50 bg-paper/85 backdrop-blur will-change-transform"
     >
       <div className="pr-4">
         <div className="h-16 flex items-center justify-between">
@@ -433,13 +445,18 @@ export default function Header() {
             <div className="hidden md:block">
               <LanguageSelect />
             </div>
-            <div className="sm:hidden h-10 w-10 grid place-items-center">
+
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              className="h-10 w-10 grid place-items-center"
+              aria-label="Search"
+            >
               <HiOutlineMagnifyingGlass
                 className="size-6 text-black/60"
                 strokeWidth={1}
-                aria-hidden="true"
               />
-            </div>
+            </button>
 
             <button
               className="md:hidden h-10 w-10 grid place-items-center rounded-full hover:bg-black/5 transition"
@@ -461,18 +478,11 @@ export default function Header() {
             <div className="md:hidden">
               <LanguageSelect />
             </div>
-
-            <div className="hidden sm:grid h-10 w-10 place-items-center">
-              <HiOutlineMagnifyingGlass
-                className="size-6 text-black/60"
-                strokeWidth={1}
-                aria-hidden="true"
-              />
-            </div>
           </div>
         </div>
       </div>
 
+      {/* Desktop dropdown */}
       <div
         className={[
           "hidden md:block fixed left-0 right-0 top-16",
@@ -560,7 +570,9 @@ export default function Header() {
                       "text-black opacity-100",
                     ].join(" ")}
                   >
-                    <span className={underlineActiveTabClass}>{t.header.shoes}</span>
+                    <span className={underlineActiveTabClass}>
+                      {t.header.shoes}
+                    </span>
                   </button>
                 </div>
               )}
@@ -635,6 +647,7 @@ export default function Header() {
         </div>
       </div>
 
+      {/* Mobile menu */}
       <div className={mobileWrapClass(open)}>
         <div className="md:hidden">
           <div className="px-4 py-3 relative">
@@ -650,11 +663,13 @@ export default function Header() {
               </div>
             )}
 
+            {/* NAV VIEW */}
             <div className={mobileSlideClass(mView === "nav")}>
               {mView === "nav" && (
                 <div className="flex flex-col">
                   {NAV.map((i) => {
                     const expandable = mobileNavHasCategories(i.key);
+
                     return (
                       <button
                         key={i.key}
@@ -663,8 +678,10 @@ export default function Header() {
                           if (i.key === "gifts") return go("/gift-card");
                           if (i.key === "accessories")
                             return go("/category/man-accessories");
+                          if (i.key === "findus") return go("/contacts");
+                          if (i.key === "service") return go("/service");
 
-                          if (!expandable) return openMobileNav(i.key);
+                          // everything else opens categories view
                           openMobileNav(i.key);
                         }}
                         className="py-3 text-left text-sm tracking-wide border-b border-black/10 last:border-b-0 flex items-center justify-between uppercase"
@@ -682,6 +699,7 @@ export default function Header() {
               )}
             </div>
 
+            {/* CATEGORIES VIEW */}
             <div className={mobileSlideClass(mView === "categories")}>
               {mView === "categories" && mNavKey && (
                 <div className="flex flex-col">
@@ -690,7 +708,13 @@ export default function Header() {
                       key={c.key}
                       type="button"
                       onClick={() => {
-                        if (c.href) return go(`/category${c.href}`);
+                        if (c.href) {
+                          // ✅ Only prefix /category for man/woman product category routes
+                          return isProductCategoryHref(c.href)
+                            ? go(`/category${c.href}`)
+                            : go(c.href);
+                        }
+
                         if (c.hasSub) {
                           setMCategoryKey(c.key);
                           setMView("subcategories");
@@ -710,6 +734,7 @@ export default function Header() {
               )}
             </div>
 
+            {/* SUBCATEGORIES VIEW */}
             <div className={mobileSlideClass(mView === "subcategories")}>
               {mView === "subcategories" && mNavKey && mCategoryKey && (
                 <div className="flex flex-col">
@@ -729,6 +754,9 @@ export default function Header() {
           </div>
         </div>
       </div>
+      {searchOpen ? (
+        <SearchOverlay onClose={() => setSearchOpen(false)} />
+      ) : null}
     </header>
   );
 }

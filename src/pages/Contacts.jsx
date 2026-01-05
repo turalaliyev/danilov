@@ -58,8 +58,8 @@ export default function Contacts() {
           </div>
 
           <div className="mt-10 grid lg:grid-cols-2 gap-10">
-            <div className="bg-black/5 aspect-[4/3] animate-pulse" />
-            <div className="bg-black/5 aspect-[4/3] animate-pulse" />
+            <div className="bg-black/5 aspect-4/3 animate-pulse" />
+            <div className="bg-black/5 aspect-4/3 animate-pulse" />
           </div>
 
           <div className="h-16" />
@@ -90,7 +90,7 @@ export default function Contacts() {
         <div className="mt-10 grid lg:grid-cols-2 gap-10">
           <div className="order-1">
             <div className="bg-black/5 overflow-hidden">
-              <div className="aspect-[4/3]">
+              <div className="aspect-4/3">
                 {data?.locationImage ? (
                   <img
                     src={urlFor(data.locationImage).url()}
@@ -105,7 +105,7 @@ export default function Contacts() {
 
           <div className="lg:sticky lg:top-28 order-2">
             <div className="bg-black/5 overflow-hidden">
-              <div className="aspect-[4/3]">
+              <div className="aspect-4/3">
                 <iframe
                   title="Map"
                   src={mapSrc}
