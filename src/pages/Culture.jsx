@@ -10,45 +10,45 @@ import TerritoryImg from "../assets/territory.jpg";
 import BeautyImg from "../assets/beauty.jpg";
 import HumanismImg from "../assets/humanizm.jpg";
 
-const sections = [
-    {
-        id: "family",
-        subheading: "DANILOV IS",
-        title: "A FAMILY",
-        text: "Business, art and family are one. Danilov is a virtuous example of this approach. It is a family business, rooted in the territory, which feeds on the genius loci to restore value, in turn, creating beauty.",
-        image: FamilyImg,
-        imagePosition: "left",
-    },
-    {
-        id: "territory",
-        subheading: "DANILOV IS",
-        title: "A PATRON OF TERRITORY",
-        text: "The territory is important for Danilov: it is the place where everything starts, exactly as evolution is rooted in tradition. What has been is a stimulus to do better and better, rooting manual skills and knowledge in the current time. Thanks to this philosophy, Danilov artisans are able to create valuable objects, combining tradition and innovation and conveying to each product an unmistakable identity.",
-        image: TerritoryImg,
-        imagePosition: "right",
-    },
-    {
-        id: "beauty",
-        subheading: "DANILOV IS",
-        title: "A MAKER OF BEAUTY",
-        text: "Danilov creates beauty through the hands, relying on the unique knowledge, handed down for generations, of artisans who are artists at the same time. In Danilov, the hand is everything: it shapes, moulds, colors and finally gives an unrepeatable identity to every object. The hand is the reason why Danilov is a manufacturer. The hand creates objects that are real, designed to last over time while capturing the spirit of the time. Beauty is the result but also the process: a unique way of making things.",
-        image: BeautyImg,
-        imagePosition: "left",
-    },
-    {
-        id: "humanism",
-        subheading: "DANILOV IS",
-        title: "A CHAMPION OF HUMANISM",
-        text: "Danilov is distinguished by an authentic humanism that is also the profoundly essence of the brand. The importance of the single individual is at the center of the company's philosophy. Danilov is a family. Enlarged, but united: a family, linked by human and true relationships. It is precisely the family structure that creates authenticity, and in this spirit Danilov strives for Beauty and invite customers to enjoy it, arousing positive feelings, raising the quality of everyday life, naturally.",
-        image: HumanismImg,
-        imagePosition: "right",
-    },
-];
-
 export default function Culture() {
     const { language } = useContext(LanguageContext);
     const t = translations[language] || translations.en;
     const navigate = useNavigate();
+
+    const sections = [
+        {
+            id: "family",
+            subheading: t.culturePage?.subheading || "DANILOV IS",
+            title: t.culturePage?.family?.title || "A FAMILY",
+            text: t.culturePage?.family?.text || "Business, art and family are one. Danilov is a virtuous example of this approach. It is a family business, rooted in the territory, which feeds on the genius loci to restore value, in turn, creating beauty.",
+            image: FamilyImg,
+            imagePosition: "left",
+        },
+        {
+            id: "territory",
+            subheading: t.culturePage?.subheading || "DANILOV IS",
+            title: t.culturePage?.territory?.title || "A PATRON OF TERRITORY",
+            text: t.culturePage?.territory?.text || "The territory is important for Danilov: it is the place where everything starts, exactly as evolution is rooted in tradition. What has been is a stimulus to do better and better, rooting manual skills and knowledge in the current time. Thanks to this philosophy, Danilov artisans are able to create valuable objects, combining tradition and innovation and conveying to each product an unmistakable identity.",
+            image: TerritoryImg,
+            imagePosition: "right",
+        },
+        {
+            id: "beauty",
+            subheading: t.culturePage?.subheading || "DANILOV IS",
+            title: t.culturePage?.beauty?.title || "A MAKER OF BEAUTY",
+            text: t.culturePage?.beauty?.text || "Danilov creates beauty through the hands, relying on the unique knowledge, handed down for generations, of artisans who are artists at the same time. In Danilov, the hand is everything: it shapes, moulds, colors and finally gives an unrepeatable identity to every object. The hand is the reason why Danilov is a manufacturer. The hand creates objects that are real, designed to last over time while capturing the spirit of the time. Beauty is the result but also the process: a unique way of making things.",
+            image: BeautyImg,
+            imagePosition: "left",
+        },
+        {
+            id: "humanism",
+            subheading: t.culturePage?.subheading || "DANILOV IS",
+            title: t.culturePage?.humanism?.title || "A CHAMPION OF HUMANISM",
+            text: t.culturePage?.humanism?.text || "Danilov is distinguished by an authentic humanism that is also the profoundly essence of the brand. The importance of the single individual is at the center of the company's philosophy. Danilov is a family. Enlarged, but united: a family, linked by human and true relationships. It is precisely the family structure that creates authenticity, and in this spirit Danilov strives for Beauty and invite customers to enjoy it, arousing positive feelings, raising the quality of everyday life, naturally.",
+            image: HumanismImg,
+            imagePosition: "right",
+        },
+    ];
 
     return (
         <div className="min-h-screen bg-white">
