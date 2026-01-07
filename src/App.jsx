@@ -6,7 +6,9 @@ import NotFoundPage from "./pages/NotFoundPage.jsx";
 import CategoryCollection from "./pages/CategoryCollection.jsx";
 import GiftCardPage from "./pages/GiftCardPage.jsx";
 import Contacts from "./pages/Contacts.jsx";
-import Service from "./pages/Service.jsx"; 
+import Service from "./pages/Service.jsx";
+import Culture from "./pages/Culture.jsx";
+import DanilovIs from "./pages/DanilovIs.jsx";
 
 export default function App() {
   return (
@@ -18,6 +20,8 @@ export default function App() {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/service" element={<Service />} />
+        <Route path="/culture" element={<Culture />} />
+        <Route path="/culture/danilov-is" element={<DanilovIs />} />
       </Route>
     </Routes>
   );
