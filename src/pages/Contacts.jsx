@@ -50,7 +50,7 @@ export default function Contacts() {
 
   if (loading) {
     return (
-      <section className="w-full">
+      <section className="w-full bg-white min-h-screen">
         <div className="max-w-350 mx-auto px-6 lg:px-10 pt-8">
           <div className="flex items-start justify-between gap-6">
             <div className="h-8 w-32 bg-black/5 animate-pulse" />
@@ -69,7 +69,7 @@ export default function Contacts() {
   }
 
   return (
-    <section className="w-full">
+    <section className="w-full bg-white min-h-screen">
       <div className="max-w-350 mx-auto px-6 lg:px-10 pt-8">
         <div className="flex items-start justify-between gap-6">
           <h1 className="text-[28px] leading-none tracking-wide font-semibold">
