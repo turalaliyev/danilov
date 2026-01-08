@@ -140,6 +140,26 @@ export const translations = {
       journal: "Journal",
       stores: "Stores",
     },
+    // Culture Page
+    culturePage: {
+      subheading: "DANILOV IS",
+      family: {
+        title: "A FAMILY",
+        text: "Business, art and family are one. Danilov is a virtuous example of this approach. It is a family business, rooted in the territory, which feeds on the genius loci to restore value, in turn, creating beauty.",
+      },
+      territory: {
+        title: "A PATRON OF TERRITORY",
+        text: "The territory is important for Danilov: it is the place where everything starts, exactly as evolution is rooted in tradition. What has been is a stimulus to do better and better, rooting manual skills and knowledge in the current time. Thanks to this philosophy, Danilov artisans are able to create valuable objects, combining tradition and innovation and conveying to each product an unmistakable identity.",
+      },
+      beauty: {
+        title: "A MAKER OF BEAUTY",
+        text: "Danilov creates beauty through the hands, relying on the unique knowledge, handed down for generations, of artisans who are artists at the same time. In Danilov, the hand is everything: it shapes, moulds, colors and finally gives an unrepeatable identity to every object. The hand is the reason why Danilov is a manufacturer. The hand creates objects that are real, designed to last over time while capturing the spirit of the time. Beauty is the result but also the process: a unique way of making things.",
+      },
+      humanism: {
+        title: "A CHAMPION OF HUMANISM",
+        text: "Danilov is distinguished by an authentic humanism that is also the profoundly essence of the brand. The importance of the single individual is at the center of the company's philosophy. Danilov is a family. Enlarged, but united: a family, linked by human and true relationships. It is precisely the family structure that creates authenticity, and in this spirit Danilov strives for Beauty and invite customers to enjoy it, arousing positive feelings, raising the quality of everyday life, naturally.",
+      },
+    },
   },
   ru: {
     // Header
@@ -282,6 +302,26 @@ export const translations = {
       journal: "Журнал",
       stores: "Магазины",
     },
+    // Culture Page
+    culturePage: {
+      subheading: "DANILOV - ЭТО",
+      family: {
+        title: "СЕМЬЯ",
+        text: "Бизнес, искусство и семья едины. Danilov — добродетельный пример такого подхода. Это семейный бизнес, укорененный на территории, который питается гением места, чтобы восстановить ценность и, в свою очередь, создать красоту.",
+      },
+      territory: {
+        title: "ПОКРОВИТЕЛЬ ТЕРРИТОРИИ",
+        text: "Территория важна для Danilov: это место, где все начинается, точно так же, как эволюция укоренена в традиции. То, что было, является стимулом делать все лучше и лучше, укореняя ручные навыки и знания в современности. Благодаря этой философии мастера Danilov способны создавать ценные объекты, сочетая традицию и инновации и передавая каждому продукту неповторимую идентичность.",
+      },
+      beauty: {
+        title: "СОЗДАТЕЛЬ КРАСОТЫ",
+        text: "Danilov создает красоту руками, опираясь на уникальные знания, передаваемые из поколения в поколение, мастеров, которые одновременно являются художниками. В Danilov рука — это все: она формирует, лепит, окрашивает и, наконец, придает каждому объекту неповторимую идентичность. Рука — это причина, по которой Danilov является производителем. Рука создает объекты, которые реальны, предназначены для долговечности, улавливая дух времени. Красота — это результат, но также и процесс: уникальный способ создания вещей.",
+      },
+      humanism: {
+        title: "ПОБОРНИК ГУМАНИЗМА",
+        text: "Danilov отличается подлинным гуманизмом, который также является глубокой сущностью бренда. Важность отдельной личности находится в центре философии компании. Danilov — это семья. Расширенная, но единая: семья, связанная человеческими и истинными отношениями. Именно семейная структура создает аутентичность, и в этом духе Danilov стремится к Красоте и приглашает клиентов наслаждаться ею, пробуждая положительные чувства, повышая качество повседневной жизни, естественным образом.",
+      },
+    },
   },
   az: {
     // Header
@@ -423,6 +463,26 @@ export const translations = {
       craftsmanship: "Sənətkarlıq",
       journal: "Jurnal",
       stores: "Mağazalar",
+    },
+    // Culture Page
+    culturePage: {
+      subheading: "DANILOV BUDUR",
+      family: {
+        title: "AİLƏ",
+        text: "Biznes, incəsənət və ailə birdir. Danilov bu yanaşmanın fəzilətli nümunəsidir. Bu, əraziyə kök salmış, dəyəri bərpa etmək və öz növbəsində gözəllik yaratmaq üçün genius loci-dən qidalanan ailə biznesidir.",
+      },
+      territory: {
+        title: "ƏRAZİNİN HİMAYƏDARI",
+        text: "Ərazi Danilov üçün vacibdir: bu, hər şeyin başladığı yerdir, tam olaraq təkamülün ənənəyə kök salması kimi. Olan şey daha yaxşı və daha yaxşı etmək üçün stimuldur, əl bacarıqlarını və bilikləri müasir zamana kökləndirir. Bu fəlsəfə sayəsində Danilov sənətkarları ənənə və innovasiyanı birləşdirərək və hər məhsula misilsiz şəxsiyyət verərək dəyərli obyektlər yarada bilirlər.",
+      },
+      beauty: {
+        title: "GÖZƏLLİK YARADAN",
+        text: "Danilov əllər vasitəsilə gözəllik yaradır, eyni zamanda rəssam olan sənətkarların nəsildən-nəslə ötürülən unikal biliklərinə etibar edir. Danilov-da əl hər şeydir: o, formalaşdırır, şəkilləndirir, rəngləyir və nəhayət, hər obyektə təkrarlanmayan şəxsiyyət verir. Əl Danilov-un istehsalçı olmasının səbəbidir. Əl zamanın ruhunu tutarkən zamanla davam etmək üçün nəzərdə tutulmuş real obyektlər yaradır. Gözəllik nəticədir, həm də prosesdir: şeyləri yaratmağın unikal yolu.",
+      },
+      humanism: {
+        title: "HÜMANİZMİN TƏRƏFDARI",
+        text: "Danilov həm də brendin dərin mahiyyəti olan səmimi hümanizm ilə fərqlənir. Tək fərdin əhəmiyyəti şirkətin fəlsəfəsinin mərkəzindədir. Danilov bir ailədir. Genişləndirilmiş, amma birləşmiş: insan və həqiqi münasibətlərlə bağlı bir ailə. Məhz ailə strukturu səmimilik yaradır və bu ruhda Danilov Gözəlliyə çalışır və müştəriləri ondan zövq almağa dəvət edir, müsbət hissləri oyandırır, gündəlik həyatın keyfiyyətini təbii şəkildə artırır.",
+      },
     },
   },
 };
