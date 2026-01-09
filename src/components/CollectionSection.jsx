@@ -1,13 +1,22 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useMemo } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import CollectionCard from "./CollectionCard";
 import LanguageContext from "../context/LanguageContext";
 import { translations } from "../translations";
 
-export default function CollectionSection({ title, description, products, image, reverse = false }) {
+export default function CollectionSection({
+  title,
+  description,
+  products,
+  image,
+  reverse = false,
+  loading,
+}) {
   const { language } = useContext(LanguageContext);
   const t = translations[language] || translations.en;
   const sliderRef = useRef(null);
+
+  const skeletons = useMemo(() => Array.from({ length: 6 }), []);
 
   const scrollSlider = (direction) => {
     if (!sliderRef.current) return;
@@ -26,9 +35,14 @@ export default function CollectionSection({ title, description, products, image,
       className={`grid grid-cols-1 md:grid-cols-2 md:min-h-[120vh] md:max-h-[120vh] overflow-hidden ${reverse ? "bg-paper/50" : ""}`}
     >
       {/* Big picture */}
-      <div className={`collection-image w-full h-[70vh] md:h-full md:max-h-[120vh] ${reverse ? "md:order-2" : ""}`}>
+      <div
+        className={`collection-image w-full h-[70vh] md:h-full md:max-h-[120vh] ${reverse ? "md:order-2" : ""}`}
+      >
         <img
-          src={image || "https://placeholder.pics/svg/600x900/DBDBDB-DBDBDB/DBDBDB-DBDBDB"}
+          src={
+            image ||
+            "https://placeholder.pics/svg/600x900/DBDBDB-DBDBDB/DBDBDB-DBDBDB"
+          }
           alt={`${title} collection`}
           className="w-full h-full object-cover"
         />
@@ -40,11 +54,10 @@ export default function CollectionSection({ title, description, products, image,
           reverse ? "md:order-1" : ""
         }`}
       >
-
         {/* 1. Header (Title & Description) */}
         <div className="flex-none flex justify-center items-center mb-10">
           <div className="w-full">
-            <h2 className="text-2xl font-extrabold md:text-3xl uppercase mb-5 tracking-[0.08em] text-center max-w-[400px] mx-auto">
+            <h2 className="text-2xl font-extrabold md:text-3xl uppercase mb-5 tracking-[0.08em] text-center max-w-100 mx-auto">
               {title}
             </h2>
             <p className="text-sm font-light text-black/70 leading-relaxed w-[90%] md:max-w-[60%] mx-auto text-center">
@@ -56,38 +69,43 @@ export default function CollectionSection({ title, description, products, image,
         {/* 2. Slider (Takes available space) */}
         <div
           ref={sliderRef}
-          className="product-slider flex-1 flex overflow-x-auto scroll-smooth gap-1 scrollbar-hide items-center min-h-[450px] md:min-h-0"
-          style={{ 
-            scrollbarWidth: "none", 
+          className="product-slider flex-1 flex overflow-x-auto scroll-smooth gap-1 scrollbar-hide items-center min-h-112.5 md:min-h-0"
+          style={{
+            scrollbarWidth: "none",
             msOverflowStyle: "none",
-            paddingLeft: "calc(50% - 175px)" // 350px / 2 = 175px
+            paddingLeft: "calc(50% - 175px)", // 350px / 2 = 175px
           }}
         >
-          {products.map((product, index) => (
-            <div key={index} className="flex-none">
-              <CollectionCard product={product} />
-            </div>
-          ))}
+          {loading
+            ? skeletons.map((_, index) => (
+                <div key={index} className="flex-none">
+                  <CollectionCard loading />
+                </div>
+              ))
+            : products.map((product, index) => (
+                <div key={product?._id || index} className="flex-none">
+                  <CollectionCard product={product} />
+                </div>
+              ))}
         </div>
-        
+
         {/* 3. Navigation Arrows (Bottom) */}
         <div className="flex-none flex justify-center gap-8 mt-10">
-          <button 
-            onClick={() => scrollSlider('prev')} 
+          <button
+            onClick={() => scrollSlider("prev")}
             className="p-1 text-black/40 hover:text-black/80 transition-colors"
             aria-label={t.collections.previousProducts || "Previous products"}
           >
             <MdChevronLeft size={24} />
           </button>
-          <button 
-            onClick={() => scrollSlider('next')} 
+          <button
+            onClick={() => scrollSlider("next")}
             className="p-1 text-black/40 hover:text-black/80 transition-colors"
             aria-label={t.collections.nextProducts || "Next products"}
           >
             <MdChevronRight size={24} />
           </button>
         </div>
-
       </div>
     </section>
   );

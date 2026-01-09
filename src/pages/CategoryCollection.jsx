@@ -1,6 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { urlFor } from "../sanity/image";
 
 import manCategory from "../assets/man_category.webp";
 import womanCategory from "../assets/woman_category.jpg";
@@ -8,16 +7,19 @@ import { client } from "../sanity/clients";
 import LanguageContext from "../context/LanguageContext";
 import CategoryContext from "../context/CategoryContext";
 import { translations } from "../translations";
+import ProductCard from "../components/ProductCard";
 
 const underlineClass =
   "relative inline-block text-black after:content-[''] after:absolute after:left-0 after:bottom-[-6px] after:h-[1px] after:w-full after:bg-black";
 
 function titleFromSlug(slug, t) {
   if (!slug) return "";
-  
-  if (slug === "man-shoes") return `${t.categoryCollection.mens} ${t.categoryCollection.viewAll.toUpperCase()}`;
-  if (slug === "woman-shoes") return `${t.categoryCollection.womens} ${t.categoryCollection.viewAll.toUpperCase()}`;
-  
+
+  if (slug === "man-shoes")
+    return `${t.categoryCollection.mens} ${t.categoryCollection.viewAll.toUpperCase()}`;
+  if (slug === "woman-shoes")
+    return `${t.categoryCollection.womens} ${t.categoryCollection.viewAll.toUpperCase()}`;
+
   const slugToKey = {
     "man-classic": "classic",
     "man-derby": "derby",
@@ -40,15 +42,15 @@ function titleFromSlug(slug, t) {
   };
 
   const key = slugToKey[slug];
-  let label = key ? t.categoryCollection[key] : slug.replace(/^(man-|woman-)/, "").replace(/-/g, " ");
+  let label = key
+    ? t.categoryCollection[key]
+    : slug.replace(/^(man-|woman-)/, "").replace(/-/g, " ");
 
-  if (slug.startsWith("man-")) {
-    return `${t.categoryCollection.mens} ${label.toUpperCase()}`;
-  }
-  if (slug.startsWith("woman-")) {
-    return `${t.categoryCollection.womens} ${label.toUpperCase()}`;
-  }
-  return label.toUpperCase();
+  if (slug.startsWith("man-"))
+    return `${t.categoryCollection.mens} ${String(label).toUpperCase()}`;
+  if (slug.startsWith("woman-"))
+    return `${t.categoryCollection.womens} ${String(label).toUpperCase()}`;
+  return String(label).toUpperCase();
 }
 
 export default function CategoryCollection() {
@@ -109,13 +111,13 @@ export default function CategoryCollection() {
   }, [group]);
 
   const MAN_SHOE_SLUGS = useMemo(
-    () => MAN_TABS.filter((t) => t.slug !== "man-shoes").map((t) => t.slug),
-    []
+    () => MAN_TABS.filter((x) => x.slug !== "man-shoes").map((x) => x.slug),
+    [MAN_TABS]
   );
 
   const WOMAN_SHOE_SLUGS = useMemo(
-    () => WOMAN_TABS.filter((t) => t.slug !== "woman-shoes").map((t) => t.slug),
-    []
+    () => WOMAN_TABS.filter((x) => x.slug !== "woman-shoes").map((x) => x.slug),
+    [WOMAN_TABS]
   );
 
   const categoryIdsForQuery = useMemo(() => {
@@ -144,40 +146,45 @@ export default function CategoryCollection() {
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
+      setErr("");
+
       try {
         if (!category) {
           setItems([]);
-          setLoading(false);
           return;
         }
 
         const isViewAll =
           category === "man-shoes" || category === "woman-shoes";
+
         if (!isViewAll && categoryIdsForQuery.length === 0) {
           setItems([]);
           return;
         }
 
         const SHOES_QUERY = `*[_type == "shoes" && references($catIds)]{
-            _id,
-            title_en, title_az, title_ru,
-            description_en, description_az, description_ru,
-            price,
-            "slug": slug.current,
-            mainImage,
-            additionalImage,
-            categories
-            } | order(_createdAt desc)`;
+          _id,
+          title_en, title_az, title_ru,
+          description_en, description_az, description_ru,
+          price,
+          "slug": slug.current,
+          mainImage,
+          additionalImage,
+          categories
+        } | order(_createdAt desc)`;
 
         const shoes = await client.fetch(SHOES_QUERY, {
           catIds: categoryIdsForQuery,
         });
-        setItems(shoes);
+
+        setItems(shoes || []);
       } catch (error) {
-        setErr(error);
+        setErr(error?.message || String(error));
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
+
     getData();
   }, [category, categoryIdsForQuery]);
 
@@ -185,6 +192,9 @@ export default function CategoryCollection() {
     navigate(`/category/${slug}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const topItems = useMemo(() => (items || []).slice(0, 6), [items]);
+  const restItems = useMemo(() => (items || []).slice(6), [items]);
 
   return (
     <section className="w-full">
@@ -197,13 +207,13 @@ export default function CategoryCollection() {
           {tabs.length > 0 && (
             <div className="hidden md:block max-w-[75%] overflow-x-auto">
               <div className="flex items-center gap-6 text-xs whitespace-nowrap justify-end pb-2 pr-2">
-                {tabs.map((t) => {
-                  const active = t.slug === category;
+                {tabs.map((tab) => {
+                  const active = tab.slug === category;
                   return (
                     <button
-                      key={t.slug}
+                      key={tab.slug}
                       type="button"
-                      onClick={() => onTabClick(t.slug)}
+                      onClick={() => onTabClick(tab.slug)}
                       className={[
                         "transition cursor-pointer",
                         active
@@ -211,7 +221,7 @@ export default function CategoryCollection() {
                           : "text-black/70 hover:text-black",
                       ].join(" ")}
                     >
-                      {t.label}
+                      {tab.label}
                     </button>
                   );
                 })}
@@ -222,77 +232,64 @@ export default function CategoryCollection() {
 
         <div className="mt-6 flex items-center justify-between">
           <div className="text-sm text-black/70">
-            {loading ? t.categoryCollection.loading : `${items.length} ${t.categoryCollection.products}`}
+            {loading
+              ? t.categoryCollection.loading
+              : `${items.length} ${t.categoryCollection.products}`}
           </div>
         </div>
 
         {err ? <div className="mt-6 text-sm text-red-600">{err}</div> : null}
 
-        <div className="mt-8 grid lg:grid-cols-[1fr_520px] gap-10">
-          <div>
-            {loading ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-16">
-                {Array.from({ length: 6 }).map((_, idx) => (
-                  <div key={idx} className="animate-pulse">
-                    <div className="aspect-4/3 bg-black /5" />
-                    <div className="h-4 bg-black/5 mt-6 w-3/4" />
-                    <div className="h-4 bg-black/5 mt-3 w-1/3" />
-                  </div>
-                ))}
+        <div className="mt-8">
+          {loading ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
+              <div className="hidden lg:block lg:col-start-4 lg:row-start-1 lg:col-span-2 lg:row-span-2">
+                <div className="w-full h-full bg-black/5 overflow-hidden">
+                  <img
+                    src={heroImage}
+                    alt="Category visual"
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                    fetchPriority="high"
+                  />
+                </div>
               </div>
-            ) : items.length === 0 ? (
-              <div className="text-sm text-black/60">
-                {t.categoryCollection.noProducts}
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-16">
-                {items.map((p) => {
-                  const img = p.mainImage
-                    ? urlFor(p.mainImage).width(900).height(700).url()
-                    : null;
 
-                  return (
-                    <button
-                      key={p._id}
-                      type="button"
-                      className="text-left group"
-                    >
-                      <div className="aspect-4/3 bg-black/5 overflow-hidden">
-                        {img ? (
-                          <img
-                            src={img}
-                            alt={p.title || "Product"}
-                            className="w-full h-full object-contain group-hover:scale-[1.02] transition"
-                            loading="lazy"
-                          />
-                        ) : null}
-                      </div>
+              {Array.from({ length: 6 }).map((_, idx) => (
+                <ProductCard key={idx} loading />
+              ))}
 
-                      <div className="mt-2 text-[14px] text-black/90 flex justify-between">
-                        <div>{p.title_en}</div>
-                        {p.price != null && (
-                          <div className=" text-[14px] text-black/80">
-                            {Number(p.price).toLocaleString()} AZN
-                          </div>
-                        )}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          <div className="hidden lg:block">
-            <div className="sticky top-28 h-130 bg-black/5 overflow-hidden">
-              <img
-                src={heroImage}
-                alt="Category visual"
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
+              {Array.from({ length: 5 }).map((_, idx) => (
+                <ProductCard key={`b-${idx}`} loading />
+              ))}
             </div>
-          </div>
+          ) : items.length === 0 ? (
+            <div className="text-sm text-black/60 mt-8">
+              {t.categoryCollection.noProducts}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
+              <div className="hidden lg:block lg:col-start-4 lg:row-start-1 lg:col-span-2 lg:row-span-2">
+                <div className="w-full h-full bg-black/5 overflow-hidden">
+                  <img
+                    src={heroImage}
+                    alt="Category visual"
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                    fetchPriority="high"
+                  />
+                </div>
+              </div>
+
+              {topItems.map((p) => (
+                <ProductCard key={p._id} product={p} />
+              ))}
+
+              {restItems.map((p) => (
+                <ProductCard key={p._id} product={p} />
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="h-16" />

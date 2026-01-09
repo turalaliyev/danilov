@@ -3,20 +3,55 @@ import { useNavigate } from "react-router-dom";
 import { HiXMark } from "react-icons/hi2";
 import LanguageContext from "../context/LanguageContext";
 import { client } from "../sanity/clients";
-import { urlFor } from "../sanity/image";
-
-function getLocalizedTitle(item, lang) {
-  if (!item) return "";
-  if (lang === "az")
-    return item.title_az || item.title_en || item.title_ru || "";
-  if (lang === "ru")
-    return item.title_ru || item.title_en || item.title_az || "";
-  return item.title_en || item.title_az || item.title_ru || "";
-}
+import ProductCard from "../components/ProductCard";
 
 export default function SearchOverlay({ onClose }) {
   const navigate = useNavigate();
   const { language } = useContext(LanguageContext);
+
+  // ✅ Local i18n fallback (AZ / RU / EN) — no need to edit translations.js
+  const i18n = useMemo(() => {
+    const dict = {
+      en: {
+        title: "Search",
+        placeholder: "Search shoes...",
+        clear: "Clear",
+        close: "Close",
+        minChars: "Type at least 2 letters",
+        searching: "Searching...",
+        results: (count) => `${count} results`,
+        startTyping: "Start typing to search by title.",
+        noResults: "No results found.",
+        error: "Search failed. Please try again.",
+      },
+      ru: {
+        title: "Искать",
+        placeholder: "Поиск обуви...",
+        clear: "Очистить",
+        close: "Закрыть",
+        minChars: "Введите минимум 2 буквы",
+        searching: "Поиск...",
+        results: (count) => `Результатов: ${count}`,
+        startTyping: "Начните вводить, чтобы искать по названию.",
+        noResults: "Ничего не найдено.",
+        error: "Ошибка поиска. Попробуйте ещё раз.",
+      },
+      az: {
+        title: "Axtar",
+        placeholder: "Ayaqqabı axtarın...",
+        clear: "Təmizlə",
+        close: "Bağla",
+        minChars: "Ən az 2 hərf yazın",
+        searching: "Axtarılır...",
+        results: (count) => `${count} nəticə`,
+        startTyping: "Başlığa görə axtarmaq üçün yazmağa başlayın.",
+        noResults: "Nəticə tapılmadı.",
+        error: "Axtarış xətası. Yenidən cəhd edin.",
+      },
+    };
+
+    return dict[language] || dict.en;
+  }, [language]);
 
   const [query, setQuery] = useState("");
   const [items, setItems] = useState([]);
@@ -27,7 +62,6 @@ export default function SearchOverlay({ onClose }) {
   const reqIdRef = useRef(0);
 
   const close = () => {
-    // reset here (event handler), NOT inside useEffect
     setQuery("");
     setItems([]);
     setErr("");
@@ -35,13 +69,11 @@ export default function SearchOverlay({ onClose }) {
     onClose?.();
   };
 
-  // focus input on mount
   useEffect(() => {
-    const t = setTimeout(() => inputRef.current?.focus(), 50);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => inputRef.current?.focus(), 50);
+    return () => clearTimeout(timer);
   }, []);
 
-  // close on ESC
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Escape") close();
@@ -51,7 +83,6 @@ export default function SearchOverlay({ onClose }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // 1 second debounce search
   useEffect(() => {
     const q = query.trim();
 
@@ -76,21 +107,22 @@ export default function SearchOverlay({ onClose }) {
           )]{
             _id,
             title_en, title_az, title_ru,
+            description_en, description_az, description_ru,
             price,
             "slug": slug.current,
-            mainImage
+            mainImage,
+            additionalImage,
+            categories
           } | order(_createdAt desc)[0...24]`;
 
           const shoes = await client.fetch(SHOES_QUERY, { q: `*${q}*` });
 
-          // ignore late responses
           if (myReqId !== reqIdRef.current) return;
-
           setItems(Array.isArray(shoes) ? shoes : []);
         } catch (e) {
           console.log(e);
           if (myReqId !== reqIdRef.current) return;
-          setErr("Search failed. Please try again.");
+          setErr(i18n.error);
         } finally {
           if (myReqId === reqIdRef.current) setLoading(false);
         }
@@ -100,49 +132,45 @@ export default function SearchOverlay({ onClose }) {
     }, 1000);
 
     return () => clearTimeout(timeout);
-  }, [query]);
+  }, [query, i18n.error]);
 
   const hintText = useMemo(() => {
     const q = query.trim();
-    if (q.length < 2) return "Type at least 2 letters";
-    if (loading) return "Searching...";
-    return `${items.length} results`;
-  }, [query, loading, items.length]);
+    if (q.length < 2) return i18n.minChars;
+    if (loading) return i18n.searching;
+    return i18n.results(items.length);
+  }, [query, loading, items.length, i18n]);
 
   const onItemClick = (slug) => {
     close();
-    // change route if you don’t have /product/:slug
     navigate(`/product/${slug}`);
   };
 
   return (
     <div className="fixed inset-0 z-999">
-      {/* Backdrop */}
       <button
         type="button"
-        aria-label="Close search"
+        aria-label={i18n.close}
         onClick={close}
         className="absolute inset-0 bg-black/35"
       />
 
-      {/* Panel */}
       <div
         className="relative mx-auto w-full max-w-350 bg-white"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Top bar */}
         <div className="border-b border-black/10">
           <div className="px-6 lg:px-10 pt-6 pb-4">
             <div className="flex items-center justify-between gap-4">
               <div className="text-xs tracking-[0.35em] uppercase text-black/60">
-                Search
+                {i18n.title}
               </div>
 
               <button
                 type="button"
                 onClick={close}
                 className="h-10 w-10 grid place-items-center rounded-full hover:bg-black/5 transition"
-                aria-label="Close"
+                aria-label={i18n.close}
               >
                 <HiXMark className="size-6 text-black/60" />
               </button>
@@ -153,7 +181,7 @@ export default function SearchOverlay({ onClose }) {
                 ref={inputRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search shoes..."
+                placeholder={i18n.placeholder}
                 className={[
                   "w-full bg-transparent outline-none",
                   "text-[22px] tracking-wide",
@@ -172,7 +200,7 @@ export default function SearchOverlay({ onClose }) {
                     onClick={() => setQuery("")}
                     className="text-black/50 hover:text-black transition tracking-[0.18em] uppercase"
                   >
-                    Clear
+                    {i18n.clear}
                   </button>
                 ) : null}
               </div>
@@ -180,63 +208,31 @@ export default function SearchOverlay({ onClose }) {
           </div>
         </div>
 
-        {/* Results */}
         <div className="px-6 lg:px-10 py-6 max-h-[75vh] overflow-auto">
           {err ? <div className="text-sm text-red-600">{err}</div> : null}
 
           {loading ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-12">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {Array.from({ length: 6 }).map((_, idx) => (
-                <div key={idx} className="animate-pulse">
-                  <div className="aspect-4/3 bg-black/5" />
-                  <div className="h-4 bg-black/5 mt-5 w-3/4" />
-                  <div className="h-4 bg-black/5 mt-2 w-1/3" />
-                </div>
+                <ProductCard key={idx} loading />
               ))}
             </div>
           ) : query.trim().length < 2 ? (
-            <div className="text-sm text-black/60">
-              Start typing to search by title.
-            </div>
+            <div className="text-sm text-black/60">{i18n.startTyping}</div>
           ) : items.length === 0 ? (
-            <div className="text-sm text-black/60">No results found.</div>
+            <div className="text-sm text-black/60">{i18n.noResults}</div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-16">
-              {items.map((p) => {
-                const title = getLocalizedTitle(p, language);
-                const img = p.mainImage
-                  ? urlFor(p.mainImage).width(900).height(700).url()
-                  : null;
-
-                return (
-                  <button
-                    key={p._id}
-                    type="button"
-                    onClick={() => onItemClick(p.slug)}
-                    className="text-left group"
-                  >
-                    <div className="aspect-4/3 bg-black/5 overflow-hidden">
-                      {img ? (
-                        <img
-                          src={img}
-                          alt={title || "Product"}
-                          className="w-full h-full object-contain group-hover:scale-[1.02] transition"
-                          loading="lazy"
-                        />
-                      ) : null}
-                    </div>
-
-                    <div className="mt-2 text-[14px] text-black/90 flex justify-between gap-3">
-                      <div className="min-w-0 truncate">{title}</div>
-                      {p.price != null && (
-                        <div className="text-[14px] text-black/80 whitespace-nowrap">
-                          {Number(p.price).toLocaleString()} AZN
-                        </div>
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              {items.map((p) => (
+                <button
+                  key={p._id}
+                  type="button"
+                  onClick={() => onItemClick(p.slug)}
+                  className="text-left"
+                >
+                  <ProductCard product={p} />
+                </button>
+              ))}
             </div>
           )}
         </div>

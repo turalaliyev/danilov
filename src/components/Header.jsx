@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import manCategory from "../assets/man_category.webp";
 import womanCategory from "../assets/woman_category.jpg";
-import personalizationCategory from "../assets/personalization_category.webp";
-import cultureCategory from "../assets/culture_category.jpg";
 import { HiOutlineMagnifyingGlass, HiBars2 } from "react-icons/hi2";
 import LogoBlack from "../assets/logo-black.png";
 import LogoWhite from "../assets/logo-white.png";
@@ -86,38 +84,6 @@ export default function Header() {
     () => ({
       man: { title: t.nav.man, image: manCategory },
       woman: { title: t.nav.woman, image: womanCategory },
-      personal: {
-        title: t.nav.personalization,
-        image: personalizationCategory,
-        links: [
-          {
-            label: t.personalization.monogram,
-            href: "/personalization/monogram",
-          },
-          {
-            label: t.personalization.madeToOrder,
-            href: "/personalization/made-to-order",
-          },
-          {
-            label: t.personalization.materials,
-            href: "/personalization/materials",
-          },
-          {
-            label: t.personalization.bookAppointment,
-            href: "/personalization/appointment",
-          },
-        ],
-      },
-      culture: {
-        title: t.nav.culture,
-        image: cultureCategory,
-        links: [
-          { label: t.culture.theStory, href: "/culture/story" },
-          { label: t.culture.craftsmanship, href: "/culture/craftsmanship" },
-          { label: t.culture.journal, href: "/culture/journal" },
-          { label: t.culture.stores, href: "/stores" },
-        ],
-      },
     }),
     [t]
   );
@@ -273,6 +239,8 @@ export default function Header() {
     if (key === "accessories") return go("/category/man-accessories");
     if (key === "findus") return go("/contacts");
     if (key === "service") return go("/service");
+    if (key === "culture") return go("/culture");
+    if (key === "personal") return go("/personal");
 
     setActive((prev) => {
       const next = prev === key ? null : key;
@@ -334,7 +302,7 @@ export default function Header() {
 
   // ✅ show arrow for items that open a sub menu on mobile
   const mobileNavHasCategories = (key) => {
-    return ["man", "woman", "personal", "culture"].includes(key);
+    return ["man", "woman"].includes(key);
   };
 
   // ✅ Only these hrefs should be prefixed with "/category"
@@ -350,6 +318,8 @@ export default function Header() {
     if (key === "accessories") return go("/category/man-accessories");
     if (key === "findus") return go("/contacts");
     if (key === "service") return go("/service");
+    if (key === "culture") return go("/culture");
+    if (key === "personal") return go("/personal");
 
     setMNavKey(key);
     setMCategoryKey(null);

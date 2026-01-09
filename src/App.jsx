@@ -18,9 +18,9 @@ export default function App() {
         <Route path="/category/:category" element={<CategoryCollection />} />
         <Route path="/gift-card" element={<GiftCardPage />} />
         <Route path="/contacts" element={<Contacts />} />
-        <Route path="*" element={<NotFoundPage />} />
         <Route path="/service" element={<Service />} />
         <Route path="/culture" element={<Culture />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
