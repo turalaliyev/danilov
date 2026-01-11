@@ -167,7 +167,7 @@ export default function CategoryCollection() {
           title_en, title_az, title_ru,
           description_en, description_az, description_ru,
           price,
-          "slug": slug.current,
+          "slug": slug.current, sku,
           mainImage,
           additionalImage,
           categories
@@ -282,11 +282,25 @@ export default function CategoryCollection() {
               </div>
 
               {topItems.map((p) => (
-                <ProductCard key={p._id} product={p} />
+                <button
+                  key={p._id}
+                  type="button"
+                  onClick={() => p.sku && navigate(`/product/${p.sku}`)}
+                  className="text-left"
+                >
+                  <ProductCard product={p} />
+                </button>
               ))}
 
               {restItems.map((p) => (
-                <ProductCard key={p._id} product={p} />
+                <button
+                  key={p._id}
+                  type="button"
+                  onClick={() => p.sku && navigate(`/product/${p.sku}`)}
+                  className="text-left"
+                >
+                  <ProductCard product={p} />
+                </button>
               ))}
             </div>
           )}

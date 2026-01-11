@@ -1,9 +1,11 @@
 import React, { useContext, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { urlFor } from "../sanity/image";
 import LanguageContext from "../context/LanguageContext";
 
 export default function CollectionCard({ product }) {
   const { language } = useContext(LanguageContext);
+  const navigate = useNavigate();
 
   const title = useMemo(() => {
     if (!product) return "";
@@ -16,8 +18,23 @@ export default function CollectionCard({ product }) {
     ? urlFor(product.mainImage).width(600).height(700).url()
     : null;
 
+  const handleClick = () => {
+    if (product?.sku) {
+      navigate(`/product/${product.sku}`);
+    }
+  };
+
   return (
-    <div className="product-card shrink-0 h-[55vh] w-[40vh] bg-white p-4 text-center shadow-sm flex flex-col font-light">
+    <button
+      type="button"
+      onClick={handleClick}
+      disabled={!product?.sku}
+      className={`product-card shrink-0 h-[55vh] w-[40vh] bg-white p-4 text-center shadow-sm flex flex-col font-light ${
+        product?.sku
+          ? "cursor-pointer hover:shadow-md transition-shadow"
+          : "cursor-default"
+      }`}
+    >
       <img
         src={
           img ||
@@ -34,6 +51,6 @@ export default function CollectionCard({ product }) {
           {product?.price} AZN
         </span>
       </div>
-    </div>
+    </button>
   );
 }

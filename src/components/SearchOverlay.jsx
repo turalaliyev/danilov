@@ -109,7 +109,7 @@ export default function SearchOverlay({ onClose }) {
             title_en, title_az, title_ru,
             description_en, description_az, description_ru,
             price,
-            "slug": slug.current,
+            "slug": slug.current, sku,
             mainImage,
             additionalImage,
             categories
@@ -141,9 +141,9 @@ export default function SearchOverlay({ onClose }) {
     return i18n.results(items.length);
   }, [query, loading, items.length, i18n]);
 
-  const onItemClick = (slug) => {
+  const onItemClick = (sku) => {
     close();
-    navigate(`/product/${slug}`);
+    navigate(`/product/${sku}`);
   };
 
   return (
@@ -227,7 +227,7 @@ export default function SearchOverlay({ onClose }) {
                 <button
                   key={p._id}
                   type="button"
-                  onClick={() => onItemClick(p.slug)}
+                  onClick={() => onItemClick(p.sku)}
                   className="text-left"
                 >
                   <ProductCard product={p} />

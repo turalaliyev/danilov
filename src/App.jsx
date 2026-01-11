@@ -9,6 +9,7 @@ import Contacts from "./pages/Contacts.jsx";
 import Service from "./pages/Service.jsx";
 import Culture from "./pages/Culture.jsx";
 import DanilovIs from "./pages/Culture.jsx";
+import ProductPage from "./pages/ProductPage.jsx";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
       <Route element={<SiteLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/category/:category" element={<CategoryCollection />} />
+        <Route path="/product/:sku" element={<ProductPage />} />
         <Route path="/gift-card" element={<GiftCardPage />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/service" element={<Service />} />

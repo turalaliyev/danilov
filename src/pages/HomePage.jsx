@@ -53,7 +53,7 @@ export default function HomePage() {
         title_en, title_az, title_ru,
         description_en, description_az, description_ru,
         price,
-        "slug": slug.current,
+        "slug": slug.current, sku,
         mainImage,
         additionalImage,
         categories
@@ -67,7 +67,7 @@ export default function HomePage() {
         title_en, title_az, title_ru,
         description_en, description_az, description_ru,
         price,
-        "slug": slug.current,
+        "slug": slug.current, sku,
         mainImage,
         additionalImage,
         categories
