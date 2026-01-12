@@ -66,32 +66,29 @@ export default function ProductPage() {
 
   const mainImage = useMemo(() => product?.mainImage || null, [product]);
 
-  const additionalImages = useMemo(() => {
-    if (!product) return [];
-    const imgs = [];
-    if (product.additionalImage1) {
-      if (Array.isArray(product.additionalImage1)) {
-        imgs.push(...product.additionalImage1.filter(Boolean));
-      } else {
-        imgs.push(product.additionalImage1);
-      }
+  const additionalImage1 = useMemo(() => {
+    if (!product?.additionalImage1) return null;
+    if (Array.isArray(product.additionalImage1)) {
+      return product.additionalImage1.filter(Boolean)[0] || null;
     }
-    if (product.additionalImage2) {
-      if (Array.isArray(product.additionalImage2)) {
-        imgs.push(...product.additionalImage2.filter(Boolean));
-      } else {
-        imgs.push(product.additionalImage2);
-      }
+    return product.additionalImage1;
+  }, [product]);
+
+  const additionalImage2 = useMemo(() => {
+    if (!product?.additionalImage2) return null;
+    if (Array.isArray(product.additionalImage2)) {
+      return product.additionalImage2.filter(Boolean)[0] || null;
     }
-    return imgs;
+    return product.additionalImage2;
   }, [product]);
 
   const allImages = useMemo(() => {
     const imgs = [];
     if (mainImage) imgs.push(mainImage);
-    imgs.push(...additionalImages);
+    if (additionalImage1) imgs.push(additionalImage1);
+    if (additionalImage2) imgs.push(additionalImage2);
     return imgs;
-  }, [mainImage, additionalImages]);
+  }, [mainImage, additionalImage1, additionalImage2]);
 
   useEffect(() => {
     setSelectedImageIndex(0);
@@ -208,18 +205,14 @@ export default function ProductPage() {
         <div className="max-w-350 mx-auto px-6 lg:px-10 pt-8 pb-16">
           <div className="animate-pulse">
             <div className="h-4 w-28 bg-black/10 mb-6" />
-            <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_520px] gap-10">
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_550px] gap-4 lg:gap-8">
               <div>
-                <div className="rounded-2xl bg-black/10 aspect-16/11 max-w-[760px]" />
-                <div className="mt-4 w-full lg:w-1/2">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-black/10 aspect-16/11" />
-                    <div className="rounded-xl bg-black/10 aspect-16/11" />
-                  </div>
+                <div className="bg-white/60 border border-black/10 shadow-sm">
+                  <div className="w-full min-h-[600px] flex items-center justify-center bg-black/10 max-w-[760px]" />
                 </div>
               </div>
 
-              <div className="rounded-2xl bg-black/10 p-8 h-fit">
+              <div className="bg-[#121a1f] p-7 sm:p-8 h-fit">
                 <div className="h-3 w-24 bg-white/20 mb-4" />
                 <div className="h-10 w-3/4 bg-white/20 mb-4" />
                 <div className="h-6 w-1/3 bg-white/20 mb-2" />
@@ -263,14 +256,12 @@ export default function ProductPage() {
     );
   }
 
-  const hasAdditional = additionalImages.length > 0;
   const priceText =
     product.price != null ? Number(product.price).toLocaleString() : null;
 
   return (
     <section className="w-full bg-[#f4f0eb]">
       <div className="max-w-350 mx-auto px-6 lg:px-10 pt-8 pb-16">
-        {/* Top bar */}
         <div className="flex items-center justify-between gap-4">
           <button
             type="button"
@@ -289,20 +280,20 @@ export default function ProductPage() {
           )}
         </div>
 
-        <div className="mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_550px] gap-10 lg:gap-14">
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_550px] gap-4 lg:gap-8">
           <div className="min-w-0">
             <div className="max-w-[760px]">
-              <div className="relative rounded-2xl bg-white/60 border border-black/10 overflow-hidden shadow-sm">
-                <div className="aspect-16/11">
+              <div className="relative bg-white/60 border border-black/10 shadow-sm">
+                <div className="w-full flex items-center justify-center">
                   {currentImageUrl ? (
                     <img
                       src={currentImageUrl}
                       alt={title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-auto max-h-[800px] object-contain"
                       loading="eager"
                     />
                   ) : (
-                    <div className="w-full h-full grid place-items-center text-black/30">
+                    <div className="w-full h-[600px] grid place-items-center text-black/30">
                       No Image
                     </div>
                   )}
@@ -313,7 +304,7 @@ export default function ProductPage() {
                     <button
                       type="button"
                       onClick={goPrev}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white/25 hover:bg-white transition grid place-items-center shadow-sm"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 bg-white/25 hover:bg-white transition grid place-items-center shadow-sm"
                       aria-label="Previous image"
                     >
                       <HiChevronLeft className="size-5 text-black/70" />
@@ -321,7 +312,7 @@ export default function ProductPage() {
                     <button
                       type="button"
                       onClick={goNext}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white/25 hover:bg-white transition grid place-items-center shadow-sm"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 bg-white/25 hover:bg-white transition grid place-items-center shadow-sm"
                       aria-label="Next image"
                     >
                       <HiChevronRight className="size-5 text-black/70" />
@@ -330,43 +321,108 @@ export default function ProductPage() {
                 ) : null}
               </div>
 
-              {hasAdditional ? (
-                <div className="mt-4 w-full lg:w-1/2">
-                  <div className="grid grid-cols-2 gap-3">
-                    {additionalImages.map((img, idx) => {
-                      const realIndex = idx + 1;
-                      const thumbUrl = urlFor(img)
-                        .width(520)
-                        .height(420)
-                        .fit("max")
-                        .url();
-                      const active = realIndex === selectedImageIndex;
-
-                      return (
-                        <button
-                          key={`${product._id}-add-${idx}`}
-                          type="button"
-                          onClick={() => setSelectedImageIndex(realIndex)}
-                          className={[
-                            "rounded-xl overflow-hidden bg-white/60 border shadow-sm",
-                            "transition",
-                            active
-                              ? "border-black/40"
-                              : "border-black/10 hover:border-black/25",
-                          ].join(" ")}
-                          aria-label={`Select image ${realIndex + 1}`}
-                        >
-                          <div className="aspect-16/11">
-                            <img
-                              src={thumbUrl}
-                              alt={`${title} ${idx + 1}`}
-                              className="w-full h-full object-cover"
-                              loading="lazy"
-                            />
-                          </div>
-                        </button>
-                      );
-                    })}
+              {allImages.length > 1 ? (
+                <div className="mt-4 w-full lg:hidden">
+                  <div className="flex flex-row gap-3 overflow-x-auto">
+                    {mainImage && (
+                      <button
+                        key={`${product._id}-main-img`}
+                        type="button"
+                        onClick={() => setSelectedImageIndex(0)}
+                        className={[
+                          "shrink-0 overflow-hidden bg-white/60 border shadow-sm",
+                          "transition",
+                          selectedImageIndex === 0
+                            ? "border-black/40"
+                            : "border-black/10 hover:border-black/25",
+                        ].join(" ")}
+                        aria-label="Select main image"
+                      >
+                        <div className="aspect-16/11 w-32">
+                          <img
+                            src={urlFor(mainImage)
+                              .width(520)
+                              .height(420)
+                              .fit("max")
+                              .url()}
+                            alt={title}
+                            className={[
+                              "w-full h-full object-cover transition",
+                              selectedImageIndex === 0
+                                ? "opacity-100"
+                                : "opacity-50",
+                            ].join(" ")}
+                            loading="lazy"
+                          />
+                        </div>
+                      </button>
+                    )}
+                    {additionalImage1 && (
+                      <button
+                        key={`${product._id}-add-img-1`}
+                        type="button"
+                        onClick={() => setSelectedImageIndex(1)}
+                        className={[
+                          "shrink-0 overflow-hidden bg-white/60 border shadow-sm",
+                          "transition",
+                          selectedImageIndex === 1
+                            ? "border-black/40"
+                            : "border-black/10 hover:border-black/25",
+                        ].join(" ")}
+                        aria-label="Select additional image 1"
+                      >
+                        <div className="aspect-16/11 w-32">
+                          <img
+                            src={urlFor(additionalImage1)
+                              .width(520)
+                              .height(420)
+                              .fit("max")
+                              .url()}
+                            alt={`${title} additional 1`}
+                            className={[
+                              "w-full h-full object-cover transition",
+                              selectedImageIndex === 1
+                                ? "opacity-100"
+                                : "opacity-50",
+                            ].join(" ")}
+                            loading="lazy"
+                          />
+                        </div>
+                      </button>
+                    )}
+                    {additionalImage2 && (
+                      <button
+                        key={`${product._id}-add-img-2`}
+                        type="button"
+                        onClick={() => setSelectedImageIndex(2)}
+                        className={[
+                          "shrink-0 overflow-hidden bg-white/60 border shadow-sm",
+                          "transition",
+                          selectedImageIndex === 2
+                            ? "border-black/40"
+                            : "border-black/10 hover:border-black/25",
+                        ].join(" ")}
+                        aria-label="Select additional image 2"
+                      >
+                        <div className="aspect-16/11 w-32">
+                          <img
+                            src={urlFor(additionalImage2)
+                              .width(520)
+                              .height(420)
+                              .fit("max")
+                              .url()}
+                            alt={`${title} additional 2`}
+                            className={[
+                              "w-full h-full object-cover transition",
+                              selectedImageIndex === 2
+                                ? "opacity-100"
+                                : "opacity-50",
+                            ].join(" ")}
+                            loading="lazy"
+                          />
+                        </div>
+                      </button>
+                    )}
                   </div>
                 </div>
               ) : null}
@@ -374,8 +430,8 @@ export default function ProductPage() {
           </div>
 
           <aside className="min-w-0">
-            <div className="lg:sticky lg:top-28">
-              <div className="rounded-2xl bg-[#121a1f] text-white border border-white/10 shadow-xl overflow-hidden">
+            <div>
+              <div className="bg-[#121a1f] text-white border border-white/10 shadow-xl overflow-hidden">
                 <div className="p-7 sm:p-8">
                   {product.sku ? (
                     <div className="mt-2 text-[12px] tracking-wide text-white/45">
@@ -406,6 +462,113 @@ export default function ProductPage() {
                 </div>
               </div>
             </div>
+
+            {/* Thumbnail row for desktop - under product info */}
+            {allImages.length > 1 ? (
+              <div className="mt-4 w-full hidden lg:block">
+                <div className="flex flex-row gap-3 overflow-x-auto">
+                  {mainImage && (
+                    <button
+                      key={`${product._id}-main-img-desktop`}
+                      type="button"
+                      onClick={() => setSelectedImageIndex(0)}
+                      className={[
+                        "shrink-0 overflow-hidden bg-white/60 border shadow-sm",
+                        "transition",
+                        selectedImageIndex === 0
+                          ? "border-black/40"
+                          : "border-black/10 hover:border-black/25",
+                      ].join(" ")}
+                      aria-label="Select main image"
+                    >
+                      <div className="aspect-16/11 w-32">
+                        <img
+                          src={urlFor(mainImage)
+                            .width(520)
+                            .height(420)
+                            .fit("max")
+                            .url()}
+                          alt={title}
+                          className={[
+                            "w-full h-full object-cover transition",
+                            selectedImageIndex === 0
+                              ? "opacity-100"
+                              : "opacity-50",
+                          ].join(" ")}
+                          loading="lazy"
+                        />
+                      </div>
+                    </button>
+                  )}
+                  {additionalImage1 && (
+                    <button
+                      key={`${product._id}-add-img-1-desktop`}
+                      type="button"
+                      onClick={() => setSelectedImageIndex(1)}
+                      className={[
+                        "shrink-0 overflow-hidden bg-white/60 border shadow-sm",
+                        "transition",
+                        selectedImageIndex === 1
+                          ? "border-black/40"
+                          : "border-black/10 hover:border-black/25",
+                      ].join(" ")}
+                      aria-label="Select additional image 1"
+                    >
+                      <div className="aspect-16/11 w-32">
+                        <img
+                          src={urlFor(additionalImage1)
+                            .width(520)
+                            .height(420)
+                            .fit("max")
+                            .url()}
+                          alt={`${title} additional 1`}
+                          className={[
+                            "w-full h-full object-cover transition",
+                            selectedImageIndex === 1
+                              ? "opacity-100"
+                              : "opacity-50",
+                          ].join(" ")}
+                          loading="lazy"
+                        />
+                      </div>
+                    </button>
+                  )}
+                  {additionalImage2 && (
+                    <button
+                      key={`${product._id}-add-img-2-desktop`}
+                      type="button"
+                      onClick={() => setSelectedImageIndex(2)}
+                      className={[
+                        "shrink-0 overflow-hidden bg-white/60 border shadow-sm",
+                        "transition",
+                        selectedImageIndex === 2
+                          ? "border-black/40"
+                          : "border-black/10 hover:border-black/25",
+                      ].join(" ")}
+                      aria-label="Select additional image 2"
+                    >
+                      <div className="aspect-16/11 w-32">
+                        <img
+                          src={urlFor(additionalImage2)
+                            .width(520)
+                            .height(420)
+                            .fit("max")
+                            .url()}
+                          alt={`${title} additional 2`}
+                          className={[
+                            "w-full h-full object-cover transition",
+                            selectedImageIndex === 2
+                              ? "opacity-100"
+                              : "opacity-50",
+                          ].join(" ")}
+                          loading="lazy"
+                        />
+                      </div>
+                    </button>
+                  )}
+                </div>
+              </div>
+            ) : null}
           </aside>
         </div>
       </div>

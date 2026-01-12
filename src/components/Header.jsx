@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import manCategory from "../assets/man_category.webp";
 import womanCategory from "../assets/woman_category.jpg";
+import personalizationCategory from "../assets/personalization_category.webp";
 import { HiOutlineMagnifyingGlass, HiBars2 } from "react-icons/hi2";
 import LogoBlack from "../assets/logo-black.png";
 import LogoWhite from "../assets/logo-white.png";
@@ -10,6 +11,7 @@ import LanguageSelect from "./LanguageSelect";
 import LanguageContext from "../context/LanguageContext";
 import { translations } from "../translations";
 import SearchOverlay from "./SearchOverlay";
+import { client } from "../sanity/clients";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -84,6 +86,17 @@ export default function Header() {
     () => ({
       man: { title: t.nav.man, image: manCategory },
       woman: { title: t.nav.woman, image: womanCategory },
+      personal: {
+        title: t.nav.personalization,
+        image: personalizationCategory,
+        links: [
+          {
+            label: t.personalization.madeToMeasure,
+            href: "whatsapp://made-to-measure",
+          },
+          { label: t.personalization.bespoke, href: "whatsapp://bespoke" },
+        ],
+      },
     }),
     [t]
   );
@@ -94,6 +107,7 @@ export default function Header() {
   const [mNavKey, setMNavKey] = useState(null);
   const [mCategoryKey, setMCategoryKey] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [whatsappNumber, setWhatsappNumber] = useState("+994556746674");
 
   useEffect(() => {
     const checkDarkMode = () => {
@@ -106,6 +120,31 @@ export default function Header() {
 
     return () => mediaQuery.removeEventListener("change", checkDarkMode);
   }, []);
+
+  useEffect(() => {
+    const fetchPhoneNumber = async () => {
+      try {
+        const INFO_QUERY = `*[_type == "info"]{
+          phone_number
+        }[0]`;
+
+        const info = await client.fetch(INFO_QUERY);
+        if (info?.phone_number) {
+          setWhatsappNumber(info.phone_number);
+        }
+      } catch (error) {
+        console.error("Error fetching phone number:", error);
+      }
+    };
+
+    fetchPhoneNumber();
+  }, []);
+
+  const getWhatsAppLink = (message = "") => {
+    const onlyDigits = String(whatsappNumber).replace(/\D/g, "");
+    const encodedMessage = encodeURIComponent(message);
+    return `https://wa.me/${onlyDigits}${message ? `?text=${encodedMessage}` : ""}`;
+  };
 
   useEffect(() => {
     const onKey = (e) => {
@@ -148,7 +187,6 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    // Track velocity to detect bounce-back
     let lastTime = performance.now();
     let velocity = 0;
 
@@ -163,17 +201,14 @@ export default function Header() {
 
       const delta = currentY - prevY;
 
-      // Calculate velocity (px per ms)
       if (dt > 0) {
         velocity = delta / dt;
       }
 
       lastScrollY.current = currentY;
 
-      // Top zone where header is always visible - catches bounce-back
       const TOP_ZONE = 50;
 
-      // At top: always show header
       if (currentY <= TOP_ZONE) {
         if (offsetRef.current !== 0) {
           offsetRef.current = 0;
@@ -183,16 +218,12 @@ export default function Header() {
         return;
       }
 
-      // Ignore very small movements (bounce noise)
       if (Math.abs(delta) < 2) {
         ticking.current = false;
         return;
       }
 
-      // Detect bounce-back: if we were near top and now getting pushed down with high velocity
-      // This happens when trackpad/touch overscroll releases
       if (prevY < TOP_ZONE * 2 && delta > 0 && velocity > 0.5) {
-        // This is likely bounce-back, ignore hiding
         ticking.current = false;
         return;
       }
@@ -240,7 +271,11 @@ export default function Header() {
     if (key === "findus") return go("/contacts");
     if (key === "service") return go("/service");
     if (key === "culture") return go("/culture");
-    if (key === "personal") return go("/personal");
+    if (key === "personal") {
+      // Don't navigate, just open dropdown
+      setActive((prev) => (prev === key ? null : key));
+      return;
+    }
 
     setActive((prev) => {
       const next = prev === key ? null : key;
@@ -302,7 +337,7 @@ export default function Header() {
 
   // ✅ show arrow for items that open a sub menu on mobile
   const mobileNavHasCategories = (key) => {
-    return ["man", "woman"].includes(key);
+    return ["man", "woman", "personal"].includes(key);
   };
 
   // ✅ Only these hrefs should be prefixed with "/category"
@@ -319,7 +354,12 @@ export default function Header() {
     if (key === "findus") return go("/contacts");
     if (key === "service") return go("/service");
     if (key === "culture") return go("/culture");
-    if (key === "personal") return go("/personal");
+    if (key === "personal") {
+      setMNavKey(key);
+      setMCategoryKey(null);
+      setMView("categories");
+      return;
+    }
 
     setMNavKey(key);
     setMCategoryKey(null);
@@ -347,8 +387,16 @@ export default function Header() {
     if (mNavKey === "woman") {
       return [{ label: t.header.shoes, key: "shoes", hasSub: true }];
     }
+    if (mNavKey === "personal") {
+      return (dropdownData[mNavKey]?.links || []).map((l) => ({
+        label: l.label,
+        key: l.href,
+        hasSub: false,
+        href: l.href,
+      }));
+    }
 
-    // personal/culture use dropdownData links
+    // culture and others use dropdownData links
     return (dropdownData[mNavKey]?.links || []).map((l) => ({
       label: l.label,
       key: l.href,
@@ -549,16 +597,35 @@ export default function Header() {
 
               {active !== "man" && active !== "woman" && (
                 <div className="mt-10 space-y-5">
-                  {(activeItem?.links || []).map((l) => (
-                    <button
-                      key={l.label}
-                      type="button"
-                      onClick={() => go(l.href)}
-                      className="block w-full text-left text-xs tracking-[0.28em] uppercase transition cursor-pointer text-black/60 hover:text-black hover:opacity-100"
-                    >
-                      {l.label}
-                    </button>
-                  ))}
+                  {(activeItem?.links || []).map((l) => {
+                    const isWhatsApp = l.href?.startsWith("whatsapp://");
+                    const handleClick = () => {
+                      if (isWhatsApp) {
+                        const messageType = l.href.replace("whatsapp://", "");
+                        const message =
+                          messageType === "made-to-measure"
+                            ? "Hello, I'm interested in Made To Measure services."
+                            : messageType === "bespoke"
+                              ? "Hello, I'm interested in Bespoke services."
+                              : "";
+                        window.open(getWhatsAppLink(message), "_blank");
+                        closeAll();
+                      } else {
+                        go(l.href);
+                      }
+                    };
+
+                    return (
+                      <button
+                        key={l.label}
+                        type="button"
+                        onClick={handleClick}
+                        className="block w-full text-left text-xs tracking-[0.28em] uppercase transition cursor-pointer text-black/60 hover:text-black hover:opacity-100"
+                      >
+                        {l.label}
+                      </button>
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -651,7 +718,6 @@ export default function Header() {
                           if (i.key === "findus") return go("/contacts");
                           if (i.key === "service") return go("/service");
 
-                          // everything else opens categories view
                           openMobileNav(i.key);
                         }}
                         className="py-3 text-left text-sm tracking-wide border-b border-black/10 last:border-b-0 flex items-center justify-between uppercase"
@@ -679,7 +745,30 @@ export default function Header() {
                       type="button"
                       onClick={() => {
                         if (c.href) {
-                          // ✅ Only prefix /category for man/woman product category routes
+                          const isWhatsApp = c.href?.startsWith("whatsapp://");
+                          if (isWhatsApp) {
+                            const messageType = c.href.replace(
+                              "whatsapp://",
+                              ""
+                            );
+                            const message =
+                              messageType === "made-to-measure"
+                                ? language === "az"
+                                  ? "Salam, Mən Ölçüyə görə xidmətləri ilə maraqlanıram."
+                                  : language === "ru"
+                                    ? "Здравствуйте, меня интересуют услуги По мерке."
+                                    : "Hello, I'm interested in Made To Measure services."
+                                : messageType === "bespoke"
+                                  ? language === "az"
+                                    ? "Salam, Mən Fərdi tikinti xidmətləri ilə maraqlanıram."
+                                    : language === "ru"
+                                      ? "Здравствуйте, меня интересуют услуги Индивидуального пошива."
+                                      : "Hello, I'm interested in Bespoke services."
+                                  : "";
+                            window.open(getWhatsAppLink(message), "_blank");
+                            closeAll();
+                            return;
+                          }
                           return isProductCategoryHref(c.href)
                             ? go(`/category${c.href}`)
                             : go(c.href);

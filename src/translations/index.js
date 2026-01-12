@@ -41,9 +41,11 @@ export const translations = {
     // Collections
     collections: {
       mensCollection: "Shop the Men's Collection",
-      mensDescription: "Ruggedly refined hiking‑inspired boots crafted in handsome leathers and soft shearling along with masterful leather weekend bags balance modernity and artisanal depth.",
+      mensDescription:
+        "Ruggedly refined hiking‑inspired boots crafted in handsome leathers and soft shearling along with masterful leather weekend bags balance modernity and artisanal depth.",
       womensCollection: "Shop the Women's Collection",
-      womensDescription: "Stacked heel shearling knee‑high boots and polished lace‑up trekking styles deliver sporty sophistication. Accessories convey warmth and beauty.",
+      womensDescription:
+        "Stacked heel shearling knee‑high boots and polished lace‑up trekking styles deliver sporty sophistication. Accessories convey warmth and beauty.",
       previousProducts: "Previous products",
       nextProducts: "Next products",
     },
@@ -59,12 +61,14 @@ export const translations = {
     // About Section
     about: {
       title: "Danilov - Handmade Shoes",
-      description: "Founded in 2010 in Baku, in the heart of Azerbaijan's Baku region, Danilov embodies the essence of modern Azerbaijan luxury, where timeless style meets exceptional craftsmanship. From sleek men's lace‑ups and contemporary sneakers to elegant women's heels and iconic double buckle shoes, each piece is handcrafted with meticulous attention to detail and premium materials. The collections blend refined aesthetics with everyday versatility, offering footwear and leather accessories that elevate any wardrobe. Rooted in the traditions of Made in Azerbaijan, Danilov stands for sophistication, individuality, and enduring elegance.",
+      description:
+        "Founded in 2010 in Baku, in the heart of Azerbaijan's Baku region, Danilov embodies the essence of modern Azerbaijan luxury, where timeless style meets exceptional craftsmanship. From sleek men's lace‑ups and contemporary sneakers to elegant women's heels and iconic double buckle shoes, each piece is handcrafted with meticulous attention to detail and premium materials. The collections blend refined aesthetics with everyday versatility, offering footwear and leather accessories that elevate any wardrobe. Rooted in the traditions of Made in Azerbaijan, Danilov stands for sophistication, individuality, and enduring elegance.",
     },
     // Anthology Section
     anthology: {
       title: "Danilov anthology",
-      description: "Discover the world of Danilov through creative vision, artisanal savoir-faire, and contemporary style.",
+      description:
+        "Discover the world of Danilov through creative vision, artisanal savoir-faire, and contemporary style.",
       classic: "Danilov Classic",
       eclipse: "Eclipse",
       backToBusiness: "Back to Business",
@@ -74,7 +78,8 @@ export const translations = {
     // Contact Section
     contact: {
       title: "Contact us on WhatsApp",
-      description: "Get in touch with us directly for exclusive offers, new collection updates, and personalized service.",
+      description:
+        "Get in touch with us directly for exclusive offers, new collection updates, and personalized service.",
       interestedIn: "I am interested in:",
       generalInquiry: "General inquiry",
       mensCollection: "Men's Collection",
@@ -84,7 +89,8 @@ export const translations = {
     },
     // Footer
     footer: {
-      description: "A modern shoe house inspired by timeless craftsmanship and clean design. Built for daily wear — finished like a statement piece.",
+      description:
+        "A modern shoe house inspired by timeless craftsmanship and clean design. Built for daily wear — finished like a statement piece.",
       customerCare: "Customer care",
       personalization: "Personalization",
       findUs: "Find us",
@@ -124,7 +130,8 @@ export const translations = {
     // Service Page
     servicePage: {
       title: "Danilov - Service",
-      description: "At Danilov Service, we believe that exceptional footwear deserves exceptional care. Our expert craftsmen offer professional shoe restoration, leather conditioning, and bespoke repair services to extend the life of your beloved pairs. From deep cleaning and polishing to sole replacement and stitching repairs, we treat every shoe with the same attention to detail that goes into crafting them. Trust us to keep your Danilov shoes — and any fine footwear — looking impeccable for years to come.",
+      description:
+        "At Danilov Service, we believe that exceptional footwear deserves exceptional care. Our expert craftsmen offer professional shoe restoration, leather conditioning, and bespoke repair services to extend the life of your beloved pairs. From deep cleaning and polishing to sole replacement and stitching repairs, we treat every shoe with the same attention to detail that goes into crafting them. Trust us to keep your Danilov shoes — and any fine footwear — looking impeccable for years to come.",
     },
     // Personalization dropdown
     personalization: {
@@ -132,6 +139,8 @@ export const translations = {
       madeToOrder: "Made to order",
       materials: "Materials",
       bookAppointment: "Book an appointment",
+      madeToMeasure: "Made To Measure",
+      bespoke: "Bespoke",
     },
     // Culture dropdown
     culture: {
@@ -203,9 +212,11 @@ export const translations = {
     // Collections
     collections: {
       mensCollection: "Мужская коллекция",
-      mensDescription: "Прочные и изысканные ботинки в стиле хайкинг, выполненные из качественной кожи и мягкой овчины, а также мастерски изготовленные кожаные сумки для выходных сочетают современность и ремесленную глубину.",
+      mensDescription:
+        "Прочные и изысканные ботинки в стиле хайкинг, выполненные из качественной кожи и мягкой овчины, а также мастерски изготовленные кожаные сумки для выходных сочетают современность и ремесленную глубину.",
       womensCollection: "Женская коллекция",
-      womensDescription: "Ботинки до колена на каблуке из овчины и отполированные шнурованные модели в стиле треккинг демонстрируют спортивную изысканность. Аксессуары передают теплоту и красоту.",
+      womensDescription:
+        "Ботинки до колена на каблуке из овчины и отполированные шнурованные модели в стиле треккинг демонстрируют спортивную изысканность. Аксессуары передают теплоту и красоту.",
       previousProducts: "Предыдущие товары",
       nextProducts: "Следующие товары",
     },
@@ -221,12 +232,14 @@ export const translations = {
     // About Section
     about: {
       title: "Danilov - Обувь ручной работы",
-      description: "Основанный в 2010 году в Баку, в сердце Бакинского региона Азербайджана, Danilov воплощает суть современной азербайджанской роскоши, где вневременной стиль встречается с исключительным мастерством. От элегантных мужских шнуровок и современных кроссовок до изысканных женских каблуков и культовых туфель с двойной пряжкой, каждая деталь изготавливается вручную с тщательным вниманием к деталям и премиальным материалам. Коллекции сочетают утонченную эстетику с повседневной универсальностью, предлагая обувь и кожаные аксессуары, которые поднимают любой гардероб. Укорененный в традициях Made in Azerbaijan, Danilov олицетворяет изысканность, индивидуальность и непреходящую элегантность.",
+      description:
+        "Основанный в 2010 году в Баку, в сердце Бакинского региона Азербайджана, Danilov воплощает суть современной азербайджанской роскоши, где вневременной стиль встречается с исключительным мастерством. От элегантных мужских шнуровок и современных кроссовок до изысканных женских каблуков и культовых туфель с двойной пряжкой, каждая деталь изготавливается вручную с тщательным вниманием к деталям и премиальным материалам. Коллекции сочетают утонченную эстетику с повседневной универсальностью, предлагая обувь и кожаные аксессуары, которые поднимают любой гардероб. Укорененный в традициях Made in Azerbaijan, Danilov олицетворяет изысканность, индивидуальность и непреходящую элегантность.",
     },
     // Anthology Section
     anthology: {
       title: "Антология Danilov",
-      description: "Откройте для себя мир Danilov через творческое видение, ремесленное мастерство и современный стиль.",
+      description:
+        "Откройте для себя мир Danilov через творческое видение, ремесленное мастерство и современный стиль.",
       classic: "Danilov Classic",
       eclipse: "Eclipse",
       backToBusiness: "Back to Business",
@@ -236,7 +249,8 @@ export const translations = {
     // Contact Section
     contact: {
       title: "Свяжитесь с нами в WhatsApp",
-      description: "Свяжитесь с нами напрямую для эксклюзивных предложений, обновлений новой коллекции и персонализированного сервиса.",
+      description:
+        "Свяжитесь с нами напрямую для эксклюзивных предложений, обновлений новой коллекции и персонализированного сервиса.",
       interestedIn: "Меня интересует:",
       generalInquiry: "Общий запрос",
       mensCollection: "Мужская коллекция",
@@ -246,7 +260,8 @@ export const translations = {
     },
     // Footer
     footer: {
-      description: "Современный дом обуви, вдохновленный вневременным мастерством и чистым дизайном. Создан для повседневной носки — выполнен как произведение искусства.",
+      description:
+        "Современный дом обуви, вдохновленный вневременным мастерством и чистым дизайном. Создан для повседневной носки — выполнен как произведение искусства.",
       customerCare: "Служба поддержки",
       personalization: "Персонализация",
       findUs: "Найти нас",
@@ -286,7 +301,8 @@ export const translations = {
     // Service Page
     servicePage: {
       title: "Danilov - Сервис",
-      description: "В Danilov Service мы верим, что исключительная обувь заслуживает исключительного ухода. Наши опытные мастера предлагают профессиональную реставрацию обуви, кондиционирование кожи и индивидуальные ремонтные услуги, чтобы продлить жизнь вашим любимым парам. От глубокой чистки и полировки до замены подошвы и ремонта швов — мы относимся к каждой паре обуви с тем же вниманием к деталям, что и при её создании. Доверьте нам уход за вашей обувью Danilov — и любой качественной обувью — чтобы она выглядела безупречно долгие годы.",
+      description:
+        "В Danilov Service мы верим, что исключительная обувь заслуживает исключительного ухода. Наши опытные мастера предлагают профессиональную реставрацию обуви, кондиционирование кожи и индивидуальные ремонтные услуги, чтобы продлить жизнь вашим любимым парам. От глубокой чистки и полировки до замены подошвы и ремонта швов — мы относимся к каждой паре обуви с тем же вниманием к деталям, что и при её создании. Доверьте нам уход за вашей обувью Danilov — и любой качественной обувью — чтобы она выглядела безупречно долгие годы.",
     },
     // Personalization dropdown
     personalization: {
@@ -294,6 +310,8 @@ export const translations = {
       madeToOrder: "На заказ",
       materials: "Материалы",
       bookAppointment: "Записаться на прием",
+      madeToMeasure: "Мейд то межур",
+      bespoke: "Беспокэ",
     },
     // Culture dropdown
     culture: {
@@ -365,9 +383,11 @@ export const translations = {
     // Collections
     collections: {
       mensCollection: "Kişi kolleksiyası",
-      mensDescription: "Gözəl dəri və yumşaq qoyun dərisindən hazırlanmış, dağ yürüşü ilhamlı kobud və zərif çəkmələr, həmçinin sənətkarlıqla hazırlanmış dəri həftə sonu çantaları müasirliyi və sənətkarlıq dərinliyini tarazlaşdırır.",
+      mensDescription:
+        "Gözəl dəri və yumşaq qoyun dərisindən hazırlanmış, dağ yürüşü ilhamlı kobud və zərif çəkmələr, həmçinin sənətkarlıqla hazırlanmış dəri həftə sonu çantaları müasirliyi və sənətkarlıq dərinliyini tarazlaşdırır.",
       womensCollection: "Qadın kolleksiyası",
-      womensDescription: "Dizə qədər yüksək dabanlı qoyun dərisi çəkmələr və cilalanmış bağlama trekking stilləri idman zərifliyini təqdim edir. Aksesuarlar istilik və gözəllik verir.",
+      womensDescription:
+        "Dizə qədər yüksək dabanlı qoyun dərisi çəkmələr və cilalanmış bağlama trekking stilləri idman zərifliyini təqdim edir. Aksesuarlar istilik və gözəllik verir.",
       previousProducts: "Əvvəlki məhsullar",
       nextProducts: "Növbəti məhsullar",
     },
@@ -383,12 +403,14 @@ export const translations = {
     // About Section
     about: {
       title: "Danilov - Əl ilə hazırlanmış ayaqqabı",
-      description: "2010-cu ildə Bakıda, Azərbaycanın Bakı regionunun qəlbində yaradılmış Danilov, müasir Azərbaycan lüksünün mahiyyətini təcəssüm etdirir, burada zaman keçməyən stil istisna sənətkarlıqla qarşılaşır. Zərif kişi bağlamalarından və müasir idman ayaqqabılarından tutmuş zərif qadın dabanlarına və ikonik ikiqat toqqalı ayaqqabılara qədər, hər bir parça diqqətlə diqqət və premium materiallarla əl ilə hazırlanır. Kolleksiyalar zərif estetikani gündəlik çevikliklə birləşdirir, hər hansı bir garderobu yüksəldən ayaqqabı və dəri aksesuarları təklif edir. Azərbaycanda istehsal olunmuş ənənələrinə kök salmış Danilov, incəlik, fərdilik və davamlı zərifliyi təmsil edir.",
+      description:
+        "2010-cu ildə Bakıda, Azərbaycanın Bakı regionunun qəlbində yaradılmış Danilov, müasir Azərbaycan lüksünün mahiyyətini təcəssüm etdirir, burada zaman keçməyən stil istisna sənətkarlıqla qarşılaşır. Zərif kişi bağlamalarından və müasir idman ayaqqabılarından tutmuş zərif qadın dabanlarına və ikonik ikiqat toqqalı ayaqqabılara qədər, hər bir parça diqqətlə diqqət və premium materiallarla əl ilə hazırlanır. Kolleksiyalar zərif estetikani gündəlik çevikliklə birləşdirir, hər hansı bir garderobu yüksəldən ayaqqabı və dəri aksesuarları təklif edir. Azərbaycanda istehsal olunmuş ənənələrinə kök salmış Danilov, incəlik, fərdilik və davamlı zərifliyi təmsil edir.",
     },
     // Anthology Section
     anthology: {
       title: "Danilov antologiyası",
-      description: "Yaradıcı görüş, sənətkarlıq bilikləri və müasir stil vasitəsilə Danilov dünyasını kəşf edin.",
+      description:
+        "Yaradıcı görüş, sənətkarlıq bilikləri və müasir stil vasitəsilə Danilov dünyasını kəşf edin.",
       classic: "Danilov Classic",
       eclipse: "Eclipse",
       backToBusiness: "Back to Business",
@@ -398,7 +420,8 @@ export const translations = {
     // Contact Section
     contact: {
       title: "WhatsApp-də bizimlə əlaqə saxlayın",
-      description: "Ekskluziv təkliflər, yeni kolleksiya yeniləmələri və fərdiləşdirilmiş xidmət üçün birbaşa bizimlə əlaqə saxlayın.",
+      description:
+        "Ekskluziv təkliflər, yeni kolleksiya yeniləmələri və fərdiləşdirilmiş xidmət üçün birbaşa bizimlə əlaqə saxlayın.",
       interestedIn: "Məni maraqlandırır:",
       generalInquiry: "Ümumi sorğu",
       mensCollection: "Kişi kolleksiyası",
@@ -408,7 +431,8 @@ export const translations = {
     },
     // Footer
     footer: {
-      description: "Zaman keçməyən sənətkarlıq və təmiz dizayn ilhamı ilə müasir ayaqqabı evi. Gündəlik geyim üçün yaradılmış — əsər kimi bitirilmiş.",
+      description:
+        "Zaman keçməyən sənətkarlıq və təmiz dizayn ilhamı ilə müasir ayaqqabı evi. Gündəlik geyim üçün yaradılmış — əsər kimi bitirilmiş.",
       customerCare: "Müştəri xidməti",
       personalization: "Fərdiləşdirmə",
       findUs: "Bizi tapın",
@@ -448,7 +472,8 @@ export const translations = {
     // Service Page
     servicePage: {
       title: "Danilov - Servis",
-      description: "Danilov Service-də biz inanırıq ki, əla ayaqqabı əla qulluğa layiqdir. Təcrübəli ustalarımız sevimli cütlərinizin ömrünü uzatmaq üçün peşəkar ayaqqabı bərpası, dəri kondisionerləmə və fərdi təmir xidmətləri təklif edir. Dərin təmizləmə və cilalamadan taban dəyişdirilməsinə və tikiş təmirinə qədər — hər ayaqqabıya onun hazırlanmasına sərf edilən eyni diqqətlə yanaşırıq. Danilov ayaqqabılarınızın — və hər hansı keyfiyyətli ayaqqabının — illər boyu qüsursuz görünməsi üçün bizə etibar edin.",
+      description:
+        "Danilov Service-də biz inanırıq ki, əla ayaqqabı əla qulluğa layiqdir. Təcrübəli ustalarımız sevimli cütlərinizin ömrünü uzatmaq üçün peşəkar ayaqqabı bərpası, dəri kondisionerləmə və fərdi təmir xidmətləri təklif edir. Dərin təmizləmə və cilalamadan taban dəyişdirilməsinə və tikiş təmirinə qədər — hər ayaqqabıya onun hazırlanmasına sərf edilən eyni diqqətlə yanaşırıq. Danilov ayaqqabılarınızın — və hər hansı keyfiyyətli ayaqqabının — illər boyu qüsursuz görünməsi üçün bizə etibar edin.",
     },
     // Personalization dropdown
     personalization: {
@@ -456,6 +481,8 @@ export const translations = {
       madeToOrder: "Sifarişlə hazırlanmış",
       materials: "Materiallar",
       bookAppointment: "Görüş təyin et",
+      madeToMeasure: "Made to Measure",
+      bespoke: "Bespoke",
     },
     // Culture dropdown
     culture: {
@@ -486,4 +513,3 @@ export const translations = {
     },
   },
 };
-
