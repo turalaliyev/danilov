@@ -125,31 +125,43 @@ export default function Contacts() {
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="mt-15 justify-center flex">
-          <a
-            href="tel:+994556746674"
-            className="flex items-center gap-2 text-black/70 hover:text-black transition-colors"
-          >
-            <FaPhone className="text-base" />
-            <span>Tel: +994 55 674 66 74</span>
-          </a>
-        </div>
+      {/* Contact Section */}
+      <div className="mt-12 py-12 px-4 sm:px-6 lg:px-10 bg-white border-t border-black/10">
+        <div className="max-w-2xl mx-auto text-center">
+          <h3 className="text-2xl md:text-3xl uppercase tracking-wide mb-4">
+            {t.contact?.titleFindUs || "Contact Us"}
+          </h3>
+          <p className="text-sm md:text-base leading-relaxed text-black/70 font-light mb-6">
+            {t.contact?.findUsText ||
+              "Have questions about our location or opening hours? Contact us via WhatsApp or phone for assistance and directions to our store."}
+          </p>
+          
+          {/* Phone */}
+          <div className="mb-6 flex justify-center">
+            <a
+              href="tel:+994556746674"
+              className="flex items-center gap-2 text-black/70 hover:text-black transition-colors text-base"
+            >
+              <FaPhone className="text-base" />
+              <span>Tel: +994 55 674 66 74</span>
+            </a>
+          </div>
 
-        {/* WhatsApp Button - centered on desktop, below map on mobile */}
-        <div className="mt-4 flex justify-center">
+          {/* WhatsApp Button */}
           <a
             href={waLink}
             target="_blank"
             rel="noreferrer"
-            className="px-10 py-3 bg-green-600 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-green-700 transition-all flex items-center gap-3"
+            className="inline-block px-10 py-4 bg-green-600 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-green-700 transition-all"
           >
             {t.contact.chatOnWhatsApp}
           </a>
         </div>
-
-        <div className="h-16" />
       </div>
+
+      <div className="h-8" />
     </section>
   );
 }

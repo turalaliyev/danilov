@@ -582,7 +582,7 @@ export default function Header() {
                 <div className="mt-10 space-y-6">
                   <button
                     type="button"
-                    onClick={() => {}}
+                    onClick={() => { }}
                     className={[
                       "block w-full text-left text-xs tracking-[0.28em] uppercase transition cursor-pointer",
                       "text-black opacity-100",
