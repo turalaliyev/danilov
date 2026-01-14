@@ -1,27 +1,77 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import LanguageContext from "../context/LanguageContext";
 import { translations } from "../translations";
+import { client } from "../sanity/clients.js";
+import { urlFor } from "../sanity/image.ts";
 
 export default function PromoGrid() {
   const { language } = useContext(LanguageContext);
   const t = translations[language] || translations.en;
+  const [promoImages, setPromoImages] = useState({});
 
-  // Use local test images (no external placeholders) so PromoGrid always renders.
-  const testImages = Object.values(
-    import.meta.glob("../assets/test_images/*.jpg", { eager: true, import: "default" })
-  );
-
-  const pick = (seed) => {
-    if (!testImages.length) return undefined;
-    const idx = Math.floor(Math.random() * 1_000_000 + seed) % testImages.length;
-    return testImages[idx];
+  // Get today's date as a seed for daily rotation
+  const getTodaySeed = () => {
+    const today = new Date();
+    return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
   };
 
+  // Get a stable index based on daily seed
+  const getDailyIndex = (categorySlug, totalProducts) => {
+    if (totalProducts <= 0) return 0;
+    const seed = getTodaySeed() + categorySlug;
+    let hash = 0;
+    for (let i = 0; i < seed.length; i++) {
+      hash = ((hash << 5) - hash) + seed.charCodeAt(i);
+      hash = hash & hash;
+    }
+    return Math.abs(hash) % totalProducts;
+  };
+
+  useEffect(() => {
+    const fetchPromoImages = async () => {
+      try {
+        const categoryMappings = [
+          { slug: "man-boots", key: "bootsForHim" },
+          { slug: "woman-boots", key: "bootsForHer" },
+          { slug: "man-clothes", key: "mensOutwear" },
+          { slug: "man-accessories", key: "mensAccessories" },
+        ];
+
+        const images = {};
+
+        for (const mapping of categoryMappings) {
+          const query = `*[_type == "shoes" && $categorySlug in categories[]->slug.current]{
+            mainImage,
+            additionalImage
+          }`;
+          
+          const products = await client.fetch(query, { categorySlug: mapping.slug });
+          
+          if (products && products.length > 0) {
+            const dailyIndex = getDailyIndex(mapping.slug, products.length);
+            const selectedProduct = products[dailyIndex];
+            const imageAsset = selectedProduct.mainImage || selectedProduct.additionalImage;
+            
+            if (imageAsset) {
+              images[mapping.key] = urlFor(imageAsset).width(800).height(1200).url();
+            }
+          }
+        }
+
+        setPromoImages(images);
+      } catch (error) {
+        console.error("Error fetching promo images:", error);
+      }
+    };
+
+    fetchPromoImages();
+  }, []);
+
   const promos = [
-    { title: t.promoGrid.bootsForHim, link: "/category/man-boots", image: pick(1) },
-    { title: t.promoGrid.bootsForHer, link: "/category/woman-boots", image: pick(2) },
-    { title: t.promoGrid.mensOutwear, link: "/category/man-clothes", image: pick(3) },
-    { title: t.promoGrid.mensAccessories, link: "/category/man-accessories", image: pick(4), linkText: t.promoGrid.viewAll },
+    { title: t.promoGrid.bootsForHim, link: "/category/man-boots", image: promoImages.bootsForHim },
+    { title: t.promoGrid.bootsForHer, link: "/category/woman-boots", image: promoImages.bootsForHer },
+    { title: t.promoGrid.mensOutwear, link: "/category/man-clothes", image: promoImages.mensOutwear },
+    { title: t.promoGrid.mensAccessories, link: "/category/man-accessories", image: promoImages.mensAccessories, linkText: t.promoGrid.viewAll },
   ];
 
   return (

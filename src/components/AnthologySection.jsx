@@ -4,29 +4,24 @@ import videoSrc from "../assets/v.mp4";
 import LanguageContext from "../context/LanguageContext";
 import { translations } from "../translations";
 
+// Import images from anthology_images folder
+import eclipseImg from "../assets/anthology_images/eclipse.jpg";
+import backToBusinessImg from "../assets/anthology_images/back_to_business.jpg";
+import doubleBuckleImg from "../assets/anthology_images/double_buckle.jpg";
+import limitedImg from "../assets/anthology_images/limited.jpg";
+
 export default function AnthologySection() {
   const { language } = useContext(LanguageContext);
   const t = translations[language] || translations.en;
   const tEn = translations.en; // Always use English for card titles
   const sliderRef = useRef(null);
 
-  // Use local test images (no external placeholders) so AnthologySection always renders.
-  const testImages = Object.values(
-    import.meta.glob("../assets/test_images/*.jpg", { eager: true, import: "default" })
-  );
-
-  const pick = (seed) => {
-    if (!testImages.length) return undefined;
-    const idx = Math.floor(Math.random() * 1_000_000 + seed) % testImages.length;
-    return testImages[idx];
-  };
-
   const items = [
     { title: tEn.anthology.classic, video: videoSrc },
-    { title: tEn.anthology.eclipse, image: pick(11) },
-    { title: tEn.anthology.backToBusiness, image: pick(12) },
-    { title: tEn.anthology.doubleBuckleSneaker, image: pick(13) },
-    { title: tEn.anthology.limitedEdition, image: pick(14) },
+    { title: tEn.anthology.eclipse, image: eclipseImg },
+    { title: tEn.anthology.backToBusiness, image: backToBusinessImg },
+    { title: tEn.anthology.doubleBuckleSneaker, image: doubleBuckleImg },
+    { title: tEn.anthology.limitedEdition, image: limitedImg },
   ];
 
   const scrollSlider = (direction) => {
