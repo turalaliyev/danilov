@@ -97,7 +97,7 @@ export default function GiftCardPage() {
       <div className="min-h-screen bg-white">
         {/* Header */}
         <div className="px-4 sm:px-6 lg:px-10 py-6 flex items-center justify-between border-b border-black/10">
-          <h1 className="text-xs tracking-[0.32em] uppercase text-black">
+          <h1 className="text-sm tracking-[0.32em] uppercase text-black">
             {t.nav?.gifts || "Gifts"}
           </h1>
           <button

@@ -247,7 +247,7 @@ export default function CategoryCollection() {
       <section className="w-full">
         <div className="max-w-350 mx-auto px-6 lg:px-10 pt-8">
           <div className="flex items-start justify-between gap-6">
-            <h1 className="text-[28px] leading-none tracking-wide font-semibold">
+            <h1 className="text-sm tracking-[0.32em] uppercase text-black">
               {pageTitle}
             </h1>
 

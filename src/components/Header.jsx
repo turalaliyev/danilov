@@ -103,6 +103,28 @@ export default function Header() {
 
   const activeItem = active ? dropdownData[active] : null;
 
+  // SEO-optimized alt texts for category images
+  const categoryAltTexts = useMemo(() => {
+    const alts = {
+      man: {
+        az: "Danilov kişi ayaqqabı kolleksiyası - əl ilə hazırlanmış premium ayaqqabılar",
+        ru: "Коллекция мужской обуви Danilov - премиальная обувь ручной работы",
+        en: "Danilov men's shoe collection - premium handmade footwear",
+      },
+      woman: {
+        az: "Danilov qadın ayaqqabı kolleksiyası - əl ilə hazırlanmış premium ayaqqabılar",
+        ru: "Коллекция женской обуви Danilov - премиальная обувь ручной работы",
+        en: "Danilov women's shoe collection - premium handmade footwear",
+      },
+      personal: {
+        az: "Danilov fərdiləşdirmə xidmətləri - ölçüyə görə və fərdi tikinti ayaqqabılar",
+        ru: "Услуги персонализации Danilov - обувь по мерке и индивидуального пошива",
+        en: "Danilov personalization services - made to measure and bespoke shoes",
+      },
+    };
+    return alts[active]?.[language] || alts[active]?.en || "Danilov kolleksiyası";
+  }, [active, language]);
+
   const [mView, setMView] = useState("nav");
   const [mNavKey, setMNavKey] = useState(null);
   const [mCategoryKey, setMCategoryKey] = useState(null);
@@ -665,7 +687,7 @@ export default function Header() {
                 <div className="flex-1 h-full">
                   <img
                     src={activeItem?.image}
-                    alt={activeItem?.title || "Danilov kolleksiyası"}
+                    alt={categoryAltTexts}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -675,7 +697,7 @@ export default function Header() {
               <div className="flex-1 h-full">
                 <img
                   src={activeItem?.image}
-                  alt={activeItem?.title || "Danilov kolleksiyası"}
+                  alt={categoryAltTexts}
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
