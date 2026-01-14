@@ -94,7 +94,7 @@ export default function Contacts() {
               <div className="aspect-4/3">
                 {data?.locationImage ? (
                   <img
-                    src={urlFor(data.locationImage).url()}
+                    src={urlFor(data.locationImage).width(800).height(600).quality(85).url()}
                     alt="Shop"
                     className="w-full h-full object-cover"
                     loading="lazy"

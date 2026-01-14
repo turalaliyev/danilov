@@ -15,7 +15,7 @@ export default function CollectionCard({ product }) {
   }, [language, product]);
 
   const img = product?.mainImage
-    ? urlFor(product.mainImage).width(600).height(700).url()
+    ? urlFor(product.mainImage).width(500).height(600).quality(85).url()
     : null;
 
   const handleClick = () => {
@@ -42,6 +42,7 @@ export default function CollectionCard({ product }) {
         }
         alt={title}
         className="w-full flex-1 min-h-0 object-cover mb-4"
+        loading="lazy"
       />
 
       <div className="flex-none">

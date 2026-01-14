@@ -68,6 +68,7 @@ export default function AnthologySection() {
                   loop
                   muted
                   playsInline
+                  preload="metadata"
                 />
               ) : item.image ? (
                 <img 

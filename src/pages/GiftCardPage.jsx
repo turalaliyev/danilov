@@ -91,6 +91,7 @@ export default function GiftCardPage() {
                       loop
                       muted
                       playsInline
+                      preload="metadata"
                     />
                     <button
                       onClick={toggleMute}
@@ -156,6 +157,7 @@ export default function GiftCardPage() {
                       loop
                       muted
                       playsInline
+                      preload="metadata"
                     />
                     <button
                       onClick={toggleMute}

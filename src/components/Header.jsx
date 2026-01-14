@@ -436,7 +436,7 @@ export default function Header() {
               />
             </button>
 
-            <div className="hidden md:flex items-center gap-6 text-sm">
+            <div className="hidden md:flex items-center gap-6 text-[13px]">
               {NAV.map((i) => {
                 const isActive = active === i.key;
                 return (

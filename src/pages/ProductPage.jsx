@@ -103,7 +103,7 @@ export default function ProductPage() {
     if (!allImages.length) return null;
     const img = allImages[selectedImageIndex] || allImages[0];
     if (!img) return null;
-    return urlFor(img).width(1100).height(900).fit("max").url();
+    return urlFor(img).width(1000).height(900).quality(90).fit("max").url();
   }, [allImages, selectedImageIndex]);
 
   const [data, setData] = useState(null);

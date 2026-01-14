@@ -13,7 +13,7 @@ export default function ProductCard({ product, loading = false }) {
   }, [language, product]);
 
   const img = product?.mainImage
-    ? urlFor(product.mainImage).width(900).height(1100).url()
+    ? urlFor(product.mainImage).width(600).height(750).quality(85).url()
     : null;
 
   if (loading) {

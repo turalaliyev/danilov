@@ -53,7 +53,7 @@ export default function PromoGrid() {
             const imageAsset = selectedProduct.mainImage || selectedProduct.additionalImage;
             
             if (imageAsset) {
-              images[mapping.key] = urlFor(imageAsset).width(800).height(1200).url();
+              images[mapping.key] = urlFor(imageAsset).width(800).height(1200).quality(85).url();
             }
           }
         }

@@ -92,6 +92,7 @@ export default function Culture() {
                     loop
                     muted
                     playsInline
+                    preload="metadata"
                   />
                 ) : (
                   <img
@@ -143,6 +144,7 @@ export default function Culture() {
                     loop
                     muted
                     playsInline
+                    preload="metadata"
                   />
                 ) : (
                   <img

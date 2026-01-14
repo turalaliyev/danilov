@@ -8,8 +8,7 @@ import ContactSection from "../components/ContactSection.jsx";
 import LanguageContext from "../context/LanguageContext";
 import { translations } from "../translations";
 
-import Img8 from "../assets/test_images/IMG-20240910-WA0009.jpg";
-
+import ManCategory from "../assets/ManCategory.jpg";
 import WomanCategory from "../assets/womanCategoryShoes.jpg";
 
 import { client } from "../sanity/clients.js";
@@ -103,7 +102,7 @@ export default function HomePage() {
         title={t.collections.mensCollection}
         description={t.collections.mensDescription}
         products={menCategoryProducts}
-        image={Img8}
+        image={ManCategory}
         loading={loading}
       />
 

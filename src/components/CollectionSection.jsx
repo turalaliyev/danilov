@@ -45,6 +45,7 @@ export default function CollectionSection({
           }
           alt={`${title} collection`}
           className="w-full h-full object-cover"
+          loading="lazy"
         />
       </div>
 
