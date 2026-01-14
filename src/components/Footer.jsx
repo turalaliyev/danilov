@@ -7,7 +7,7 @@ import LanguageContext from "../context/LanguageContext";
 import { translations } from "../translations";
 
 export default function Footer() {
-  const { language } = useContext(LanguageContext);
+  const { language, getLocalizedPath } = useContext(LanguageContext);
   const t = translations[language] || translations.en;
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -28,10 +28,10 @@ export default function Footer() {
       <div className="max-w-6xl xl:max-w-[1400px] 2xl:max-w-[1800px] mx-auto px-4 xl:px-8 py-12">
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start gap-12 lg:gap-20 xl:gap-32 2xl:gap-48">
           <div className="max-w-md xl:max-w-lg text-center lg:text-left">
-            <Link to="/" className="inline-block select-none cursor-pointer">
+            <Link to={getLocalizedPath("/")} className="inline-block select-none cursor-pointer">
               <img
                 src={isDarkMode ? LogoWhite : LogoBlack}
-                alt="Danilov"
+                alt="Danilov - Əl ilə hazırlanmış ayaqqabı Bakıda"
                 className="h-16 -ml-1 -mt-2 mx-auto lg:mx-0"
               />
             </Link>
@@ -41,28 +41,28 @@ export default function Footer() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-20 lg:gap-32 xl:gap-48 2xl:gap-64 w-full lg:w-auto">
-            <div className="text-center lg:text-left">
+            <nav className="text-center lg:text-left" aria-label="Customer care">
               <div className="text-xs tracking-[0.4em] uppercase text-black/60">
                 {t.footer.customerCare}
               </div>
               <ul className="mt-4 space-y-2 text-sm">
                 <li>
-                  <Link className="hover:opacity-70" to="/contacts">
+                  <Link className="hover:opacity-70" to={getLocalizedPath("/contacts")}>
                     {t.footer.findUs}
                   </Link>
                 </li>
                 <li>
-                  <Link className="hover:opacity-70" to="/category/care">
+                  <Link className="hover:opacity-70" to={getLocalizedPath("/service")}>
                     {t.footer.service}
                   </Link>
                 </li>
                 <li>
-                  <Link className="hover:opacity-70" to="/contacts">
+                  <Link className="hover:opacity-70" to={getLocalizedPath("/contacts")}>
                     {t.footer.contact}
                   </Link>
                 </li>
               </ul>
-            </div>
+            </nav>
 
             <div className="text-center lg:text-left">
               <div className="text-xs tracking-[0.4em] uppercase text-black/60">
@@ -74,7 +74,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:opacity-70 text-black/60 hover:text-black transition-colors"
-                  aria-label="Instagram"
+                  aria-label="Danilov Instagram"
                 >
                   <FaInstagram size={20} />
                 </a>
@@ -83,7 +83,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:opacity-70 text-black/60 hover:text-black transition-colors"
-                  aria-label="TikTok"
+                  aria-label="Danilov TikTok"
                 >
                   <FaTiktok size={20} />
                 </a>

@@ -1,0 +1,26 @@
+# Danilov - Handmade Shoes
+# https://danilov.az
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://danilov.az/sitemap.xml
+
+# Disallow admin/api routes
+Disallow: /api/
+Disallow: /admin/
+Disallow: /studio/
+
+# Disallow query parameters that create duplicate content
+Disallow: /*?*
+
+# Allow important resources
+Allow: /assets/
+Allow: /*.js
+Allow: /*.css
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.webp
+Allow: /*.svg

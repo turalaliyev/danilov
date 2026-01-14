@@ -15,7 +15,7 @@ import { client } from "../sanity/clients";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { language } = useContext(LanguageContext);
+  const { language, getLocalizedPath } = useContext(LanguageContext);
   const t = translations[language] || translations.en;
 
   const [open, setOpen] = useState(false);
@@ -260,9 +260,10 @@ export default function Header() {
     setMCategoryKey(null);
   };
 
+  // Navigate with language prefix
   const go = (href) => {
     closeAll();
-    navigate(href);
+    navigate(getLocalizedPath(href));
   };
 
   const toggleDesktopDropdown = (key) => {
@@ -423,7 +424,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => {
-                navigate("/");
+                navigate(getLocalizedPath("/"));
                 closeAll();
               }}
               className="select-none cursor-pointer"
@@ -431,7 +432,7 @@ export default function Header() {
             >
               <img
                 src={isDarkMode ? LogoWhite : LogoBlack}
-                alt="Danilov"
+                alt="Danilov - Əl ilə hazırlanmış ayaqqabı"
                 className="h-19 mr-2"
               />
             </button>
@@ -664,7 +665,7 @@ export default function Header() {
                 <div className="flex-1 h-full">
                   <img
                     src={activeItem?.image}
-                    alt={activeItem?.title || "Danilov"}
+                    alt={activeItem?.title || "Danilov kolleksiyası"}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -674,7 +675,7 @@ export default function Header() {
               <div className="flex-1 h-full">
                 <img
                   src={activeItem?.image}
-                  alt={activeItem?.title || "Danilov"}
+                  alt={activeItem?.title || "Danilov kolleksiyası"}
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />

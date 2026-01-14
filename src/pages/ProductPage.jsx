@@ -1,15 +1,19 @@
 import { useContext, useEffect, useMemo, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { client } from "../sanity/clients";
 import { urlFor } from "../sanity/image";
 import LanguageContext from "../context/LanguageContext";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import { translations } from "../translations";
+import SEO from "../components/SEO";
+import { getProductSeoMeta } from "../seo/metadata";
+import { organizationSchema, generateBreadcrumbSchema, generateProductSchema, combineSchemas } from "../seo/schema";
 
 export default function ProductPage() {
   const { sku } = useParams();
   const navigate = useNavigate();
-  const { language } = useContext(LanguageContext);
+  const location = useLocation();
+  const { language, getLocalizedPath } = useContext(LanguageContext);
   const t = translations[language] || translations.en;
 
   const [product, setProduct] = useState(null);
@@ -244,7 +248,7 @@ export default function ProductPage() {
                 {i18n.back}
               </button>
               <button
-                onClick={() => navigate("/")}
+                onClick={() => navigate(getLocalizedPath("/"))}
                 className="px-6 py-2 bg-black text-white hover:bg-black/80 transition text-sm uppercase tracking-[0.14em]"
               >
                 {i18n.goHome}
@@ -259,8 +263,34 @@ export default function ProductPage() {
   const priceText =
     product.price != null ? Number(product.price).toLocaleString() : null;
 
+  // Get SEO metadata for product
+  const seo = getProductSeoMeta(product, language);
+
+  // Generate schemas
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Danilov", url: `https://danilov.az/${language}` },
+    { name: categoryName || t.nav.man, url: `https://danilov.az/${language}/category/man-shoes` },
+    { name: title, url: `https://danilov.az${location.pathname}` },
+  ]);
+
+  const productSchema = generateProductSchema(product, language);
+  const pageSchema = combineSchemas(organizationSchema, breadcrumbSchema, productSchema);
+
+  // Get product image URL for OG
+  const ogImage = currentImageUrl || "https://danilov.az/og-image.jpg";
+
   return (
-    <section className="w-full bg-[#f4f0eb]">
+    <>
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        lang={language}
+        path={location.pathname}
+        ogImage={ogImage}
+        ogType="product"
+        schema={pageSchema}
+      />
+      <section className="w-full bg-[#f4f0eb]">
       <div className="max-w-350 mx-auto px-6 lg:px-10 pt-8 pb-16">
         <div className="flex items-center justify-between gap-4">
           <button
@@ -573,5 +603,6 @@ export default function ProductPage() {
         </div>
       </div>
     </section>
+    </>
   );
 }
