@@ -184,7 +184,7 @@ export default function SearchOverlay({ onClose }) {
                 placeholder={i18n.placeholder}
                 className={[
                   "w-full bg-transparent outline-none",
-                  "text-[22px] tracking-wide",
+                  "text-[22px] tracking-wide text-black",
                   "placeholder:text-black/25",
                   "border-b border-black/20 focus:border-black/50",
                   "py-3",

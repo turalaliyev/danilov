@@ -192,8 +192,8 @@ export default function Header() {
     measure();
 
     const onResize = () => {
-      if (window.innerWidth < 768) setActive(null);
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth < 1024) setActive(null);
+      if (window.innerWidth >= 1024) {
         measure();
         setMView("nav");
         setMNavKey(null);
@@ -459,7 +459,7 @@ export default function Header() {
               />
             </button>
 
-            <div className="hidden md:flex items-center gap-6 text-[13px]">
+            <div className="hidden lg:flex items-center gap-6 text-[13px]">
               {NAV.map((i) => {
                 const isActive = active === i.key;
                 return (
@@ -483,7 +483,7 @@ export default function Header() {
           </div>
 
           <div className="flex items-center gap-2 md:gap-4">
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               <LanguageSelect />
             </div>
 
@@ -500,7 +500,7 @@ export default function Header() {
             </button>
 
             <button
-              className="md:hidden h-10 w-10 grid place-items-center rounded-full hover:bg-black/5 transition"
+              className="lg:hidden h-10 w-10 grid place-items-center rounded-full hover:bg-black/5 transition"
               onClick={() => {
                 setOpen((v) => {
                   const next = !v;
@@ -516,7 +516,7 @@ export default function Header() {
               <HiBars2 className="size-7 text-black/60" aria-hidden="true" />
             </button>
 
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <LanguageSelect />
             </div>
           </div>
@@ -526,7 +526,7 @@ export default function Header() {
       {/* Desktop dropdown */}
       <div
         className={[
-          "hidden md:block fixed left-0 right-0 top-16",
+          "hidden lg:block fixed left-0 right-0 top-16",
           "transition-all duration-300 ease-out",
           active
             ? "opacity-100 pointer-events-auto"
@@ -709,7 +709,7 @@ export default function Header() {
 
       {/* Mobile menu */}
       <div className={mobileWrapClass(open)}>
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <div className="px-4 py-3 relative">
             {mView !== "nav" && (
               <div className="flex justify-end">

@@ -236,3 +236,10 @@
 .bg-ink {
   background-color: var(--color-ink-bg);
 }
+
+/* Search input placeholder - light in dark mode */
+@media (prefers-color-scheme: dark) {
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+}
