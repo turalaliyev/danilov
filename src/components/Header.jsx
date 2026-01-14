@@ -449,7 +449,7 @@ export default function Header() {
                 navigate(getLocalizedPath("/"));
                 closeAll();
               }}
-              className="select-none cursor-pointer"
+              className="select-none cursor-pointer ml-2 md:ml-0"
               aria-label="Go to home"
             >
               <img

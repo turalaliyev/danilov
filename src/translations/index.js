@@ -425,8 +425,8 @@ export const translations = {
     },
     // Promo Grid
     promoGrid: {
-      bootsForHim: "Onun üçün çəkmələr",
-      bootsForHer: "Onun üçün çəkmələr",
+      bootsForHim: "Kişi üçün çəkmələr",
+      bootsForHer: "Qadın üçün çəkmələr",
       mensOutwear: "Kişi üst geyimi",
       mensAccessories: "Kişi aksesuarları",
       shopNow: "İndi al",

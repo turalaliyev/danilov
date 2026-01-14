@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LanguageContext from "../context/LanguageContext";
 import { translations } from "../translations";
 import { client } from "../sanity/clients.js";
 import { urlFor } from "../sanity/image.ts";
 
 export default function PromoGrid() {
-  const { language } = useContext(LanguageContext);
+  const { language, getLocalizedPath } = useContext(LanguageContext);
+  const navigate = useNavigate();
   const t = translations[language] || translations.en;
   const [promoImages, setPromoImages] = useState({});
 
@@ -71,7 +73,7 @@ export default function PromoGrid() {
     { title: t.promoGrid.bootsForHim, link: "/category/man-boots", image: promoImages.bootsForHim },
     { title: t.promoGrid.bootsForHer, link: "/category/woman-boots", image: promoImages.bootsForHer },
     { title: t.promoGrid.mensOutwear, link: "/category/man-clothes", image: promoImages.mensOutwear },
-    { title: t.promoGrid.mensAccessories, link: "/category/man-accessories", image: promoImages.mensAccessories, linkText: t.promoGrid.viewAll },
+    { title: t.promoGrid.mensAccessories, link: "/category/man-accessories", image: promoImages.mensAccessories },
   ];
 
   return (
@@ -79,7 +81,7 @@ export default function PromoGrid() {
       {promos.map((promo, index) => (
         <div 
           key={index} 
-          className={`promo-item relative w-full md:w-1/2 h-[120vh] ${index % 2 === 0 ? 'md:pr-0.5' : 'md:pl-0.5'}`}
+          className={`promo-item relative w-full md:w-1/2 h-[60vh] md:h-[120vh] ${index % 2 === 0 ? 'md:pr-0.5' : 'md:pl-0.5'}`}
         >
           {promo.image ? (
             <img
@@ -93,9 +95,12 @@ export default function PromoGrid() {
           )}
           <div className="promo-overlay absolute inset-0 flex flex-col items-center justify-center text-white uppercase text-center bg-black/30">
             <h3 className="text-2xl mb-2.5">{promo.title}</h3>
-            <a href={promo.link} className="border-b border-white text-sm pb-1 hover:opacity-80 transition">
-              {promo.linkText || t.promoGrid.shopNow}
-            </a>
+            <button 
+              onClick={() => navigate(getLocalizedPath(promo.link))}
+              className="border-b border-white text-sm pb-1 hover:opacity-80 transition cursor-pointer"
+            >
+              {t.promoGrid.viewAll}
+            </button>
           </div>
         </div>
       ))}
