@@ -47,12 +47,7 @@ export default function Footer() {
               </div>
               <ul className="mt-4 space-y-2 text-sm">
                 <li>
-                  <Link className="hover:opacity-70" to="/category/personal">
-                    {t.footer.personalization}
-                  </Link>
-                </li>
-                <li>
-                  <Link className="hover:opacity-70" to="/category/findus">
+                  <Link className="hover:opacity-70" to="/contacts">
                     {t.footer.findUs}
                   </Link>
                 </li>
@@ -62,7 +57,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="hover:opacity-70" to="/category/contact">
+                  <Link className="hover:opacity-70" to="/contacts">
                     {t.footer.contact}
                   </Link>
                 </li>

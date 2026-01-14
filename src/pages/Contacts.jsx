@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { urlFor } from "../sanity/image";
+import { FaPhone } from "react-icons/fa";
 
 import { client } from "../sanity/clients";
 import LanguageContext from "../context/LanguageContext";
@@ -125,8 +126,18 @@ export default function Contacts() {
           </div>
         </div>
 
+        <div className="mt-15 justify-center flex">
+          <a
+            href="tel:+994556746674"
+            className="flex items-center gap-2 text-black/70 hover:text-black transition-colors"
+          >
+            <FaPhone className="text-base" />
+            <span>Tel: +994 55 674 66 74</span>
+          </a>
+        </div>
+
         {/* WhatsApp Button - centered on desktop, below map on mobile */}
-        <div className="mt-10 flex justify-center">
+        <div className="mt-4 flex justify-center">
           <a
             href={waLink}
             target="_blank"
