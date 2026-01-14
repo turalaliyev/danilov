@@ -161,6 +161,7 @@ export default function Contacts() {
                     className="w-full h-full"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
+                    sandbox="allow-scripts allow-same-origin allow-popups"
                   />
                 </div>
               </div>

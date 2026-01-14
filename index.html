@@ -12,6 +12,25 @@
     <meta name="author" content="Danilov" />
     <meta name="robots" content="index, follow" />
     
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="Content-Security-Policy" content="
+      upgrade-insecure-requests;
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.sanity.io https://www.google.com https://www.googletagmanager.com https://maps.googleapis.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      img-src 'self' data: https: blob:;
+      font-src 'self' https://fonts.gstatic.com;
+      connect-src 'self' https://*.sanity.io https://*.apicdn.sanity.io wss://*.sanity.io;
+      frame-src https://www.google.com https://maps.google.com;
+      media-src 'self' blob:;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+    " />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
