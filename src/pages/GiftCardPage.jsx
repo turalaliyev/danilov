@@ -186,9 +186,9 @@ export default function GiftCardPage() {
       ))}
 
       {/* Contact Section */}
-      <div className="py-16 px-4 sm:px-6 lg:px-10 bg-white border-t border-black/10">
+      <div className="py-16 px-4 sm:px-6 lg:px-10 bg-[#d3d3d3]">
         <div className="max-w-2xl mx-auto text-center">
-          <h3 className="text-2xl md:text-3xl uppercase tracking-wide mb-4">
+          <h3 className="text-2xl md:text-3xl uppercase tracking-wide mb-4 text-black">
             {t.contact?.titleGifts || "Contact Us"}
           </h3>
           <p className="text-sm md:text-base leading-relaxed text-black/70 font-light mb-6">
@@ -218,6 +218,8 @@ export default function GiftCardPage() {
           </a>
         </div>
       </div>
+
+      <div className="h-8" />
     </div>
   );
 }
