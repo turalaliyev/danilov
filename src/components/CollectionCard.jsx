@@ -20,7 +20,7 @@ export default function CollectionCard({ product }) {
 
   const handleClick = () => {
     if (product?.sku) {
-      navigate(`/product/${product.sku}`);
+      navigate(`/${language}/product/${product.sku}`);
     }
   };
 

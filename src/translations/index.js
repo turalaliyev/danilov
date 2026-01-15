@@ -80,6 +80,7 @@ export const translations = {
       title: "Contact us on WhatsApp",
       titleFindUs: "Contact Us",
       titleGifts: "Contact Us",
+      titleService: "Contact Us",
       description:
         "Get in touch with us directly for exclusive offers, new collection updates, and personalized service.",
       interestedIn: "I am interested in:",
@@ -88,6 +89,7 @@ export const translations = {
       womensCollection: "Women's Collection",
       otherInquiry: "Other Inquiry",
       chatOnWhatsApp: "Chat on WhatsApp",
+      instagramButton: "Danilov Servis",
       findUsText: "Have questions about our location or opening hours? Contact us via WhatsApp or phone for assistance and directions to our store.",
     },
     // Footer
@@ -135,6 +137,7 @@ export const translations = {
       title: "Danilov - Service",
       description:
         "At Danilov Service, we believe that exceptional footwear deserves exceptional care. Our expert craftsmen offer professional shoe restoration, leather conditioning, and bespoke repair services to extend the life of your beloved pairs. From deep cleaning and polishing to sole replacement and stitching repairs, we treat every shoe with the same attention to detail that goes into crafting them. Trust us to keep your Danilov shoes — and any fine footwear — looking impeccable for years to come.",
+      contactText: "Have questions about our service? Contact us via WhatsApp or phone for assistance. Follow us on Instagram for updates and examples of our work.",
     },
     // Personalization dropdown
     personalization: {
@@ -267,6 +270,7 @@ export const translations = {
       title: "Свяжитесь с нами в WhatsApp",
       titleFindUs: "Свяжитесь с нами",
       titleGifts: "Свяжитесь с нами",
+      titleService: "Свяжитесь с нами",
       description:
         "Свяжитесь с нами напрямую для эксклюзивных предложений, обновлений новой коллекции и персонализированного сервиса.",
       interestedIn: "Меня интересует:",
@@ -275,6 +279,7 @@ export const translations = {
       womensCollection: "Женская коллекция",
       otherInquiry: "Другой запрос",
       chatOnWhatsApp: "Чат в WhatsApp",
+      instagramButton: "Danilov Servis",
       findUsText: "Есть вопросы о нашем местоположении или часах работы? Свяжитесь с нами через WhatsApp или по телефону для помощи и направлений к нашему магазину.",
     },
     // Footer
@@ -322,6 +327,7 @@ export const translations = {
       title: "Danilov - Сервис",
       description:
         "В Danilov Service мы верим, что исключительная обувь заслуживает исключительного ухода. Наши опытные мастера предлагают профессиональную реставрацию обуви, кондиционирование кожи и индивидуальные ремонтные услуги, чтобы продлить жизнь вашим любимым парам. От глубокой чистки и полировки до замены подошвы и ремонта швов — мы относимся к каждой паре обуви с тем же вниманием к деталям, что и при её создании. Доверьте нам уход за вашей обувью Danilov — и любой качественной обувью — чтобы она выглядела безупречно долгие годы.",
+      contactText: "Есть вопросы о нашем сервисе? Свяжитесь с нами через WhatsApp или по телефону для получения помощи. Следите за нами в Instagram для обновлений и примеров наших работ.",
     },
     // Personalization dropdown
     personalization: {
@@ -454,6 +460,7 @@ export const translations = {
       title: "WhatsApp-da bizimlə əlaqə saxlayın",
       titleFindUs: "Bizimlə əlaqə saxlayın",
       titleGifts: "Bizimlə əlaqə saxlayın",
+      titleService: "Bizimlə əlaqə saxlayın",
       description:
         "Ekskluziv təkliflər, yeni kolleksiya yeniləmələri və fərdiləşdirilmiş xidmət üçün birbaşa bizimlə əlaqə saxlayın.",
       interestedIn: "Məni maraqlandırır:",
@@ -462,6 +469,7 @@ export const translations = {
       womensCollection: "Qadın kolleksiyası",
       otherInquiry: "Digər sorğu",
       chatOnWhatsApp: "WhatsApp-da əlaqə",
+      instagramButton: "Danilov Servis",
       findUsText: "Yerləşdiyimiz yer və ya iş saatları haqqında sualınız var? Yardım və mağazamıza istiqamət üçün WhatsApp və ya telefon vasitəsilə bizimlə əlaqə saxlayın.",
     },
     // Footer
@@ -509,6 +517,7 @@ export const translations = {
       title: "Danilov - Servis",
       description:
         "Danilov Service-də biz inanırıq ki, əla ayaqqabı əla qulluğa layiqdir. Təcrübəli ustalarımız sevimli cütlərinizin ömrünü uzatmaq üçün peşəkar ayaqqabı bərpası, dəri kondisionerləmə və fərdi təmir xidmətləri təklif edir. Dərin təmizləmə və cilalamadan taban dəyişdirilməsinə və tikiş təmirinə qədər — hər ayaqqabıya onun hazırlanmasına sərf edilən eyni diqqətlə yanaşırıq. Danilov ayaqqabılarınızın — və hər hansı keyfiyyətli ayaqqabının — illər boyu qüsursuz görünməsi üçün bizə etibar edin.",
+      contactText: "Servisimiz haqqında sualınız var? Yardım üçün WhatsApp və ya telefon vasitəsilə bizimlə əlaqə saxlayın. Yeniləmələr və işlərimizin nümunələri üçün Instagram-da bizi izləyin.",
     },
     // Personalization dropdown
     personalization: {

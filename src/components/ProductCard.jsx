@@ -1,9 +1,11 @@
 import React, { useContext, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { urlFor } from "../sanity/image";
 import LanguageContext from "../context/LanguageContext";
 
 export default function ProductCard({ product, loading = false }) {
   const { language } = useContext(LanguageContext);
+  const navigate = useNavigate();
 
   const title = useMemo(() => {
     if (!product) return "";
@@ -15,6 +17,12 @@ export default function ProductCard({ product, loading = false }) {
   const img = product?.mainImage
     ? urlFor(product.mainImage).width(600).height(750).quality(85).url()
     : null;
+
+  const handleClick = () => {
+    if (product?.sku) {
+      navigate(`/${language}/product/${product.sku}`);
+    }
+  };
 
   if (loading) {
     return (
@@ -29,7 +37,16 @@ export default function ProductCard({ product, loading = false }) {
   }
 
   return (
-    <div className="bg-white p-4 shadow-sm">
+    <button
+      type="button"
+      onClick={handleClick}
+      disabled={!product?.sku}
+      className={`bg-white p-4 shadow-sm w-full text-left ${
+        product?.sku
+          ? "cursor-pointer hover:shadow-md transition-shadow"
+          : "cursor-default"
+      }`}
+    >
       <div className="aspect-4/5 bg-black/5 overflow-hidden">
         <img
           src={
@@ -50,6 +67,6 @@ export default function ProductCard({ product, loading = false }) {
           </div>
         )}
       </div>
-    </div>
+    </button>
   );
 }

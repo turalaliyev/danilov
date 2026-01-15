@@ -1,7 +1,7 @@
 // src/pages/Service.jsx
 import { useContext, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaInstagram, FaPhone } from "react-icons/fa";
 import LanguageContext from "../context/LanguageContext";
 import { translations } from "../translations";
 import SEO from "../components/SEO";
@@ -77,7 +77,7 @@ export default function Service() {
                 />
               </div>
 
-              {/* Text and Links */}
+              {/* Text */}
               <div className="lg:w-1/2 flex flex-col justify-center">
                 <h2 className="text-2xl md:text-3xl uppercase tracking-wide font-bold">
                   {t.servicePage.title}
@@ -85,32 +85,60 @@ export default function Service() {
                 <p className="mt-4 text-sm text-black/60 leading-relaxed font-light">
                   {t.servicePage.description}
                 </p>
-
-                {/* Social Links */}
-                <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
-                  <a
-                    href={waLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-10 py-3 bg-green-600 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-green-700 transition-all flex items-center justify-center gap-3"
-                  >
-                    <FaWhatsapp size={18} />
-                    {t.contact.chatOnWhatsApp}
-                  </a>
-                  <a
-                    href={INSTAGRAM_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-10 py-3 bg-linear-to-r from-yellow-400 via-pink-500 to-purple-600 text-white text-xs font-bold uppercase tracking-[0.15em] hover:opacity-90 transition-all flex items-center justify-center gap-3"
-                  >
-                    <FaInstagram size={18} />
-                    Instagram
-                  </a>
-                </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Contact Section */}
+        <div className="py-16 px-4 sm:px-6 lg:px-10 bg-[#d3d3d3]">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl uppercase tracking-wide mb-4 text-black">
+              {t.contact?.titleService || "Contact Us"}
+            </h2>
+            <p className="text-sm md:text-base leading-relaxed text-black/70 font-light mb-6">
+              {t.servicePage?.contactText ||
+                "Have questions about our service? Contact us via WhatsApp or phone for assistance."}
+            </p>
+            
+            {/* Phone */}
+            <div className="mb-6 flex justify-center">
+              <a
+                href="tel:+994556746674"
+                className="flex items-center gap-2 text-black/70 hover:text-black transition-colors text-base"
+              >
+                <FaPhone className="text-base" />
+                <span>Tel: +994 55 674 66 74</span>
+              </a>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              {/* WhatsApp Button */}
+              <a
+                href={waLink}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center w-[220px] py-4 bg-green-600 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-green-700 transition-all"
+              >
+                {t.contact?.chatOnWhatsApp || "Chat on WhatsApp"}
+              </a>
+
+              {/* Instagram Button */}
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-[220px] py-4 bg-linear-to-r from-yellow-400 via-pink-500 to-purple-600 text-white text-xs font-bold uppercase tracking-[0.15em] hover:opacity-90 transition-all"
+              >
+                <FaInstagram className="mr-2" size={14} />
+                {t.contact?.instagramButton || "Danilov Servis"}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="h-8" />
       </div>
     </>
   );
