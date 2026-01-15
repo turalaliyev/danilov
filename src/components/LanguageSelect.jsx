@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import LanguageContext from "../context/LanguageContext";
+import { useNavigate, useLocation } from "react-router-dom";
+import LanguageContext, { SUPPORTED } from "../context/LanguageContext";
 
 const LANGS = [
   { value: "az", label: "AZ" },
@@ -9,6 +10,8 @@ const LANGS = [
 
 export default function LanguageSelect() {
   const { language, setLanguage } = useContext(LanguageContext);
+  const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const wrapRef = useRef(null);
@@ -47,11 +50,37 @@ export default function LanguageSelect() {
     };
   }, []);
 
-  const current = LANGS.find((l) => l.value === language)?.label || "EN";
+  const current = LANGS.find((l) => l.value === language)?.label || "AZ";
 
   const handleToggle = () => {
     ignoreNextClick.current = true;
     setOpen((v) => !v);
+  };
+
+  // Switch language by navigating to new URL
+  const switchLanguage = (newLang) => {
+    if (newLang === language) {
+      setOpen(false);
+      return;
+    }
+
+    // Get current path and replace language segment
+    const currentPath = location.pathname;
+    const pathParts = currentPath.split('/').filter(Boolean);
+    
+    // Replace language segment if it exists
+    if (pathParts.length > 0 && SUPPORTED.includes(pathParts[0])) {
+      pathParts[0] = newLang;
+    } else {
+      pathParts.unshift(newLang);
+    }
+    
+    const newPath = '/' + pathParts.join('/');
+    
+    // Update context and navigate
+    setLanguage(newLang);
+    navigate(newPath);
+    setOpen(false);
   };
 
   return (
@@ -70,6 +99,7 @@ export default function LanguageSelect() {
         ].join(" ")}
         aria-haspopup="menu"
         aria-expanded={open}
+        aria-label="Select language"
       >
         <span>{current}</span>
         <span
@@ -103,10 +133,7 @@ export default function LanguageSelect() {
             <button
               key={l.value}
               type="button"
-              onPointerDown={() => {
-                setLanguage(l.value);
-                setOpen(false);
-              }}
+              onPointerDown={() => switchLanguage(l.value)}
               className={[
                 "w-full text-left px-3 py-2",
                 "text-xs tracking-[0.24em] uppercase",
@@ -114,6 +141,7 @@ export default function LanguageSelect() {
                 "hover:bg-white/5 transition",
               ].join(" ")}
               role="menuitem"
+              aria-current={active ? "true" : undefined}
             >
               {l.label}
             </button>

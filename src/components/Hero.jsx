@@ -1,4 +1,5 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { BsPlay, BsPause } from "react-icons/bs";
 import { CgMouse } from "react-icons/cg";
 import videoBg from "../assets/video_2025-12-24_12-27-14.mp4";
@@ -6,10 +7,20 @@ import LanguageContext from "../context/LanguageContext";
 import { translations } from "../translations";
 
 export default function Hero() {
-  const { language } = useContext(LanguageContext);
+  const { language, getLocalizedPath } = useContext(LanguageContext);
+  const navigate = useNavigate();
   const t = translations[language] || translations.en;
   const [isPlaying, setIsPlaying] = useState(true);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef(null);
+
+  useEffect(() => {
+    // Preload video after page loads
+    if (videoRef.current) {
+      videoRef.current.load();
+      setVideoLoaded(true);
+    }
+  }, []);
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -32,6 +43,7 @@ export default function Hero() {
           loop
           muted
           playsInline
+          preload="auto"
           className="absolute top-0 left-0 w-full h-full object-cover"
         >
           <source src={videoBg} type="video/mp4" />
@@ -39,7 +51,7 @@ export default function Hero() {
         </video>
 
         {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/20" />
+        <div className={`absolute inset-0 transition-opacity duration-500 ${videoLoaded ? 'bg-black/20' : 'bg-black/40'}`} />
 
         {/* Content */}
         <div className="absolute inset-0 flex items-center justify-center flex-col text-center z-10">
@@ -47,12 +59,12 @@ export default function Hero() {
             <h1 className="text-4xl sm:text-4xl md:text-5xl tracking-widest mb-4 uppercase font-bold drop-shadow-lg">
               One step higher
             </h1>
-            <a
-              href="#collections"
-              className="relative inline-block text-sm uppercase tracking-[0.15em] pb-1 border-b border-white hover:text-gray-200 hover:border-gray-200 transition-colors"
+            <button
+              onClick={() => navigate(getLocalizedPath("/culture"))}
+              className="relative inline-block text-sm uppercase tracking-[0.15em] pb-1 border-b border-white hover:text-gray-200 hover:border-gray-200 transition-colors cursor-pointer"
             >
               {t.hero.discoverMore}
-            </a>
+            </button>
           </div>
         </div>
 

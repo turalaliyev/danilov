@@ -1,1 +1,13 @@
-/*    /index.html   200
+# Danilov - Netlify Redirects Configuration
+# Language-based routing with SPA fallback
+
+# Language route fallbacks (SPA)
+/az/*    /index.html   200
+/ru/*    /index.html   200
+/en/*    /index.html   200
+
+# Root redirect to primary language (Azerbaijan)
+/        /az           302
+
+# Catch-all SPA fallback
+/*       /index.html   200

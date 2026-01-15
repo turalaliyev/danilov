@@ -1,15 +1,18 @@
 import { useContext, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Hero from "../components/Hero.jsx";
 import CollectionSection from "../components/CollectionSection.jsx";
 import PromoGrid from "../components/PromoGrid.jsx";
 import AboutSection from "../components/AboutSection.jsx";
 import AnthologySection from "../components/AnthologySection.jsx";
 import ContactSection from "../components/ContactSection.jsx";
+import SEO from "../components/SEO.jsx";
 import LanguageContext from "../context/LanguageContext";
 import { translations } from "../translations";
+import { getSeoMeta } from "../seo/metadata.js";
+import { organizationSchema, websiteSchema, combineSchemas } from "../seo/schema.js";
 
-import Img8 from "../assets/test_images/IMG-20240910-WA0009.jpg";
-
+import ManCategory from "../assets/ManCategory.jpg";
 import WomanCategory from "../assets/womanCategoryShoes.jpg";
 
 import { client } from "../sanity/clients.js";
@@ -17,7 +20,10 @@ import CategoryContext from "../context/CategoryContext.jsx";
 
 export default function HomePage() {
   const { language } = useContext(LanguageContext);
+  const location = useLocation();
   const t = translations[language] || translations.en;
+  const seo = getSeoMeta("home", language);
+  
   const [menCategoryProducts, setMenCategoryProducts] = useState([]);
   const [womenCategoryProducts, setWomenCategoryProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -96,32 +102,44 @@ export default function HomePage() {
     getData();
   }, [categories]);
 
+  // Combine schemas for homepage
+  const homeSchema = combineSchemas(organizationSchema, websiteSchema);
+
   return (
-    <main>
-      <Hero />
-      <CollectionSection
-        title={t.collections.mensCollection}
-        description={t.collections.mensDescription}
-        products={menCategoryProducts}
-        image={Img8}
-        loading={loading}
+    <>
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        lang={language}
+        path={location.pathname}
+        schema={homeSchema}
       />
+      <main>
+        <Hero />
+        <CollectionSection
+          title={t.collections.mensCollection}
+          description={t.collections.mensDescription}
+          products={menCategoryProducts}
+          image={ManCategory}
+          loading={loading}
+        />
 
-      <CollectionSection
-        title={t.collections.womensCollection}
-        description={t.collections.womensDescription}
-        products={womenCategoryProducts}
-        image={WomanCategory}
-        reverse={true}
-        loading={loading}
-      />
-      <PromoGrid />
+        <CollectionSection
+          title={t.collections.womensCollection}
+          description={t.collections.womensDescription}
+          products={womenCategoryProducts}
+          image={WomanCategory}
+          reverse={true}
+          loading={loading}
+        />
+        <PromoGrid />
 
-      <AboutSection />
+        <AboutSection />
 
-      <AnthologySection />
+        <AnthologySection />
 
-      <ContactSection />
-    </main>
+        <ContactSection />
+      </main>
+    </>
   );
 }

@@ -35,7 +35,7 @@
   --color-border-soft: rgba(0, 0, 0, 0.1);
   --color-border-weak: rgba(0, 0, 0, 0.05);
   --color-border-mid: rgba(0, 0, 0, 0.15);
-  --color-contact-bg: #d3d3d3;
+  --color-contact-bg: #e8e8e8;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -104,6 +104,8 @@
     color-scheme: light dark;
     background-color: var(--color-page);
     color: var(--color-ink);
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
   }
 
   html {
@@ -112,12 +114,10 @@
   }
 
   header {
-    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
     font-weight: 300;
   }
 
   footer {
-    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
     font-weight: 400;
   }
 
@@ -235,4 +235,11 @@
 }
 .bg-ink {
   background-color: var(--color-ink-bg);
+}
+
+/* Search input placeholder - light in dark mode */
+@media (prefers-color-scheme: dark) {
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
 }

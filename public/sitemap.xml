@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://danilov.az/az</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://danilov.az/ru</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://danilov.az/en</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Contacts -->
+  <url>
+    <loc>https://danilov.az/az/contacts</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/contacts"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/contacts"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/contacts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/contacts"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danilov.az/ru/contacts</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/contacts"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/contacts"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/contacts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/contacts"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danilov.az/en/contacts</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/contacts"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/contacts"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/contacts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/contacts"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Gift Card -->
+  <url>
+    <loc>https://danilov.az/az/gift-card</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/gift-card"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/gift-card"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/gift-card"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/gift-card"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://danilov.az/ru/gift-card</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/gift-card"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/gift-card"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/gift-card"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/gift-card"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://danilov.az/en/gift-card</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/gift-card"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/gift-card"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/gift-card"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/gift-card"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Service -->
+  <url>
+    <loc>https://danilov.az/az/service</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/service"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/service"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/service"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/service"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://danilov.az/ru/service</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/service"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/service"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/service"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/service"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://danilov.az/en/service</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/service"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/service"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/service"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/service"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Culture -->
+  <url>
+    <loc>https://danilov.az/az/culture</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/culture"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/culture"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/culture"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/culture"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://danilov.az/ru/culture</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/culture"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/culture"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/culture"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/culture"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://danilov.az/en/culture</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/culture"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/culture"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/culture"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/culture"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Men's Category -->
+  <url>
+    <loc>https://danilov.az/az/category/man-shoes</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/category/man-shoes"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/category/man-shoes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/category/man-shoes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/category/man-shoes"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://danilov.az/ru/category/man-shoes</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/category/man-shoes"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/category/man-shoes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/category/man-shoes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/category/man-shoes"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://danilov.az/en/category/man-shoes</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/category/man-shoes"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/category/man-shoes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/category/man-shoes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/category/man-shoes"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Women's Category -->
+  <url>
+    <loc>https://danilov.az/az/category/woman-shoes</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/category/woman-shoes"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/category/woman-shoes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/category/woman-shoes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/category/woman-shoes"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://danilov.az/ru/category/woman-shoes</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/category/woman-shoes"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/category/woman-shoes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/category/woman-shoes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/category/woman-shoes"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://danilov.az/en/category/woman-shoes</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://danilov.az/az/category/woman-shoes"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://danilov.az/ru/category/woman-shoes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://danilov.az/en/category/woman-shoes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://danilov.az/az/category/woman-shoes"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>

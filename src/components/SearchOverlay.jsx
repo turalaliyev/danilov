@@ -7,7 +7,7 @@ import ProductCard from "../components/ProductCard";
 
 export default function SearchOverlay({ onClose }) {
   const navigate = useNavigate();
-  const { language } = useContext(LanguageContext);
+  const { language, getLocalizedPath } = useContext(LanguageContext);
 
   // ✅ Local i18n fallback (AZ / RU / EN) — no need to edit translations.js
   const i18n = useMemo(() => {
@@ -143,7 +143,7 @@ export default function SearchOverlay({ onClose }) {
 
   const onItemClick = (sku) => {
     close();
-    navigate(`/product/${sku}`);
+    navigate(getLocalizedPath(`/product/${sku}`));
   };
 
   return (
@@ -184,7 +184,7 @@ export default function SearchOverlay({ onClose }) {
                 placeholder={i18n.placeholder}
                 className={[
                   "w-full bg-transparent outline-none",
-                  "text-[22px] tracking-wide",
+                  "text-[22px] tracking-wide text-black",
                   "placeholder:text-black/25",
                   "border-b border-black/20 focus:border-black/50",
                   "py-3",

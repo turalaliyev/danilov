@@ -78,6 +78,9 @@ export const translations = {
     // Contact Section
     contact: {
       title: "Contact us on WhatsApp",
+      titleFindUs: "Contact Us",
+      titleGifts: "Contact Us",
+      titleService: "Contact Us",
       description:
         "Get in touch with us directly for exclusive offers, new collection updates, and personalized service.",
       interestedIn: "I am interested in:",
@@ -86,6 +89,8 @@ export const translations = {
       womensCollection: "Women's Collection",
       otherInquiry: "Other Inquiry",
       chatOnWhatsApp: "Chat on WhatsApp",
+      instagramButton: "Danilov Servis",
+      findUsText: "Have questions about our location or opening hours? Contact us via WhatsApp or phone for assistance and directions to our store.",
     },
     // Footer
     footer: {
@@ -95,6 +100,7 @@ export const translations = {
       personalization: "Personalization",
       findUs: "Find us",
       service: "Service",
+      culture: "Danilov's Culture",
       contact: "Contact",
       follow: "Follow",
     },
@@ -132,6 +138,7 @@ export const translations = {
       title: "Danilov - Service",
       description:
         "At Danilov Service, we believe that exceptional footwear deserves exceptional care. Our expert craftsmen offer professional shoe restoration, leather conditioning, and bespoke repair services to extend the life of your beloved pairs. From deep cleaning and polishing to sole replacement and stitching repairs, we treat every shoe with the same attention to detail that goes into crafting them. Trust us to keep your Danilov shoes — and any fine footwear — looking impeccable for years to come.",
+      contactText: "Have questions about our service? Contact us via WhatsApp or phone for assistance. Follow us on Instagram for updates and examples of our work.",
     },
     // Personalization dropdown
     personalization: {
@@ -168,6 +175,19 @@ export const translations = {
         title: "A CHAMPION OF HUMANISM",
         text: "Danilov is distinguished by an authentic humanism that is also the profoundly essence of the brand. The importance of the single individual is at the center of the company's philosophy. Danilov is a family. Enlarged, but united: a family, linked by human and true relationships. It is precisely the family structure that creates authenticity, and in this spirit Danilov strives for Beauty and invite customers to enjoy it, arousing positive feelings, raising the quality of everyday life, naturally.",
       },
+    },
+    // Gifts Page
+    giftsPage: {
+      subheading: "DANILOV GIFTS",
+      perfectGift: {
+        title: "THE PERFECT GIFT",
+        text: "Give the gift of timeless elegance and exceptional craftsmanship. A Danilov gift card is more than just a present — it's an invitation to experience luxury, quality, and personal style. Whether for a special occasion or just because, let your loved ones choose from our exclusive collection of handcrafted shoes and accessories.",
+      },
+      experience: {
+        title: "AN UNFORGETTABLE EXPERIENCE",
+        text: "With a Danilov gift card, you're giving more than beautiful shoes — you're offering a personalized journey of discovery. From classic elegance to contemporary designs, every piece in our collection tells a story of artisanal excellence. Let them find their perfect match and create memories that last a lifetime.",
+      },
+      contactText: "Have questions about gift cards? Contact us via WhatsApp or phone for assistance with your gift purchase.",
     },
   },
   ru: {
@@ -249,6 +269,9 @@ export const translations = {
     // Contact Section
     contact: {
       title: "Свяжитесь с нами в WhatsApp",
+      titleFindUs: "Свяжитесь с нами",
+      titleGifts: "Свяжитесь с нами",
+      titleService: "Свяжитесь с нами",
       description:
         "Свяжитесь с нами напрямую для эксклюзивных предложений, обновлений новой коллекции и персонализированного сервиса.",
       interestedIn: "Меня интересует:",
@@ -257,6 +280,8 @@ export const translations = {
       womensCollection: "Женская коллекция",
       otherInquiry: "Другой запрос",
       chatOnWhatsApp: "Чат в WhatsApp",
+      instagramButton: "Danilov Servis",
+      findUsText: "Есть вопросы о нашем местоположении или часах работы? Свяжитесь с нами через WhatsApp или по телефону для помощи и направлений к нашему магазину.",
     },
     // Footer
     footer: {
@@ -266,6 +291,7 @@ export const translations = {
       personalization: "Персонализация",
       findUs: "Найти нас",
       service: "Сервис",
+      culture: "Культура Danilov",
       contact: "Контакты",
       follow: "Подписаться",
     },
@@ -303,6 +329,7 @@ export const translations = {
       title: "Danilov - Сервис",
       description:
         "В Danilov Service мы верим, что исключительная обувь заслуживает исключительного ухода. Наши опытные мастера предлагают профессиональную реставрацию обуви, кондиционирование кожи и индивидуальные ремонтные услуги, чтобы продлить жизнь вашим любимым парам. От глубокой чистки и полировки до замены подошвы и ремонта швов — мы относимся к каждой паре обуви с тем же вниманием к деталям, что и при её создании. Доверьте нам уход за вашей обувью Danilov — и любой качественной обувью — чтобы она выглядела безупречно долгие годы.",
+      contactText: "Есть вопросы о нашем сервисе? Свяжитесь с нами через WhatsApp или по телефону для получения помощи. Следите за нами в Instagram для обновлений и примеров наших работ.",
     },
     // Personalization dropdown
     personalization: {
@@ -339,6 +366,19 @@ export const translations = {
         title: "ПОБОРНИК ГУМАНИЗМА",
         text: "Danilov отличается подлинным гуманизмом, который также является глубокой сущностью бренда. Важность отдельной личности находится в центре философии компании. Danilov — это семья. Расширенная, но единая: семья, связанная человеческими и истинными отношениями. Именно семейная структура создает аутентичность, и в этом духе Danilov стремится к Красоте и приглашает клиентов наслаждаться ею, пробуждая положительные чувства, повышая качество повседневной жизни, естественным образом.",
       },
+    },
+    // Gifts Page
+    giftsPage: {
+      subheading: "ПОДАРКИ DANILOV",
+      perfectGift: {
+        title: "ИДЕАЛЬНЫЙ ПОДАРОК",
+        text: "Подарите вневременную элегантность и исключительное мастерство. Подарочная карта Danilov — это больше, чем просто подарок, это приглашение испытать роскошь, качество и личный стиль. Будь то особый случай или просто так, позвольте вашим близким выбрать из нашей эксклюзивной коллекции обуви и аксессуаров ручной работы.",
+      },
+      experience: {
+        title: "НЕЗАБЫВАЕМЫЙ ОПЫТ",
+        text: "С подарочной картой Danilov вы дарите не просто красивую обувь — вы предлагаете персонализированное путешествие открытий. От классической элегантности до современного дизайна, каждая вещь в нашей коллекции рассказывает историю мастерского совершенства. Пусть они найдут свою идеальную пару и создадут воспоминания на всю жизнь.",
+      },
+      contactText: "Есть вопросы о подарочных картах? Свяжитесь с нами через WhatsApp или по телефону для помощи с покупкой подарка.",
     },
   },
   az: {
@@ -393,8 +433,8 @@ export const translations = {
     },
     // Promo Grid
     promoGrid: {
-      bootsForHim: "Onun üçün çəkmələr",
-      bootsForHer: "Onun üçün çəkmələr",
+      bootsForHim: "Kişi üçün çəkmələr",
+      bootsForHer: "Qadın üçün çəkmələr",
       mensOutwear: "Kişi üst geyimi",
       mensAccessories: "Kişi aksesuarları",
       shopNow: "İndi al",
@@ -419,7 +459,10 @@ export const translations = {
     },
     // Contact Section
     contact: {
-      title: "WhatsApp-də bizimlə əlaqə saxlayın",
+      title: "WhatsApp-da bizimlə əlaqə saxlayın",
+      titleFindUs: "Bizimlə əlaqə saxlayın",
+      titleGifts: "Bizimlə əlaqə saxlayın",
+      titleService: "Bizimlə əlaqə saxlayın",
       description:
         "Ekskluziv təkliflər, yeni kolleksiya yeniləmələri və fərdiləşdirilmiş xidmət üçün birbaşa bizimlə əlaqə saxlayın.",
       interestedIn: "Məni maraqlandırır:",
@@ -428,6 +471,8 @@ export const translations = {
       womensCollection: "Qadın kolleksiyası",
       otherInquiry: "Digər sorğu",
       chatOnWhatsApp: "WhatsApp-da əlaqə",
+      instagramButton: "Danilov Servis",
+      findUsText: "Yerləşdiyimiz yer və ya iş saatları haqqında sualınız var? Yardım və mağazamıza istiqamət üçün WhatsApp və ya telefon vasitəsilə bizimlə əlaqə saxlayın.",
     },
     // Footer
     footer: {
@@ -437,6 +482,7 @@ export const translations = {
       personalization: "Fərdiləşdirmə",
       findUs: "Bizi tapın",
       service: "Servis",
+      culture: "Danilov Mədəniyyəti",
       contact: "Əlaqə",
       follow: "İzləyin",
     },
@@ -474,6 +520,7 @@ export const translations = {
       title: "Danilov - Servis",
       description:
         "Danilov Service-də biz inanırıq ki, əla ayaqqabı əla qulluğa layiqdir. Təcrübəli ustalarımız sevimli cütlərinizin ömrünü uzatmaq üçün peşəkar ayaqqabı bərpası, dəri kondisionerləmə və fərdi təmir xidmətləri təklif edir. Dərin təmizləmə və cilalamadan taban dəyişdirilməsinə və tikiş təmirinə qədər — hər ayaqqabıya onun hazırlanmasına sərf edilən eyni diqqətlə yanaşırıq. Danilov ayaqqabılarınızın — və hər hansı keyfiyyətli ayaqqabının — illər boyu qüsursuz görünməsi üçün bizə etibar edin.",
+      contactText: "Servisimiz haqqında sualınız var? Yardım üçün WhatsApp və ya telefon vasitəsilə bizimlə əlaqə saxlayın. Yeniləmələr və işlərimizin nümunələri üçün Instagram-da bizi izləyin.",
     },
     // Personalization dropdown
     personalization: {
@@ -510,6 +557,19 @@ export const translations = {
         title: "HÜMANİZMİN TƏRƏFDARI",
         text: "Danilov həm də brendin dərin mahiyyəti olan səmimi hümanizm ilə fərqlənir. Tək fərdin əhəmiyyəti şirkətin fəlsəfəsinin mərkəzindədir. Danilov bir ailədir. Genişləndirilmiş, amma birləşmiş: insan və həqiqi münasibətlərlə bağlı bir ailə. Məhz ailə strukturu səmimilik yaradır və bu ruhda Danilov Gözəlliyə çalışır və müştəriləri ondan zövq almağa dəvət edir, müsbət hissləri oyandırır, gündəlik həyatın keyfiyyətini təbii şəkildə artırır.",
       },
+    },
+    // Gifts Page
+    giftsPage: {
+      subheading: "DANILOV HƏDİYYƏLƏRİ",
+      perfectGift: {
+        title: "MÜKƏMMƏL HƏDİYYƏ",
+        text: "Zaman keçməyən zəriflik və müstəsna sənətkarlıq hədiyyə edin. Danilov hədiyyə kartı sadəcə bir hədiyyə deyil — bu lüks, keyfiyyət və şəxsi stil yaşamaq üçün bir dəvətdir. İstər xüsusi bir münasibət, istərsə də sadəcə olaraq, yaxınlarınıza əl işi ayaqqabı və aksesuarlardan ibarət ekskluziv kolleksiyamızdan seçim etməyə imkan verin.",
+      },
+      experience: {
+        title: "UNUDULMAZ TƏCRÜBƏ",
+        text: "Danilov hədiyyə kartı ilə siz gözəl ayaqqabıdan daha çox şey verisiniz — fərdiləşdirilmiş kəşf səyahəti təklif edirsiniz. Klassik zəriflikdən müasir dizayna qədər, kolleksiyamızdakı hər bir parça sənətkarlıq mükəmməlliyinin hekayəsini danışır. Onların mükəmməl uyğunluğunu tapmalarına və ömürlük xatirələr yaratmalarına icazə verin.",
+      },
+      contactText: "Hədiyyə kartları haqqında sualınız var? Hədiyyə alışınıza kömək üçün WhatsApp və ya telefon vasitəsilə bizimlə əlaqə saxlayın.",
     },
   },
 };

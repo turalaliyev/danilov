@@ -15,7 +15,7 @@ import { client } from "../sanity/clients";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { language } = useContext(LanguageContext);
+  const { language, getLocalizedPath } = useContext(LanguageContext);
   const t = translations[language] || translations.en;
 
   const [open, setOpen] = useState(false);
@@ -103,6 +103,28 @@ export default function Header() {
 
   const activeItem = active ? dropdownData[active] : null;
 
+  // SEO-optimized alt texts for category images
+  const categoryAltTexts = useMemo(() => {
+    const alts = {
+      man: {
+        az: "Danilov kişi ayaqqabı kolleksiyası - əl ilə hazırlanmış premium ayaqqabılar",
+        ru: "Коллекция мужской обуви Danilov - премиальная обувь ручной работы",
+        en: "Danilov men's shoe collection - premium handmade footwear",
+      },
+      woman: {
+        az: "Danilov qadın ayaqqabı kolleksiyası - əl ilə hazırlanmış premium ayaqqabılar",
+        ru: "Коллекция женской обуви Danilov - премиальная обувь ручной работы",
+        en: "Danilov women's shoe collection - premium handmade footwear",
+      },
+      personal: {
+        az: "Danilov fərdiləşdirmə xidmətləri - ölçüyə görə və fərdi tikinti ayaqqabılar",
+        ru: "Услуги персонализации Danilov - обувь по мерке и индивидуального пошива",
+        en: "Danilov personalization services - made to measure and bespoke shoes",
+      },
+    };
+    return alts[active]?.[language] || alts[active]?.en || "Danilov kolleksiyası";
+  }, [active, language]);
+
   const [mView, setMView] = useState("nav");
   const [mNavKey, setMNavKey] = useState(null);
   const [mCategoryKey, setMCategoryKey] = useState(null);
@@ -170,8 +192,8 @@ export default function Header() {
     measure();
 
     const onResize = () => {
-      if (window.innerWidth < 768) setActive(null);
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth < 1024) setActive(null);
+      if (window.innerWidth >= 1024) {
         measure();
         setMView("nav");
         setMNavKey(null);
@@ -260,9 +282,10 @@ export default function Header() {
     setMCategoryKey(null);
   };
 
+  // Navigate with language prefix
   const go = (href) => {
     closeAll();
-    navigate(href);
+    navigate(getLocalizedPath(href));
   };
 
   const toggleDesktopDropdown = (key) => {
@@ -423,20 +446,20 @@ export default function Header() {
             <button
               type="button"
               onClick={() => {
-                navigate("/");
+                navigate(getLocalizedPath("/"));
                 closeAll();
               }}
-              className="select-none cursor-pointer"
+              className="select-none cursor-pointer ml-2 md:ml-0"
               aria-label="Go to home"
             >
               <img
                 src={isDarkMode ? LogoWhite : LogoBlack}
-                alt="Danilov"
+                alt="Danilov - Əl ilə hazırlanmış ayaqqabı"
                 className="h-19 mr-2"
               />
             </button>
 
-            <div className="hidden md:flex items-center gap-6 text-sm">
+            <div className="hidden lg:flex items-center gap-6 text-[13px]">
               {NAV.map((i) => {
                 const isActive = active === i.key;
                 return (
@@ -460,7 +483,7 @@ export default function Header() {
           </div>
 
           <div className="flex items-center gap-2 md:gap-4">
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               <LanguageSelect />
             </div>
 
@@ -477,7 +500,7 @@ export default function Header() {
             </button>
 
             <button
-              className="md:hidden h-10 w-10 grid place-items-center rounded-full hover:bg-black/5 transition"
+              className="lg:hidden h-10 w-10 grid place-items-center rounded-full hover:bg-black/5 transition"
               onClick={() => {
                 setOpen((v) => {
                   const next = !v;
@@ -493,7 +516,7 @@ export default function Header() {
               <HiBars2 className="size-7 text-black/60" aria-hidden="true" />
             </button>
 
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <LanguageSelect />
             </div>
           </div>
@@ -503,7 +526,7 @@ export default function Header() {
       {/* Desktop dropdown */}
       <div
         className={[
-          "hidden md:block fixed left-0 right-0 top-16",
+          "hidden lg:block fixed left-0 right-0 top-16",
           "transition-all duration-300 ease-out",
           active
             ? "opacity-100 pointer-events-auto"
@@ -582,7 +605,7 @@ export default function Header() {
                 <div className="mt-10 space-y-6">
                   <button
                     type="button"
-                    onClick={() => {}}
+                    onClick={() => { }}
                     className={[
                       "block w-full text-left text-xs tracking-[0.28em] uppercase transition cursor-pointer",
                       "text-black opacity-100",
@@ -664,7 +687,7 @@ export default function Header() {
                 <div className="flex-1 h-full">
                   <img
                     src={activeItem?.image}
-                    alt={activeItem?.title || "Danilov"}
+                    alt={categoryAltTexts}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -674,7 +697,7 @@ export default function Header() {
               <div className="flex-1 h-full">
                 <img
                   src={activeItem?.image}
-                  alt={activeItem?.title || "Danilov"}
+                  alt={categoryAltTexts}
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
@@ -686,7 +709,7 @@ export default function Header() {
 
       {/* Mobile menu */}
       <div className={mobileWrapClass(open)}>
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <div className="px-4 py-3 relative">
             {mView !== "nav" && (
               <div className="flex justify-end">
