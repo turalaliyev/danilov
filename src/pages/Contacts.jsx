@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useContext } from "react";
+import { useEffect, useMemo, useState, useContext, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { urlFor } from "../sanity/image";
 import { FaPhone } from "react-icons/fa";
@@ -19,6 +19,7 @@ export default function Contacts() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const contactSectionRef = useRef(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -41,6 +42,20 @@ export default function Contacts() {
     };
     getData();
   }, []);
+
+  // Scroll to contact section if hash is present, otherwise scroll to top
+  useEffect(() => {
+    if (!loading) {
+      if (location.hash === '#contact' && contactSectionRef.current) {
+        setTimeout(() => {
+          contactSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      } else if (!location.hash) {
+        // Scroll to top when no hash is present
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  }, [location.hash, loading]);
 
   const WHATSAPP_NUMBER = data?.phone_number || "+994556746674";
 
@@ -177,7 +192,7 @@ export default function Contacts() {
         </div>
 
         {/* Contact Section */}
-        <div className="mt-12 py-12 px-4 sm:px-6 lg:px-10 bg-[#d3d3d3]">
+        <div ref={contactSectionRef} className="mt-12 py-12 px-4 sm:px-6 lg:px-10 bg-[#d3d3d3]">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl uppercase tracking-wide mb-4 text-black">
               {t.contact?.titleFindUs || "Contact Us"}

@@ -57,7 +57,12 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="hover:opacity-70" to={getLocalizedPath("/contacts")}>
+                  <Link className="hover:opacity-70" to={getLocalizedPath("/culture")}>
+                    {t.footer.culture}
+                  </Link>
+                </li>
+                <li>
+                  <Link className="hover:opacity-70" to={getLocalizedPath("/contacts#contact")}>
                     {t.footer.contact}
                   </Link>
                 </li>
