@@ -122,7 +122,9 @@ export default function Header() {
         en: "Danilov personalization services - made to measure and bespoke shoes",
       },
     };
-    return alts[active]?.[language] || alts[active]?.en || "Danilov kolleksiyası";
+    return (
+      alts[active]?.[language] || alts[active]?.en || "Danilov kolleksiyası"
+    );
   }, [active, language]);
 
   const [mView, setMView] = useState("nav");
@@ -332,7 +334,7 @@ export default function Header() {
     [
       "overflow-hidden",
       "transition-[max-height,opacity] duration-300 ease-out",
-      isOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0",
+      isOpen ? "max-h-[95vh] opacity-100" : "max-h-0 opacity-0",
     ].join(" ");
 
   const mobileSlideClass = (isActive) =>
@@ -605,7 +607,7 @@ export default function Header() {
                 <div className="mt-10 space-y-6">
                   <button
                     type="button"
-                    onClick={() => { }}
+                    onClick={() => {}}
                     className={[
                       "block w-full text-left text-xs tracking-[0.28em] uppercase transition cursor-pointer",
                       "text-black opacity-100",

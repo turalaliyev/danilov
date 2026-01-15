@@ -3,6 +3,8 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 import manCategory from "../assets/man_category.webp";
 import womanCategory from "../assets/woman_category.jpg";
+import accessoriesCategory from "../assets/AccessoriesCategory.jpg";
+import clothesCategory from "../assets/ClothesCategory.webp";
 import { client } from "../sanity/clients";
 import LanguageContext from "../context/LanguageContext";
 import CategoryContext from "../context/CategoryContext";
@@ -10,7 +12,12 @@ import { translations } from "../translations";
 import ProductCard from "../components/ProductCard";
 import SEO from "../components/SEO";
 import { getCategorySeoMeta } from "../seo/metadata";
-import { organizationSchema, generateBreadcrumbSchema, generateItemListSchema, combineSchemas } from "../seo/schema";
+import {
+  organizationSchema,
+  generateBreadcrumbSchema,
+  generateItemListSchema,
+  combineSchemas,
+} from "../seo/schema";
 
 // SEO-optimized alt text helper
 const getCategoryAltText = (group, language) => {
@@ -130,10 +137,12 @@ export default function CategoryCollection() {
   }, [group, MAN_TABS, WOMAN_TABS]);
 
   const heroImage = useMemo(() => {
+    if (category === "man-accessories") return accessoriesCategory;
+    if (category === "man-clothes") return clothesCategory;
     if (group === "man") return manCategory;
     if (group === "woman") return womanCategory;
     return manCategory;
-  }, [group]);
+  }, [category, group]);
 
   const MAN_SHOE_SLUGS = useMemo(
     () => MAN_TABS.filter((x) => x.slug !== "man-shoes").map((x) => x.slug),
@@ -224,16 +233,26 @@ export default function CategoryCollection() {
   // Generate breadcrumb schema
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Danilov", url: `https://danilov.az/${language}` },
-    { name: group === "man" ? t.nav.man : t.nav.woman, url: `https://danilov.az/${language}/category/${group}-shoes` },
-    ...(category !== `${group}-shoes` ? [{ name: pageTitle, url: `https://danilov.az${location.pathname}` }] : []),
+    {
+      name: group === "man" ? t.nav.man : t.nav.woman,
+      url: `https://danilov.az/${language}/category/${group}-shoes`,
+    },
+    ...(category !== `${group}-shoes`
+      ? [{ name: pageTitle, url: `https://danilov.az${location.pathname}` }]
+      : []),
   ]);
 
   // Generate item list schema for products
-  const itemListSchema = !loading && items.length > 0 
-    ? generateItemListSchema(items, language, pageTitle)
-    : null;
+  const itemListSchema =
+    !loading && items.length > 0
+      ? generateItemListSchema(items, language, pageTitle)
+      : null;
 
-  const pageSchema = combineSchemas(organizationSchema, breadcrumbSchema, itemListSchema);
+  const pageSchema = combineSchemas(
+    organizationSchema,
+    breadcrumbSchema,
+    itemListSchema
+  );
 
   return (
     <>
@@ -251,31 +270,36 @@ export default function CategoryCollection() {
               {pageTitle}
             </h1>
 
-            {tabs.length > 0 && (
-              <nav className="hidden md:block max-w-[75%] overflow-x-auto" aria-label="Category navigation">
-                <div className="flex items-center gap-6 text-xs whitespace-nowrap justify-end pb-2 pr-2">
-                  {tabs.map((tab) => {
-                    const active = tab.slug === category;
-                    return (
-                      <button
-                        key={tab.slug}
-                        type="button"
-                        onClick={() => onTabClick(tab.slug)}
-                        className={[
-                          "transition cursor-pointer",
-                          active
-                            ? underlineClass
-                            : "text-black/70 hover:text-black",
-                        ].join(" ")}
-                        aria-current={active ? "page" : undefined}
-                      >
-                        {tab.label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </nav>
-            )}
+            {tabs.length > 0 &&
+              category !== "man-accessories" &&
+              category !== "man-clothes" && (
+                <nav
+                  className="hidden md:block max-w-[75%] overflow-x-auto"
+                  aria-label="Category navigation"
+                >
+                  <div className="flex items-center gap-6 text-xs whitespace-nowrap justify-end pb-2 pr-2">
+                    {tabs.map((tab) => {
+                      const active = tab.slug === category;
+                      return (
+                        <button
+                          key={tab.slug}
+                          type="button"
+                          onClick={() => onTabClick(tab.slug)}
+                          className={[
+                            "transition cursor-pointer",
+                            active
+                              ? underlineClass
+                              : "text-black/70 hover:text-black",
+                          ].join(" ")}
+                          aria-current={active ? "page" : undefined}
+                        >
+                          {tab.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </nav>
+              )}
           </div>
 
           <div className="mt-6 flex items-center justify-between">
@@ -333,7 +357,9 @@ export default function CategoryCollection() {
                   <button
                     key={p._id}
                     type="button"
-                    onClick={() => p.sku && navigate(getLocalizedPath(`/product/${p.sku}`))}
+                    onClick={() =>
+                      p.sku && navigate(getLocalizedPath(`/product/${p.sku}`))
+                    }
                     className="text-left"
                   >
                     <ProductCard product={p} />
@@ -344,7 +370,9 @@ export default function CategoryCollection() {
                   <button
                     key={p._id}
                     type="button"
-                    onClick={() => p.sku && navigate(getLocalizedPath(`/product/${p.sku}`))}
+                    onClick={() =>
+                      p.sku && navigate(getLocalizedPath(`/product/${p.sku}`))
+                    }
                     className="text-left"
                   >
                     <ProductCard product={p} />
