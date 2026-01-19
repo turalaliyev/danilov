@@ -13,21 +13,8 @@ export default function LanguageSelect() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const wrapRef = useRef(null);
   const ignoreNextClick = useRef(false);
-
-  useEffect(() => {
-    const checkDarkMode = () => {
-      setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    };
-
-    checkDarkMode();
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    mediaQuery.addEventListener("change", checkDarkMode);
-
-    return () => mediaQuery.removeEventListener("change", checkDarkMode);
-  }, []);
 
   useEffect(() => {
     const onClickOutside = (e) => {
@@ -93,9 +80,7 @@ export default function LanguageSelect() {
           "text-xs tracking-[0.24em] uppercase",
           "px-2 py-1 rounded-sm",
           "bg-transparent transition",
-          isDarkMode
-            ? "text-white/80 hover:text-white border border-white/10 hover:border-white/20"
-            : "text-ink/70 hover:text-ink border border-ink/10 hover:border-ink/20",
+          "text-ink/70 hover:text-ink border border-ink/10 hover:border-ink/20",
         ].join(" ")}
         aria-haspopup="menu"
         aria-expanded={open}
