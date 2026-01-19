@@ -41,10 +41,10 @@ export default function Header() {
       { label: t.nav.gifts, key: "gifts" },
       { label: t.nav.man, key: "man" },
       { label: t.nav.woman, key: "woman" },
-      { label: t.nav.service, key: "service" },
-      { label: t.nav.personalization, key: "personal" },
-      { label: t.nav.culture, key: "culture" },
       { label: t.nav.accessories, key: "accessories" },
+      { label: t.nav.personalization, key: "personal" },
+      { label: t.nav.service, key: "service" },
+      { label: t.nav.culture, key: "culture" },
       { label: t.nav.findUs, key: "findus" },
     ],
     [t]
@@ -89,13 +89,6 @@ export default function Header() {
       personal: {
         title: t.nav.personalization,
         image: personalizationCategory,
-        links: [
-          {
-            label: t.personalization.madeToMeasure,
-            href: "whatsapp://made-to-measure",
-          },
-          { label: t.personalization.bespoke, href: "whatsapp://bespoke" },
-        ],
       },
     }),
     [t]
@@ -413,12 +406,7 @@ export default function Header() {
       return [{ label: t.header.shoes, key: "shoes", hasSub: true }];
     }
     if (mNavKey === "personal") {
-      return (dropdownData[mNavKey]?.links || []).map((l) => ({
-        label: l.label,
-        key: l.href,
-        hasSub: false,
-        href: l.href,
-      }));
+      return [];
     }
 
     // culture and others use dropdownData links
@@ -620,37 +608,17 @@ export default function Header() {
                 </div>
               )}
 
-              {active !== "man" && active !== "woman" && (
-                <div className="mt-10 space-y-5">
-                  {(activeItem?.links || []).map((l) => {
-                    const isWhatsApp = l.href?.startsWith("whatsapp://");
-                    const handleClick = () => {
-                      if (isWhatsApp) {
-                        const messageType = l.href.replace("whatsapp://", "");
-                        const message =
-                          messageType === "made-to-measure"
-                            ? "Hello, I'm interested in Made To Measure services."
-                            : messageType === "bespoke"
-                              ? "Hello, I'm interested in Bespoke services."
-                              : "";
-                        window.open(getWhatsAppLink(message), "_blank");
-                        closeAll();
-                      } else {
-                        go(l.href);
-                      }
-                    };
-
-                    return (
-                      <button
-                        key={l.label}
-                        type="button"
-                        onClick={handleClick}
-                        className="block w-full text-left text-xs tracking-[0.28em] uppercase transition cursor-pointer text-black/60 hover:text-black hover:opacity-100"
-                      >
-                        {l.label}
-                      </button>
-                    );
-                  })}
+              {active !== "man" && active !== "woman" && active === "personal" && (
+                <div className="mt-10">
+                  <a
+                    href={getWhatsAppLink()}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={closeAll}
+                    className="inline-block px-10 py-4 bg-green-600 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-green-700 transition-all"
+                  >
+                    {t.contact.chatOnWhatsApp}
+                  </a>
                 </div>
               )}
             </div>
@@ -764,56 +732,70 @@ export default function Header() {
             <div className={mobileSlideClass(mView === "categories")}>
               {mView === "categories" && mNavKey && (
                 <div className="flex flex-col">
-                  {mobileCategoriesForNav().map((c) => (
-                    <button
-                      key={c.key}
-                      type="button"
-                      onClick={() => {
-                        if (c.href) {
-                          const isWhatsApp = c.href?.startsWith("whatsapp://");
-                          if (isWhatsApp) {
-                            const messageType = c.href.replace(
-                              "whatsapp://",
-                              ""
-                            );
-                            const message =
-                              messageType === "made-to-measure"
-                                ? language === "az"
-                                  ? "Salam, Mən Ölçüyə görə xidmətləri ilə maraqlanıram."
-                                  : language === "ru"
-                                    ? "Здравствуйте, меня интересуют услуги По мерке."
-                                    : "Hello, I'm interested in Made To Measure services."
-                                : messageType === "bespoke"
+                  {mNavKey === "personal" ? (
+                    <div className="py-4">
+                      <a
+                        href={getWhatsAppLink()}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={closeAll}
+                        className="inline-block w-full px-10 py-4 bg-green-600 text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-green-700 transition-all text-center"
+                      >
+                        {t.contact.chatOnWhatsApp}
+                      </a>
+                    </div>
+                  ) : (
+                    mobileCategoriesForNav().map((c) => (
+                      <button
+                        key={c.key}
+                        type="button"
+                        onClick={() => {
+                          if (c.href) {
+                            const isWhatsApp = c.href?.startsWith("whatsapp://");
+                            if (isWhatsApp) {
+                              const messageType = c.href.replace(
+                                "whatsapp://",
+                                ""
+                              );
+                              const message =
+                                messageType === "made-to-measure"
                                   ? language === "az"
-                                    ? "Salam, Mən Fərdi tikinti xidmətləri ilə maraqlanıram."
+                                    ? "Salam, Mən Ölçüyə görə xidmətləri ilə maraqlanıram."
                                     : language === "ru"
-                                      ? "Здравствуйте, меня интересуют услуги Индивидуального пошива."
-                                      : "Hello, I'm interested in Bespoke services."
-                                  : "";
-                            window.open(getWhatsAppLink(message), "_blank");
-                            closeAll();
-                            return;
+                                      ? "Здравствуйте, меня интересуют услуги По мерке."
+                                      : "Hello, I'm interested in Made To Measure services."
+                                  : messageType === "bespoke"
+                                    ? language === "az"
+                                      ? "Salam, Mən Fərdi tikinti xidmətləri ilə maraqlanıram."
+                                      : language === "ru"
+                                        ? "Здравствуйте, меня интересуют услуги Индивидуального пошива."
+                                        : "Hello, I'm interested in Bespoke services."
+                                    : "";
+                              window.open(getWhatsAppLink(message), "_blank");
+                              closeAll();
+                              return;
+                            }
+                            return isProductCategoryHref(c.href)
+                              ? go(`/category${c.href}`)
+                              : go(c.href);
                           }
-                          return isProductCategoryHref(c.href)
-                            ? go(`/category${c.href}`)
-                            : go(c.href);
-                        }
 
-                        if (c.hasSub) {
-                          setMCategoryKey(c.key);
-                          setMView("subcategories");
-                        }
-                      }}
-                      className="py-3 text-left text-sm tracking-wide border-b border-black/10 last:border-b-0 text-black/70 hover:text-black transition flex items-center justify-between uppercase"
-                    >
-                      <span>{c.label}</span>
-                      {c.hasSub ? (
-                        <span className="text-black/45" aria-hidden="true">
-                          ▸
-                        </span>
-                      ) : null}
-                    </button>
-                  ))}
+                          if (c.hasSub) {
+                            setMCategoryKey(c.key);
+                            setMView("subcategories");
+                          }
+                        }}
+                        className="py-3 text-left text-sm tracking-wide border-b border-black/10 last:border-b-0 text-black/70 hover:text-black transition flex items-center justify-between uppercase"
+                      >
+                        <span>{c.label}</span>
+                        {c.hasSub ? (
+                          <span className="text-black/45" aria-hidden="true">
+                            ▸
+                          </span>
+                        ) : null}
+                      </button>
+                    ))
+                  )}
                 </div>
               )}
             </div>
