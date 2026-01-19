@@ -13,21 +13,8 @@ export default function LanguageSelect() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const wrapRef = useRef(null);
   const ignoreNextClick = useRef(false);
-
-  useEffect(() => {
-    const checkDarkMode = () => {
-      setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    };
-
-    checkDarkMode();
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    mediaQuery.addEventListener("change", checkDarkMode);
-
-    return () => mediaQuery.removeEventListener("change", checkDarkMode);
-  }, []);
 
   useEffect(() => {
     const onClickOutside = (e) => {
@@ -84,7 +71,7 @@ export default function LanguageSelect() {
   };
 
   return (
-    <div ref={wrapRef} className="relative">
+    <div ref={wrapRef} className="relative z-[60]">
       <button
         type="button"
         onPointerDown={handleToggle}
@@ -93,9 +80,7 @@ export default function LanguageSelect() {
           "text-xs tracking-[0.24em] uppercase",
           "px-2 py-1 rounded-sm",
           "bg-transparent transition",
-          isDarkMode
-            ? "text-white/80 hover:text-white border border-white/10 hover:border-white/20"
-            : "text-ink/70 hover:text-ink border border-ink/10 hover:border-ink/20",
+          "text-ink/70 hover:text-ink border border-ink/10 hover:border-ink/20",
         ].join(" ")}
         aria-haspopup="menu"
         aria-expanded={open}
@@ -121,6 +106,7 @@ export default function LanguageSelect() {
           "bg-[#1b1510]/95 backdrop-blur",
           "shadow-[0_10px_30px_rgba(0,0,0,0.45)]",
           "transition-all duration-200 origin-top-right",
+          "z-[60]",
           open
             ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
             : "opacity-0 scale-95 -translate-y-1 pointer-events-none",

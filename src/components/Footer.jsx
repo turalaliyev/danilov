@@ -1,27 +1,13 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { FaInstagram, FaTiktok } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import LogoBlack from "../assets/logo-black.png";
-import LogoWhite from "../assets/logo-white.png";
 import LanguageContext from "../context/LanguageContext";
 import { translations } from "../translations";
 
 export default function Footer() {
   const { language, getLocalizedPath } = useContext(LanguageContext);
   const t = translations[language] || translations.en;
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const checkDarkMode = () => {
-      setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    };
-
-    checkDarkMode();
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    mediaQuery.addEventListener("change", checkDarkMode);
-
-    return () => mediaQuery.removeEventListener("change", checkDarkMode);
-  }, []);
 
   return (
     <footer className="border-t border-black/10">
@@ -30,7 +16,7 @@ export default function Footer() {
           <div className="max-w-md xl:max-w-lg text-center lg:text-left">
             <Link to={getLocalizedPath("/")} className="inline-block select-none cursor-pointer">
               <img
-                src={isDarkMode ? LogoWhite : LogoBlack}
+                src={LogoBlack}
                 alt="Danilov - Əl ilə hazırlanmış ayaqqabı Bakıda"
                 className="h-16 -ml-1 -mt-2 mx-auto lg:mx-0"
               />

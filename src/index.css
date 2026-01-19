@@ -38,70 +38,10 @@
   --color-contact-bg: #e8e8e8;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* dark palette aligned to reference visual */
-    --color-paper: #f3ede4;
-    --color-paper-80: rgba(243, 237, 228, 0.8);
-    --color-ink: #f3ede4;
-    --color-ink-90: rgba(243, 237, 228, 0.9);
-    --color-ink-80: rgba(243, 237, 228, 0.8);
-    --color-ink-70: rgba(243, 237, 228, 0.7);
-    --color-ink-60: rgba(243, 237, 228, 0.6);
-    --color-ink-50: rgba(243, 237, 228, 0.5);
-    --color-ink-45: rgba(243, 237, 228, 0.45);
-    --color-ink-40: rgba(243, 237, 228, 0.4);
-    --color-ink-30: rgba(243, 237, 228, 0.3);
-    --color-ink-20: rgba(243, 237, 228, 0.2);
-    --color-ink-15: rgba(243, 237, 228, 0.15);
-    --color-ink-10: rgba(243, 237, 228, 0.12);
-    --color-ink-05: rgba(243, 237, 228, 0.08);
-
-    --color-sand: #c3b8a6;
-    --color-stone: #968b7c;
-    --color-brand: #c48b4b;
-    --color-brand-dark: #9a6b3b;
-    --color-ink-bg: #9a6b3b;
-
-    --color-page: rgb(53, 40, 31); /* charcoal background like reference */
-    --color-surface: rgba(22, 27, 31, 0.98); /* darker card surface (matches reference) */
-    --color-surface-muted: rgb(53, 40, 31); /* rich brown sections (header/footer) */
-    --color-surface-glass: rgb(53, 40, 31); /* header uses bg-paper/85 */
-    --color-surface-muted-soft: rgba(57, 46, 38, 0.7);
-    --color-overlay-weak: rgba(0, 0, 0, 0.16);
-    --color-overlay: rgba(0, 0, 0, 0.32);
-    --color-overlay-strong: rgba(0, 0, 0, 0.55);
-    --color-hero-scrim: rgba(0, 0, 0, 0.58);
-    --color-border-soft: rgba(243, 237, 228, 0.16);
-    --color-border-weak: rgba(243, 237, 228, 0.09);
-    --color-border-mid: rgba(243, 237, 228, 0.22);
-    --color-contact-bg: #282c30;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  /* точечные правки под референс (не влияют на светлую тему) */
-  .product-card {
-    border-color: transparent; /* (2) без обводки вокруг маленьких карточек */
-  }
-
-  .bg-gray-100 {
-    background-color: var(--color-surface); /* (4) Anthology cards bg */
-  }
-
-  footer {
-    background-color: var(--color-surface-muted); /* (6) footer коричневый */
-    border-color: var(--color-border-mid);
-  }
-
-  footer .border-black\/10 {
-    border-color: var(--color-border-mid);
-  }
-}
 
 @layer base {
   body {
-    color-scheme: light dark;
+    color-scheme: light;
     background-color: var(--color-page);
     color: var(--color-ink);
     font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -237,9 +177,3 @@
   background-color: var(--color-ink-bg);
 }
 
-/* Search input placeholder - light in dark mode */
-@media (prefers-color-scheme: dark) {
-  input::placeholder {
-    color: rgba(255, 255, 255, 0.5) !important;
-  }
-}

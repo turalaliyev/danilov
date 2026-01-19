@@ -6,7 +6,6 @@ import womanCategory from "../assets/woman_category.jpg";
 import personalizationCategory from "../assets/personalization_category.webp";
 import { HiOutlineMagnifyingGlass, HiBars2 } from "react-icons/hi2";
 import LogoBlack from "../assets/logo-black.png";
-import LogoWhite from "../assets/logo-white.png";
 import LanguageSelect from "./LanguageSelect";
 import LanguageContext from "../context/LanguageContext";
 import { translations } from "../translations";
@@ -123,20 +122,7 @@ export default function Header() {
   const [mView, setMView] = useState("nav");
   const [mNavKey, setMNavKey] = useState(null);
   const [mCategoryKey, setMCategoryKey] = useState(null);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [whatsappNumber, setWhatsappNumber] = useState("+994556746674");
-
-  useEffect(() => {
-    const checkDarkMode = () => {
-      setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    };
-
-    checkDarkMode();
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    mediaQuery.addEventListener("change", checkDarkMode);
-
-    return () => mediaQuery.removeEventListener("change", checkDarkMode);
-  }, []);
 
   useEffect(() => {
     const fetchPhoneNumber = async () => {
@@ -443,7 +429,7 @@ export default function Header() {
               aria-label="Go to home"
             >
               <img
-                src={isDarkMode ? LogoWhite : LogoBlack}
+                src={LogoBlack}
                 alt="Danilov - Əl ilə hazırlanmış ayaqqabı"
                 className="h-19 mr-2"
               />
