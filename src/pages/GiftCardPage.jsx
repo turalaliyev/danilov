@@ -1,5 +1,5 @@
 // src/pages/GiftCardPage.jsx
-import { useContext, useMemo, useState, useRef } from "react";
+import { useContext, useMemo, useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HiVolumeUp, HiVolumeOff } from "react-icons/hi";
 import { FaPhone } from "react-icons/fa";
@@ -18,7 +18,7 @@ export default function GiftCardPage() {
   const t = translations[language] || translations.en;
   const seo = getSeoMeta("giftCard", language);
   const navigate = useNavigate();
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef(null);
 
   const WHATSAPP_NUMBER = "+994556746674";
@@ -27,6 +27,13 @@ export default function GiftCardPage() {
     const onlyDigits = String(WHATSAPP_NUMBER).replace(/\D/g, "");
     return `https://wa.me/${onlyDigits}`;
   }, [WHATSAPP_NUMBER]);
+
+  // Sync video muted state with component state
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -127,7 +134,7 @@ export default function GiftCardPage() {
                         className="w-full h-full object-cover"
                         autoPlay
                         loop
-                        muted
+                        muted={isMuted}
                         playsInline
                         preload="metadata"
                         aria-label={alt.video}
@@ -194,7 +201,7 @@ export default function GiftCardPage() {
                         className="w-full h-full object-cover"
                         autoPlay
                         loop
-                        muted
+                        muted={isMuted}
                         playsInline
                         preload="metadata"
                         aria-label={alt.video}
@@ -258,8 +265,6 @@ export default function GiftCardPage() {
             </a>
           </div>
         </div>
-
-        <div className="h-8" />
       </div>
     </>
   );

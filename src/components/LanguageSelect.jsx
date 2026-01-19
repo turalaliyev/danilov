@@ -84,7 +84,7 @@ export default function LanguageSelect() {
   };
 
   return (
-    <div ref={wrapRef} className="relative">
+    <div ref={wrapRef} className="relative z-[60]">
       <button
         type="button"
         onPointerDown={handleToggle}
@@ -121,6 +121,7 @@ export default function LanguageSelect() {
           "bg-[#1b1510]/95 backdrop-blur",
           "shadow-[0_10px_30px_rgba(0,0,0,0.45)]",
           "transition-all duration-200 origin-top-right",
+          "z-[60]",
           open
             ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
             : "opacity-0 scale-95 -translate-y-1 pointer-events-none",
