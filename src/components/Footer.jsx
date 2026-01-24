@@ -18,7 +18,7 @@ export default function Footer() {
               <img
                 src={LogoBlack}
                 alt="Danilov - Əl ilə hazırlanmış ayaqqabı Bakıda"
-                className="h-16 -ml-1 -mt-2 mx-auto lg:mx-0"
+                className="h-7 -ml-1 -mt-2 mx-auto lg:mx-0"
               />
             </Link>
             <p className="mt-1 text-sm text-black/80 leading-relaxed">
@@ -83,7 +83,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-black/10 flex flex-col md:flex-row gap-3 items-center md:items-center md:justify-between text-xs text-black/60 text-center md:text-left">
+        <div className="mt-12 md:mt-10 pt-6 border-t border-black/10 flex flex-col md:flex-row gap-3 items-center md:items-center md:justify-between text-xs text-black/60 text-center md:text-left">
           <span>
             © {new Date().getFullYear()} Danilov. All rights reserved.
           </span>

@@ -417,7 +417,7 @@ export default function Header() {
       className="sticky top-0 z-50 bg-paper/85 backdrop-blur will-change-transform border-b border-black/10"
     >
       <div className="pr-3">
-        <div className="h-14 flex items-center justify-between">
+        <div className="h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <button
               type="button"
