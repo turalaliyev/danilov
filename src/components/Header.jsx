@@ -416,8 +416,8 @@ export default function Header() {
       style={{ transform: `translateY(-${offset}px)` }}
       className="sticky top-0 z-50 bg-paper/85 backdrop-blur will-change-transform border-b border-black/10"
     >
-      <div className="pr-4">
-        <div className="h-16 flex items-center justify-between">
+      <div className="pr-3">
+        <div className="h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <button
               type="button"
@@ -431,7 +431,7 @@ export default function Header() {
               <img
                 src={LogoBlack}
                 alt="Danilov - Əl ilə hazırlanmış ayaqqabı"
-                className="h-19 mr-2"
+                className="ml-2 md:ml-3 h-7 mr-3"
               />
             </button>
 
