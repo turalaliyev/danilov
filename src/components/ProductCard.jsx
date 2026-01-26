@@ -15,7 +15,7 @@ export default function ProductCard({ product, loading = false }) {
   }, [language, product]);
 
   const img = product?.mainImage
-    ? urlFor(product.mainImage).width(600).height(750).quality(85).url()
+    ? urlFor(product.mainImage).quality(85).url()
     : null;
 
   const handleClick = () => {
@@ -54,7 +54,7 @@ export default function ProductCard({ product, loading = false }) {
             "https://placeholder.pics/svg/600x800/DBDBDB-DBDBDB/DBDBDB-DBDBDB"
           }
           alt={title}
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain bg-white"
           loading="lazy"
         />
       </div>

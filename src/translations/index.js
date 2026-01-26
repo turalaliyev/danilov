@@ -10,6 +10,7 @@ export const translations = {
       culture: "Danilov's Culture",
       accessories: "Accessories",
       findUs: "Find Us",
+      sale: "Sale",
     },
     header: {
       shoes: "Shoes",
@@ -201,6 +202,7 @@ export const translations = {
       culture: "Культура Danilov",
       accessories: "Аксессуары",
       findUs: "Найти нас",
+      sale: "Распродажа",
     },
     header: {
       shoes: "Обувь",
@@ -392,6 +394,7 @@ export const translations = {
       culture: "Danilov Mədəniyyəti",
       accessories: "Aksesuarlar",
       findUs: "Bizi tapın",
+      sale: "Endirim",
     },
     header: {
       shoes: "Ayaqqabı",

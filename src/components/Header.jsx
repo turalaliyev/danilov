@@ -38,6 +38,7 @@ export default function Header() {
   const NAV = useMemo(
     () => [
       { label: t.nav.gifts, key: "gifts" },
+      { label: t.nav.sale, key: "sale" },
       { label: t.nav.man, key: "man" },
       { label: t.nav.woman, key: "woman" },
       { label: t.nav.accessories, key: "accessories" },
@@ -275,6 +276,7 @@ export default function Header() {
     if (key === "findus") return go("/contacts");
     if (key === "service") return go("/service");
     if (key === "culture") return go("/culture");
+    if (key === "sale") return go("/sale");
     if (key === "personal") {
       // Don't navigate, just open dropdown
       setActive((prev) => (prev === key ? null : key));
@@ -358,6 +360,7 @@ export default function Header() {
     if (key === "findus") return go("/contacts");
     if (key === "service") return go("/service");
     if (key === "culture") return go("/culture");
+    if (key === "sale") return go("/sale");
     if (key === "personal") {
       setMNavKey(key);
       setMCategoryKey(null);
@@ -696,6 +699,8 @@ export default function Header() {
                             return go("/category/man-accessories");
                           if (i.key === "findus") return go("/contacts");
                           if (i.key === "service") return go("/service");
+                          if (i.key === "culture") return go("/culture");
+                          if (i.key === "sale") return go("/sale");
 
                           openMobileNav(i.key);
                         }}

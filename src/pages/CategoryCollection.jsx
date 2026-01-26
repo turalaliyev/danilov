@@ -204,8 +204,9 @@ export default function CategoryCollection() {
           "slug": slug.current, sku,
           mainImage,
           additionalImage,
-          categories
-        } | order(_createdAt desc)`;
+          categories,
+          _updatedAt
+        } | order(_updatedAt desc)`;
 
         const shoes = await client.fetch(SHOES_QUERY, {
           catIds: categoryIdsForQuery,

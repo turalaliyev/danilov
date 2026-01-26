@@ -9,6 +9,7 @@ import Contacts from "./pages/Contacts.jsx";
 import Service from "./pages/Service.jsx";
 import Culture from "./pages/Culture.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
+import SalePage from "./pages/SalePage.jsx";
 
 // Supported languages
 const SUPPORTED_LANGS = ["az", "ru", "en"];
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="contacts" element={<Contacts />} />
         <Route path="service" element={<Service />} />
         <Route path="culture" element={<Culture />} />
+        <Route path="sale" element={<SalePage />} />
       </Route>
       
       {/* 404 fallback */}

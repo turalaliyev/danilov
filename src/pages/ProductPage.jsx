@@ -86,13 +86,40 @@ export default function ProductPage() {
     return product.additionalImage2;
   }, [product]);
 
+  const additionalImage3 = useMemo(() => {
+    if (!product?.additionalImage3) return null;
+    if (Array.isArray(product.additionalImage3)) {
+      return product.additionalImage3.filter(Boolean)[0] || null;
+    }
+    return product.additionalImage3;
+  }, [product]);
+
+  const additionalImage4 = useMemo(() => {
+    if (!product?.additionalImage4) return null;
+    if (Array.isArray(product.additionalImage4)) {
+      return product.additionalImage4.filter(Boolean)[0] || null;
+    }
+    return product.additionalImage4;
+  }, [product]);
+
+  const additionalImage5 = useMemo(() => {
+    if (!product?.additionalImage5) return null;
+    if (Array.isArray(product.additionalImage5)) {
+      return product.additionalImage5.filter(Boolean)[0] || null;
+    }
+    return product.additionalImage5;
+  }, [product]);
+
   const allImages = useMemo(() => {
     const imgs = [];
     if (mainImage) imgs.push(mainImage);
     if (additionalImage1) imgs.push(additionalImage1);
     if (additionalImage2) imgs.push(additionalImage2);
+    if (additionalImage3) imgs.push(additionalImage3);
+    if (additionalImage4) imgs.push(additionalImage4);
+    if (additionalImage5) imgs.push(additionalImage5);
     return imgs;
-  }, [mainImage, additionalImage1, additionalImage2]);
+  }, [mainImage, additionalImage1, additionalImage2, additionalImage3, additionalImage4, additionalImage5]);
 
   useEffect(() => {
     setSelectedImageIndex(0);
@@ -107,7 +134,7 @@ export default function ProductPage() {
     if (!allImages.length) return null;
     const img = allImages[selectedImageIndex] || allImages[0];
     if (!img) return null;
-    return urlFor(img).width(1000).height(900).quality(90).fit("max").url();
+    return urlFor(img).url();
   }, [allImages, selectedImageIndex]);
 
   const [data, setData] = useState(null);
@@ -153,6 +180,9 @@ export default function ProductPage() {
         mainImage,
         additionalImage1,
         additionalImage2,
+        additionalImage3,
+        additionalImage4,
+        additionalImage5,
         categories[]->{
           _id,
           title,
@@ -313,7 +343,7 @@ export default function ProductPage() {
         <div className="mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_550px] gap-4 lg:gap-8">
           <div className="min-w-0">
             <div className="max-w-[760px]">
-              <div className="relative bg-white/60 border border-black/10 shadow-sm">
+              <div className="relative bg-[#f4f0eb] border border-black/10 shadow-sm">
                 <div className="w-full flex items-center justify-center">
                   {currentImageUrl ? (
                     <img
@@ -445,6 +475,105 @@ export default function ProductPage() {
                             className={[
                               "w-full h-full object-cover transition",
                               selectedImageIndex === 2
+                                ? "opacity-100"
+                                : "opacity-50",
+                            ].join(" ")}
+                            loading="lazy"
+                          />
+                        </div>
+                      </button>
+                    )}
+                    {additionalImage3 && (
+                      <button
+                        key={`${product._id}-add-img-3`}
+                        type="button"
+                        onClick={() => setSelectedImageIndex(3)}
+                        className={[
+                          "shrink-0 overflow-hidden bg-white/60 border shadow-sm",
+                          "transition",
+                          selectedImageIndex === 3
+                            ? "border-black/40"
+                            : "border-black/10 hover:border-black/25",
+                        ].join(" ")}
+                        aria-label="Select additional image 3"
+                      >
+                        <div className="aspect-16/11 w-32">
+                          <img
+                            src={urlFor(additionalImage3)
+                              .width(520)
+                              .height(420)
+                              .fit("max")
+                              .url()}
+                            alt={`${title} additional 3`}
+                            className={[
+                              "w-full h-full object-cover transition",
+                              selectedImageIndex === 3
+                                ? "opacity-100"
+                                : "opacity-50",
+                            ].join(" ")}
+                            loading="lazy"
+                          />
+                        </div>
+                      </button>
+                    )}
+                    {additionalImage4 && (
+                      <button
+                        key={`${product._id}-add-img-4`}
+                        type="button"
+                        onClick={() => setSelectedImageIndex(4)}
+                        className={[
+                          "shrink-0 overflow-hidden bg-white/60 border shadow-sm",
+                          "transition",
+                          selectedImageIndex === 4
+                            ? "border-black/40"
+                            : "border-black/10 hover:border-black/25",
+                        ].join(" ")}
+                        aria-label="Select additional image 4"
+                      >
+                        <div className="aspect-16/11 w-32">
+                          <img
+                            src={urlFor(additionalImage4)
+                              .width(520)
+                              .height(420)
+                              .fit("max")
+                              .url()}
+                            alt={`${title} additional 4`}
+                            className={[
+                              "w-full h-full object-cover transition",
+                              selectedImageIndex === 4
+                                ? "opacity-100"
+                                : "opacity-50",
+                            ].join(" ")}
+                            loading="lazy"
+                          />
+                        </div>
+                      </button>
+                    )}
+                    {additionalImage5 && (
+                      <button
+                        key={`${product._id}-add-img-5`}
+                        type="button"
+                        onClick={() => setSelectedImageIndex(5)}
+                        className={[
+                          "shrink-0 overflow-hidden bg-white/60 border shadow-sm",
+                          "transition",
+                          selectedImageIndex === 5
+                            ? "border-black/40"
+                            : "border-black/10 hover:border-black/25",
+                        ].join(" ")}
+                        aria-label="Select additional image 5"
+                      >
+                        <div className="aspect-16/11 w-32">
+                          <img
+                            src={urlFor(additionalImage5)
+                              .width(520)
+                              .height(420)
+                              .fit("max")
+                              .url()}
+                            alt={`${title} additional 5`}
+                            className={[
+                              "w-full h-full object-cover transition",
+                              selectedImageIndex === 5
                                 ? "opacity-100"
                                 : "opacity-50",
                             ].join(" ")}
@@ -593,12 +722,111 @@ export default function ProductPage() {
                           ].join(" ")}
                           loading="lazy"
                         />
-                      </div>
-                    </button>
-                  )}
+                        </div>
+                      </button>
+                    )}
+                    {additionalImage3 && (
+                      <button
+                        key={`${product._id}-add-img-3-desktop`}
+                        type="button"
+                        onClick={() => setSelectedImageIndex(3)}
+                        className={[
+                          "shrink-0 overflow-hidden bg-white/60 border shadow-sm",
+                          "transition",
+                          selectedImageIndex === 3
+                            ? "border-black/40"
+                            : "border-black/10 hover:border-black/25",
+                        ].join(" ")}
+                        aria-label="Select additional image 3"
+                      >
+                        <div className="aspect-16/11 w-32">
+                          <img
+                            src={urlFor(additionalImage3)
+                              .width(520)
+                              .height(420)
+                              .fit("max")
+                              .url()}
+                            alt={`${title} additional 3`}
+                            className={[
+                              "w-full h-full object-cover transition",
+                              selectedImageIndex === 3
+                                ? "opacity-100"
+                                : "opacity-50",
+                            ].join(" ")}
+                            loading="lazy"
+                          />
+                        </div>
+                      </button>
+                    )}
+                    {additionalImage4 && (
+                      <button
+                        key={`${product._id}-add-img-4-desktop`}
+                        type="button"
+                        onClick={() => setSelectedImageIndex(4)}
+                        className={[
+                          "shrink-0 overflow-hidden bg-white/60 border shadow-sm",
+                          "transition",
+                          selectedImageIndex === 4
+                            ? "border-black/40"
+                            : "border-black/10 hover:border-black/25",
+                        ].join(" ")}
+                        aria-label="Select additional image 4"
+                      >
+                        <div className="aspect-16/11 w-32">
+                          <img
+                            src={urlFor(additionalImage4)
+                              .width(520)
+                              .height(420)
+                              .fit("max")
+                              .url()}
+                            alt={`${title} additional 4`}
+                            className={[
+                              "w-full h-full object-cover transition",
+                              selectedImageIndex === 4
+                                ? "opacity-100"
+                                : "opacity-50",
+                            ].join(" ")}
+                            loading="lazy"
+                          />
+                        </div>
+                      </button>
+                    )}
+                    {additionalImage5 && (
+                      <button
+                        key={`${product._id}-add-img-5-desktop`}
+                        type="button"
+                        onClick={() => setSelectedImageIndex(5)}
+                        className={[
+                          "shrink-0 overflow-hidden bg-white/60 border shadow-sm",
+                          "transition",
+                          selectedImageIndex === 5
+                            ? "border-black/40"
+                            : "border-black/10 hover:border-black/25",
+                        ].join(" ")}
+                        aria-label="Select additional image 5"
+                      >
+                        <div className="aspect-16/11 w-32">
+                          <img
+                            src={urlFor(additionalImage5)
+                              .width(520)
+                              .height(420)
+                              .fit("max")
+                              .url()}
+                            alt={`${title} additional 5`}
+                            className={[
+                              "w-full h-full object-cover transition",
+                              selectedImageIndex === 5
+                                ? "opacity-100"
+                                : "opacity-50",
+                            ].join(" ")}
+                            loading="lazy"
+                          />
+                        </div>
+                      </button>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ) : null}
+              ) : null}
           </aside>
         </div>
       </div>
