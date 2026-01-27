@@ -5,6 +5,29 @@ import manCategory from "../assets/man_category.webp";
 import womanCategory from "../assets/woman_category.jpg";
 import accessoriesCategory from "../assets/AccessoriesCategory.jpg";
 import clothesCategory from "../assets/ClothesCategory.webp";
+
+// Import men's subcategory images
+import manClassic from "../assets/man/classic.jpeg";
+import manDerby from "../assets/man/derby.jpeg";
+import manOxford from "../assets/man/oxford.jpeg";
+import manMonk from "../assets/man/monk.jpeg";
+import manLoafers from "../assets/man/loafers.jpeg";
+import manBoots from "../assets/man/boots.jpeg";
+import manMoccasin from "../assets/man/moccasin.jpeg";
+import manSports from "../assets/man/sports.jpeg";
+import manSandals from "../assets/man/sandals.jpeg";
+import manSlippers from "../assets/man/slippers.jpeg";
+
+// Import women's subcategory images
+import womanBoots from "../assets/woman/boots.jpeg";
+import womanHighHeels from "../assets/woman/high_heels.jpeg";
+import womanMoccasins from "../assets/woman/moccasins.jpg";
+import womanSports from "../assets/woman/sports.jpeg";
+import womanFlat from "../assets/woman/flat_shoes.jpeg";
+import womanPumps from "../assets/woman/pumps.jpeg";
+import womanSandals from "../assets/woman/sandals.jpeg";
+import womanSlippers from "../assets/woman/slippers.jpeg";
+
 import { client } from "../sanity/clients";
 import LanguageContext from "../context/LanguageContext";
 import CategoryContext from "../context/CategoryContext";
@@ -34,6 +57,34 @@ const getCategoryAltText = (group, language) => {
     },
   };
   return alts[group]?.[language] || alts[group]?.en || "Danilov collection";
+};
+
+// Helper function to get subcategory image
+const getSubcategoryImage = (category) => {
+  const subcategoryImages = {
+    // Men's subcategories
+    "man-classic": manClassic,
+    "man-derby": manDerby,
+    "man-oxford": manOxford,
+    "man-monk": manMonk,
+    "man-loafers": manLoafers,
+    "man-boots": manBoots,
+    "man-moccasins": manMoccasin,
+    "man-sports": manSports,
+    "man-sandals": manSandals,
+    "man-mules": manSlippers,
+    // Women's subcategories
+    "woman-boots": womanBoots,
+    "woman-high-heels": womanHighHeels,
+    "woman-moccasins": womanMoccasins,
+    "woman-sports": womanSports,
+    "woman-flat": womanFlat,
+    "woman-pumps": womanPumps,
+    "woman-sandals": womanSandals,
+    "woman-mules": womanSlippers,
+  };
+  
+  return subcategoryImages[category] || null;
 };
 
 const underlineClass =
@@ -139,6 +190,12 @@ export default function CategoryCollection() {
   const heroImage = useMemo(() => {
     if (category === "man-accessories") return accessoriesCategory;
     if (category === "man-clothes") return clothesCategory;
+    
+    // Check if there's a specific subcategory image
+    const subcategoryImage = getSubcategoryImage(category);
+    if (subcategoryImage) return subcategoryImage;
+    
+    // Default to main category images for "view all" pages
     if (group === "man") return manCategory;
     if (group === "woman") return womanCategory;
     return manCategory;
@@ -317,13 +374,14 @@ export default function CategoryCollection() {
             {loading ? (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
                 <div className="hidden lg:block lg:col-start-4 lg:row-start-1 lg:col-span-2 lg:row-span-2">
-                  <div className="w-full h-full bg-black/5 overflow-hidden">
+                  <div className="w-full aspect-4/5 bg-black/5 overflow-hidden">
                     <img
                       src={heroImage}
                       alt={getCategoryAltText(group, language)}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-center"
                       loading="eager"
                       fetchPriority="high"
+                      style={{ imageRendering: 'auto' }}
                     />
                   </div>
                 </div>
@@ -343,13 +401,14 @@ export default function CategoryCollection() {
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
                 <div className="hidden lg:block lg:col-start-4 lg:row-start-1 lg:col-span-2 lg:row-span-2">
-                  <div className="w-full h-full bg-black/5 overflow-hidden">
+                  <div className="w-full aspect-4/5 bg-black/5 overflow-hidden">
                     <img
                       src={heroImage}
                       alt={getCategoryAltText(group, language)}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-center"
                       loading="eager"
                       fetchPriority="high"
+                      style={{ imageRendering: 'auto' }}
                     />
                   </div>
                 </div>

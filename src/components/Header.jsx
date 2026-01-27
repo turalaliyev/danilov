@@ -421,7 +421,7 @@ export default function Header() {
     >
       <div className="pr-3">
         <div className="h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <button
               type="button"
               onClick={() => {
@@ -438,7 +438,7 @@ export default function Header() {
               />
             </button>
 
-            <div className="hidden lg:flex items-center gap-6 text-[13px]">
+            <div className="hidden lg:flex items-center gap-5 text-[13px]">
               {NAV.map((i) => {
                 const isActive = active === i.key;
                 return (
