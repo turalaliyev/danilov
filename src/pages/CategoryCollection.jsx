@@ -374,14 +374,13 @@ export default function CategoryCollection() {
             {loading ? (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
                 <div className="hidden lg:block lg:col-start-4 lg:row-start-1 lg:col-span-2 lg:row-span-2">
-                  <div className="w-full aspect-4/5 bg-black/5 overflow-hidden">
+                  <div className="w-full h-full bg-black/5 overflow-hidden">
                     <img
                       src={heroImage}
                       alt={getCategoryAltText(group, language)}
-                      className="w-full h-full object-cover object-center"
+                      className="w-full h-full object-cover"
                       loading="eager"
                       fetchPriority="high"
-                      style={{ imageRendering: 'auto' }}
                     />
                   </div>
                 </div>
@@ -401,14 +400,13 @@ export default function CategoryCollection() {
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
                 <div className="hidden lg:block lg:col-start-4 lg:row-start-1 lg:col-span-2 lg:row-span-2">
-                  <div className="w-full aspect-4/5 bg-black/5 overflow-hidden">
+                  <div className="w-full h-full bg-black/5 overflow-hidden">
                     <img
                       src={heroImage}
                       alt={getCategoryAltText(group, language)}
-                      className="w-full h-full object-cover object-center"
+                      className="w-full h-full object-cover"
                       loading="eager"
                       fetchPriority="high"
-                      style={{ imageRendering: 'auto' }}
                     />
                   </div>
                 </div>
