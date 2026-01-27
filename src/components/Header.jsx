@@ -37,8 +37,8 @@ export default function Header() {
 
   const NAV = useMemo(
     () => [
-      { label: t.nav.gifts, key: "gifts" },
       { label: t.nav.sale, key: "sale" },
+      { label: t.nav.gifts, key: "gifts" },
       { label: t.nav.man, key: "man" },
       { label: t.nav.woman, key: "woman" },
       { label: t.nav.accessories, key: "accessories" },
