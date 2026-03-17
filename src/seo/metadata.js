@@ -121,23 +121,23 @@ export const seoMetadata = {
     az: {
       title: "Kişi Ayaqqabıları - Danilov | Premium Dəri Kolleksiya",
       description:
-        "Kişilər üçün premium dəri ayaqqabı kolleksiyası. Klassik, derby, oxford, monk, loafers, çəkmələr. Əl işi keyfiyyət.",
+        "Kişilər üçün premium dəri ayaqqabı kolleksiyasi. Ekzotik dəri, derby, oxford, monk, loafers, çəkmələr. Əl işi keyfiyyət.",
       keywords:
-        "kişi ayaqqabısı, klassik ayaqqabı, oxford, derby, monk, loafers, kişi çəkmələri",
+        "kişi ayaqqabısı, ekzotik dəri, oxford, derby, monk, loafers, kişi çəkmələri",
     },
     ru: {
       title: "Мужская Обувь - Danilov | Премиум Кожаная Коллекция",
       description:
-        "Премиальная кожаная обувь для мужчин. Классика, дерби, оксфорды, монки, лоферы, ботинки. Ручная работа.",
+        "Премиальная кожаная обувь для мужчин. Экзотическая кожа, дерби, оксфорды, монки, лоферы, ботинки. Ручная работа.",
       keywords:
-        "мужская обувь, классическая обувь, оксфорды, дерби, монки, лоферы, мужские ботинки",
+        "мужская обувь, экзотическая кожа, оксфорды, дерби, монки, лоферы, мужские ботинки",
     },
     en: {
       title: "Men's Shoes - Danilov | Premium Leather Collection",
       description:
-        "Premium leather shoe collection for men. Classic, derby, oxford, monk, loafers, boots. Handcrafted quality.",
+        "Premium leather shoe collection for men. Exotic leather, derby, oxford, monk, loafers, boots. Handcrafted quality.",
       keywords:
-        "men shoes, classic shoes, oxford, derby, monk, loafers, men boots, luxury footwear",
+        "men shoes, exotic leather shoes, oxford, derby, monk, loafers, men boots, luxury footwear",
     },
   },
 
@@ -146,23 +146,23 @@ export const seoMetadata = {
     az: {
       title: "Qadın Ayaqqabıları - Danilov | Premium Dəri Kolleksiya",
       description:
-        "Qadınlar üçün premium dəri ayaqqabı kolleksiyası. Yüksək daban, düz ayaqqabı, çəkmələr, sandaletlər. Zərif dizayn.",
+        "Qadınlar üçün premium dəri ayaqqabı kolleksiyasi. Yüksək daban, çəkmələr, sandaletlər. Zərif dizayn.",
       keywords:
-        "qadın ayaqqabısı, yüksək daban, düz ayaqqabı, qadın çəkmələri, sandaletlər",
+        "qadın ayaqqabısı, yüksək daban, qadın çəkmələri, sandaletlər",
     },
     ru: {
       title: "Женская Обувь - Danilov | Премиум Кожаная Коллекция",
       description:
-        "Премиальная кожаная обувь для женщин. Высокие каблуки, плоская обувь, сапоги, сандалии. Элегантный дизайн.",
+        "Премиальная кожаная обувь для женщин. Высокие каблуки, сапоги, сандалии. Элегантный дизайн.",
       keywords:
-        "женская обувь, высокий каблук, плоская обувь, женские сапоги, сандалии",
+        "женская обувь, высокий каблук, женские сапоги, сандалии",
     },
     en: {
       title: "Women's Shoes - Danilov | Premium Leather Collection",
       description:
-        "Premium leather shoe collection for women. High heels, flat shoes, boots, sandals. Elegant design.",
+        "Premium leather shoe collection for women. High heels, boots, sandals. Elegant design.",
       keywords:
-        "women shoes, high heels, flat shoes, women boots, sandals, luxury footwear",
+        "women shoes, high heels, women boots, sandals, luxury footwear",
     },
   },
 
@@ -217,7 +217,7 @@ export function getCategorySeoMeta(categorySlug, lang = "az") {
   // Category-specific titles
   const categoryTitles = {
     az: {
-      "man-classic": "Klassik Kişi Ayaqqabıları",
+      "man-classic": "Ekzotik Dəri Kişi Ayaqqabıları",
       "man-derby": "Derby Kişi Ayaqqabıları",
       "man-oxford": "Oxford Kişi Ayaqqabıları",
       "man-monk": "Monk Kişi Ayaqqabıları",
@@ -239,7 +239,7 @@ export function getCategorySeoMeta(categorySlug, lang = "az") {
       "woman-shoes": "Bütün Qadın Ayaqqabıları",
     },
     ru: {
-      "man-classic": "Классическая Мужская Обувь",
+      "man-classic": "Экзотическая Кожа Мужская Обувь",
       "man-derby": "Дерби Мужская Обувь",
       "man-oxford": "Оксфорды Мужская Обувь",
       "man-monk": "Монки Мужская Обувь",
@@ -261,7 +261,7 @@ export function getCategorySeoMeta(categorySlug, lang = "az") {
       "woman-shoes": "Вся Женская Обувь",
     },
     en: {
-      "man-classic": "Classic Men's Shoes",
+      "man-classic": "Exotic Leather Men's Shoes",
       "man-derby": "Derby Men's Shoes",
       "man-oxford": "Oxford Men's Shoes",
       "man-monk": "Monk Men's Shoes",

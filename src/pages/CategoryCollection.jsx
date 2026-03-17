@@ -173,7 +173,6 @@ export default function CategoryCollection() {
       { label: t.categoryCollection.highHeels, slug: "woman-high-heels" },
       { label: t.categoryCollection.moccasins, slug: "woman-moccasins" },
       { label: t.categoryCollection.sports, slug: "woman-sports" },
-      { label: t.categoryCollection.flatShoes, slug: "woman-flat" },
       { label: t.categoryCollection.pumps, slug: "woman-pumps" },
       { label: t.categoryCollection.sandals, slug: "woman-sandals" },
       { label: t.categoryCollection.slippers, slug: "woman-mules" },

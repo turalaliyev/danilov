@@ -73,7 +73,6 @@ export default function Header() {
       { label: t.header.highHeels, slug: "woman-high-heels" },
       { label: t.header.moccasins, slug: "woman-moccasins" },
       { label: t.header.sports, slug: "woman-sports" },
-      { label: t.header.flatShoes, slug: "woman-flat" },
       { label: t.header.pumps, slug: "woman-pumps" },
       { label: t.header.sandals, slug: "woman-sandals" },
       { label: t.header.slippers, slug: "woman-mules" },

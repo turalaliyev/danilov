@@ -14,7 +14,7 @@ export const organizationSchema = {
   url: BASE_URL,
   logo: `${BASE_URL}/logo.png`,
   description:
-    "Premium handmade leather shoes from Baku, Azerbaijan. Classic, derby, oxford, loafers and more for men and women since 2010.",
+    "Premium handmade leather shoes from Baku, Azerbaijan. Exotic leather, derby, oxford, loafers and more for men and women since 2010.",
   foundingDate: "2010",
   foundingLocation: {
     "@type": "Place",
