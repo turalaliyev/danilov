@@ -49,7 +49,7 @@ export default function CollectionCard({ product }) {
         <h4 className="text-sm mb-1.5 text-black/80">{title}</h4>
 
         <span className="text-black/60 text-xs uppercase tracking-wide">
-          {product?.price} AZN
+          {product?.price != null ? `${product.price} AZN` : "\u00A0"}
         </span>
       </div>
     </button>
