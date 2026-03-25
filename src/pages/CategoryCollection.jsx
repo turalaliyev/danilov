@@ -90,45 +90,80 @@ const getSubcategoryImage = (category) => {
 const underlineClass =
   "relative inline-block text-black after:content-[''] after:absolute after:left-0 after:bottom-[-6px] after:h-[1px] after:w-full after:bg-black";
 
-function titleFromSlug(slug, t) {
+function titleFromSlug(slug, t, language) {
   if (!slug) return "";
 
-  if (slug === "man-shoes")
-    return `${t.categoryCollection.mens} ${t.categoryCollection.viewAll.toUpperCase()}`;
-  if (slug === "woman-shoes")
-    return `${t.categoryCollection.womens} ${t.categoryCollection.viewAll.toUpperCase()}`;
-
-  const slugToKey = {
-    "man-classic": "classic",
-    "man-derby": "derby",
-    "man-oxford": "oxford",
-    "man-monk": "monk",
-    "man-loafers": "loafers",
-    "man-boots": "boots",
-    "man-moccasins": "moccasins",
-    "man-sports": "sports",
-    "man-sandals": "sandals",
-    "man-mules": "slippers",
-    "woman-boots": "boots",
-    "woman-high-heels": "highHeels",
-    "woman-moccasins": "moccasins",
-    "woman-sports": "sports",
-    "woman-flat": "flatShoes",
-    "woman-pumps": "pumps",
-    "woman-sandals": "sandals",
-    "woman-mules": "slippers",
+  const categoryTitles = {
+    az: {
+      "man-classic": "Ekzotik Dəri Kişi Ayaqqabıları",
+      "man-derby": "Kişi Derby Ayaqqabıları",
+      "man-oxford": "Kişi Oxford Ayaqqabıları",
+      "man-monk": "Kişi Monk Ayaqqabıları",
+      "man-loafers": "Kişi Loafers Ayaqqabıları",
+      "man-boots": "Kişi Çəkmələri",
+      "man-moccasins": "Kişi Mokasınları",
+      "man-sports": "Kişi İdman Ayaqqabıları",
+      "man-sandals": "Kişi Sandaletləri",
+      "man-mules": "Kişi Mules Ayaqqabıları",
+      "man-shoes": "Bütün Kişi Ayaqqabıları",
+      "woman-boots": "Qadın Çəkmələri",
+      "woman-high-heels": "Qadın Yüksək Dabanları",
+      "woman-moccasins": "Qadın Mokasınları",
+      "woman-sports": "Qadın İdman Ayaqqabıları",
+      "woman-flat": "Düz Qadın Ayaqqabıları",
+      "woman-pumps": "Qadın Pompaları",
+      "woman-sandals": "Qadın Sandaletləri",
+      "woman-mules": "Qadın Mules Ayaqqabıları",
+      "woman-shoes": "Bütün Qadın Ayaqqabıları",
+    },
+    ru: {
+      "man-classic": "Мужская Обувь из Экзотической Кожи",
+      "man-derby": "Мужские Дерби",
+      "man-oxford": "Мужские Оксфорды",
+      "man-monk": "Мужские Монки",
+      "man-loafers": "Мужские Лоферы",
+      "man-boots": "Мужские Ботинки",
+      "man-moccasins": "Мужские Мокасины",
+      "man-sports": "Мужская Спортивная Обувь",
+      "man-sandals": "Мужские Сандалии",
+      "man-mules": "Мужские Мюли",
+      "man-shoes": "Вся Мужская Обувь",
+      "woman-boots": "Женские Сапоги",
+      "woman-high-heels": "Женские Туфли на Каблуке",
+      "woman-moccasins": "Женские Мокасины",
+      "woman-sports": "Женская Спортивная Обувь",
+      "woman-flat": "Женская Обувь на Плоской Подошве",
+      "woman-pumps": "Женские Туфли",
+      "woman-sandals": "Женские Сандалии",
+      "woman-mules": "Женские Мюли",
+      "woman-shoes": "Вся Женская Обувь",
+    },
+    en: {
+      "man-classic": "Men's Exotic Leather Shoes",
+      "man-derby": "Men's Derby Shoes",
+      "man-oxford": "Men's Oxford Shoes",
+      "man-monk": "Men's Monk Shoes",
+      "man-loafers": "Men's Loafers",
+      "man-boots": "Men's Boots",
+      "man-moccasins": "Men's Moccasins",
+      "man-sports": "Men's Sports Shoes",
+      "man-sandals": "Men's Sandals",
+      "man-mules": "Men's Mules",
+      "man-shoes": "All Men's Shoes",
+      "woman-boots": "Women's Boots",
+      "woman-high-heels": "Women's High Heels",
+      "woman-moccasins": "Women's Moccasins",
+      "woman-sports": "Women's Sports Shoes",
+      "woman-flat": "Women's Flat Shoes",
+      "woman-pumps": "Women's Pumps",
+      "woman-sandals": "Women's Sandals",
+      "woman-mules": "Women's Mules",
+      "woman-shoes": "All Women's Shoes",
+    },
   };
 
-  const key = slugToKey[slug];
-  let label = key
-    ? t.categoryCollection[key]
-    : slug.replace(/^(man-|woman-)/, "").replace(/-/g, " ");
-
-  if (slug.startsWith("man-"))
-    return `${t.categoryCollection.mens} ${String(label).toUpperCase()}`;
-  if (slug.startsWith("woman-"))
-    return `${t.categoryCollection.womens} ${String(label).toUpperCase()}`;
-  return String(label).toUpperCase();
+  const lang = categoryTitles[language] ? language : "en";
+  return categoryTitles[lang]?.[slug] || slug.replace(/^(man-|woman-)/, "").replace(/-/g, " ");
 }
 
 export default function CategoryCollection() {
@@ -141,7 +176,7 @@ export default function CategoryCollection() {
 
   // Get SEO meta for this category
   const seo = getCategorySeoMeta(category, language);
-  const pageTitle = titleFromSlug(category, t);
+  const pageTitle = titleFromSlug(category, t, language);
 
   const group = useMemo(() => {
     if (category?.startsWith("man-")) return "man";
