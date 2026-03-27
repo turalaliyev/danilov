@@ -88,7 +88,9 @@ export default function Footer() {
             © {new Date().getFullYear()} Danilov. All rights reserved.
           </span>
           <a
-            href="tel:+994508747905"
+            href="https://22-lab.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="tracking-[0.25em] uppercase hover:text-black transition-colors"
           >
             Designed & built by 22 LAB
